@@ -1,15 +1,13 @@
 #include <SFML/Graphics.hpp>
+#include "Nave.h"
 using namespace sf;
 
 int main(int argc, char *argv[]){
-	RenderWindow w(VideoMode(640,480),"Ejemplo de SFML");
-	Texture t;
-	Sprite s;
+	RenderWindow w(VideoMode(800,600),"Ejemplo de SFML");
+	w.setFramerateLimit(60);
 	
-	t.loadFromFile("sfml.png");
-	s.setTexture(t);
-	s.setPosition(175, 130);
-	
+	Nave navesita(40,3);
+		
 	while(w.isOpen()) {
 		Event e;
 		while(w.pollEvent(e)) {
@@ -18,7 +16,9 @@ int main(int argc, char *argv[]){
 		}
 		
 		w.clear(Color(255,255,255,255));
-		w.draw(s);
+		navesita.actualizar();
+		navesita.dibujar(w);
+		
 		w.display();
 	}
 	return 0;
