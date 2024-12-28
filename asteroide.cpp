@@ -3,7 +3,7 @@
 
 using namespace std;
 asteroide::asteroide() {
-	tex.loadFromFile("ateroide.png");
+	tex.loadFromFile("asteroide.png");
 	spr.setTexture(tex);
 	spr.setPosition(RNG(640-20),RNG(360-20));
 }
