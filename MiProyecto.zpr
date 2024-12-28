@@ -23,7 +23,7 @@ cursor=13:30
 open=true
 [source]
 path=Nave.cpp
-cursor=0:0
+cursor=13:18
 open=true
 [header]
 path=Nave.h
