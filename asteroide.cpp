@@ -5,6 +5,7 @@ using namespace std;
 asteroide::asteroide() {
 	tex.loadFromFile("asteroide.png");
 	spr.setTexture(tex);
+	spr.setOrigin(10,10);
 	
 	/*int x=RNG(1), y= RNG(1);
 	if (x>0){
