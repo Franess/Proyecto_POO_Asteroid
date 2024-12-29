@@ -7,10 +7,12 @@ using namespace sf;
 class asteroide {
 	Texture tex;
 	Sprite spr;
+	int s;
 public:
 	asteroide();
 	void actualizar();
 	void dibujar(RenderWindow &win);
+	void reposicionar();
 
 };
 
