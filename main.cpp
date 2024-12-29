@@ -4,8 +4,8 @@
 using namespace sf;
 
 int main(int argc, char *argv[]){
-	//640x360 resolucion real,  10% exra solo con fines de visualizacion de elementos fuera de pantalla 
-	RenderWindow win(VideoMode((704),(396)),"Asteroid");
+	//640x360 resolucion real el exra es solo con fines de visualizacion de elementos fuera de pantalla 
+	RenderWindow win(VideoMode((640+20),(360+20)),"Asteroid");
 	win.setFramerateLimit(60);
 	asteroide a;
 	Nave navesita(40,3);
@@ -17,8 +17,6 @@ int main(int argc, char *argv[]){
 			if(e.type == Event::Closed)
 				win.close();	
 		}
-		
-		
 		win.clear(Color(40,40,50,255));
 		
 		prueba++;
@@ -26,12 +24,10 @@ int main(int argc, char *argv[]){
 			a.reposicionar(); 
 			prueba=0;
 		} 
-		
 		a.actualizar();
 		navesita.actualizar();
 		navesita.dibujar(win);
 		a.dibujar(win);
-		
 		
 		win.display();
 	}
