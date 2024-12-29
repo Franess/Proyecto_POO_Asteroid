@@ -7,6 +7,7 @@ using namespace sf;
 class asteroide {
 	Texture tex;
 	Sprite spr;
+	Vector2f objetivo;
 public:
 	asteroide();
 	void actualizar();

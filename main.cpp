@@ -4,10 +4,10 @@
 using namespace sf;
 
 int main(int argc, char *argv[]){
-	//640x360 resolucion real el exra es solo con fines de visualizacion de elementos fuera de pantalla 
-	RenderWindow win(VideoMode((640+20),(360+20)),"Asteroid");
+	
+	RenderWindow win(VideoMode((640),(360)),"Asteroid"); // es el punto centarl
 	win.setFramerateLimit(60);
-	asteroide a;
+	asteroide ast;
 	Nave navesita(40,3);
 	int prueba=0;	//simplemente para probar el sistema de respawn de asteroides;
 
@@ -20,14 +20,14 @@ int main(int argc, char *argv[]){
 		win.clear(Color(40,40,50,255));
 		
 		prueba++;
-		if (prueba>60){
-			a.reposicionar(); 
+		if (prueba>60*5){
+			ast.reposicionar(); 
 			prueba=0;
 		} 
-		a.actualizar();
+		ast.actualizar();
 		navesita.actualizar();
 		navesita.dibujar(win);
-		a.dibujar(win);
+		ast.dibujar(win);
 		
 		win.display();
 	}
