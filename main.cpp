@@ -4,7 +4,8 @@
 using namespace sf;
 
 int main(int argc, char *argv[]){
-	RenderWindow win(VideoMode(640,360),"Asteroid");
+	//640x360 resolucion real,  10% exra solo con fines de visualizacion de elementos fuera de pantalla 
+	RenderWindow win(VideoMode(64+640,36+360),"Asteroid");
 	win.setFramerateLimit(60);
 	asteroide a;
 	Nave navesita(40,3);
