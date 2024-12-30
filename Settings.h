@@ -8,7 +8,7 @@ using namespace sf;
 class Settings {
 public:
 	Settings();
-	vector<Keyboard::Key> obtenerTeclas();
+	vector<Keyboard::Key>  obtenerTeclas() const;
 private:
 	vector<Keyboard::Key> teclas_nave;
 };

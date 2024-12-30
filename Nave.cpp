@@ -6,7 +6,7 @@ using namespace std;
 using namespace sf;
 
 
-Nave::Nave(float r, int p,Settings &s)  {
+Nave::Nave(float r, int p,const Settings &s)  {
 	m_nave.setRadius(r);
 	m_nave.setPointCount(p);
 	m_nave.setOrigin(r,r);

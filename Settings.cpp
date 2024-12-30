@@ -22,7 +22,7 @@ Settings::Settings() {
 		teclas_nave.push_back(static_cast<Keyboard::Key>(y));
 	}
 }
-vector<Keyboard::Key> Settings::obtenerTeclas(){
+vector<Keyboard::Key> Settings::obtenerTeclas() const{
 	return teclas_nave;
 }
 

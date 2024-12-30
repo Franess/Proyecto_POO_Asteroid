@@ -23,7 +23,7 @@ cursor=24:23
 open=true
 [source]
 path=Nave.cpp
-cursor=8:26
+cursor=17:27
 open=true
 [source]
 path=asteroide.cpp
@@ -33,11 +33,11 @@ path=complemento_v.cpp
 cursor=14:0
 [source]
 path=Settings.cpp
-cursor=24:22
+cursor=24:48
 open=true
 [header]
 path=Nave.h
-cursor=11:21
+cursor=11:27
 open=true
 [header]
 path=asteroide.h
@@ -50,7 +50,7 @@ path=complemento_v.h
 cursor=9:6
 [header]
 path=Settings.h
-cursor=10:23
+cursor=6:0
 open=true
 [other]
 path=Leeme.txt
