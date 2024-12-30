@@ -3,6 +3,7 @@
 #include "asteroide.h"
 #include "complemento_v.h"
 #include <SFML/Graphics/Color.hpp>
+#include "Settings.h"
 using namespace std;
 using namespace sf;
 
@@ -20,10 +21,10 @@ int main(int argc, char *argv[]){
 	asteroide ast;
 	ast.cambiar_objetivo();
 	ast.reposicionar();
-	
-	Nave navesita(40,3);
+	Settings yep;
+	Nave navesita(40,3,yep);
 	int prueba=0;	//simplemente para probar el sistema de respawn de asteroides;
-
+	
 	while(win.isOpen()) {
 		Event e;
 		while(win.pollEvent(e)) {

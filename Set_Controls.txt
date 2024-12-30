@@ -1,0 +1,8 @@
+#Las lineas que comienzan con ' # ' seran ignoradas
+#Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.
+#Rotar derecha
+D
+#Rotar izquierda
+A
+#Avanzar
+W
