@@ -8,3 +8,5 @@ Integrantes: Grandoli, Leonel; Medina, Juan Francisco
 
 
 -----------------------------------------------------------------------------------------------------
+Fran: Se Agrego una implementacion basica de settings a la navesita, se pueden cambiar los controles desde el archivo de texto. 
+Esta en la rama el cambio, no esta agregado al main. Es muy basico.
