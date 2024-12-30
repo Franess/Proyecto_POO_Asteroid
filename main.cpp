@@ -3,6 +3,7 @@
 #include "asteroide.h"
 #include "complemento_v.h"
 #include <SFML/Graphics/Color.hpp>
+using namespace std;
 using namespace sf;
 
 void respawn(asteroide &a){
