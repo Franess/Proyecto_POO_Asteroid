@@ -3,22 +3,28 @@
 #include "asteroide.h"
 #include "complemento_v.h"
 #include <SFML/Graphics/Color.hpp>
+#include <vector>
+using namespace std;
 using namespace sf;
 
-void respawn(asteroide &a){
-	if ( (a.posicion()> Vector2f(640+10,360+10))or(Vector2f(0-10,0-10)>a.posicion()) ){
-	a.cambiar_objetivo();
-	a.reposicionar();
-}
+void respawn(vector<asteroide> &a){
+	for(int i=0;i<a.size();i++) { 
+		if ( (a[i].posicion()> Vector2f(640+10,360+10))or(Vector2f(0-10,0-10)>a[i].posicion()) ){
+			a[i].cambiar_objetivo();
+			a[i].reposicionar();
+		}
+	}
 };
 
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
 	win.setFramerateLimit(60);
-	asteroide ast;
-	ast.cambiar_objetivo();
-	ast.reposicionar();
+	vector <asteroide> ast(15);
+	for(int i=0;i<ast.size();i++) { 
+		ast[i].cambiar_objetivo();
+		ast[i].reposicionar();	
+	}
 	
 	Nave navesita(40,3);
 	int prueba=0;	//simplemente para probar el sistema de respawn de asteroides;
@@ -36,10 +42,12 @@ int main(int argc, char *argv[]){
 			respawn(ast);
 			prueba=0;
 		} 
-		ast.actualizar();
-		navesita.actualizar();
+		for(int i=0;i<ast.size();i++) {  
+			ast[i].actualizar();
+			ast[i].dibujar(win);
+		}
+	navesita.actualizar();
 		navesita.dibujar(win);
-		ast.dibujar(win);
 		
 		win.display();
 	}
