@@ -8,7 +8,8 @@ asteroide::asteroide() {
 	tex.loadFromFile("asteroide.png");
 	spr.setTexture(tex);
 	spr.setOrigin(10,10);
-	speed=10;
+	spr.setScale(2,2);
+	speed=1;
 }
 Vector2f asteroide::posicion(){
 	return spr.getPosition();

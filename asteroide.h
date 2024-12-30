@@ -8,7 +8,7 @@ class asteroide {
 	Texture tex;
 	Sprite spr;
 	Vector2f objetivo;
-	int speed;
+	float speed;
 public:
 	asteroide();
 	void cambiar_objetivo();

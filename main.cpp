@@ -2,13 +2,15 @@
 #include "Nave.h"
 #include "asteroide.h"
 #include "complemento_v.h"
+#include <SFML/Graphics/Color.hpp>
 using namespace sf;
 
 void respawn(asteroide &a){
 	if ( (a.posicion()> Vector2f(640+10,360+10))or(Vector2f(0-10,0-10)>a.posicion()) ){
 	a.cambiar_objetivo();
 	a.reposicionar();
-}};
+}
+};
 
 
 int main(int argc, char *argv[]){
