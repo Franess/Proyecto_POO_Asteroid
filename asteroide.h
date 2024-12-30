@@ -8,12 +8,14 @@ class asteroide {
 	Texture tex;
 	Sprite spr;
 	Vector2f objetivo;
+	int speed;
 public:
 	asteroide();
+	void cambiar_objetivo();
 	void actualizar();
 	void dibujar(RenderWindow &win);
 	void reposicionar();
-
+	Vector2f posicion();
 };
 
 #endif
