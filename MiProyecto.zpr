@@ -16,17 +16,10 @@ tab_use_spaces=0
 explorer_path=.
 inherits_from=
 current_source=main.cpp
-<<<<<<< HEAD
 path_char=/
 [source]
 path=main.cpp
-cursor=31:30
-=======
-path_char=\
-[source]
-path=main.cpp
 cursor=14:31
->>>>>>> beabcd10f7fc376a97690c448bb4418c87c77b75
 open=true
 [source]
 path=Nave.cpp
