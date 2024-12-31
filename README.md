@@ -20,5 +20,8 @@ d86e35d (nuevo_asteroide): Ligeros cambios en el main e implementacion de bucles
 
 263f3e5 (nuevo_asteroide):  ... se elimino la funcion respawn y se reprogramo desde cero utilizando las nuevas funciones de asteroid, ubicado en el archivo a_manip, al igual que la funcion respawn. se reprogramo el constructor, la textura se encuentra declarada en el main como puntero...
 
-83f2788 (nuevo_asteroide):  ... ahora utilizando estas funciones se puede generar y relocalizar un vector completamente aleatoria de asteroides con velociddad y tamaño variante...
+83f2788 (nuevo_asteroide):  ... ahora utilizando estas funciones se puede generar y relocalizar un vector completamente aleatoria de asteroides con velociddad y tamaño variante... 
 cansado de la vida -G.   
+
+36d9829 / ab33400 (nuevo_asteroide): se añadieron valores como hp e id para facilitar el manejo y trabajar a futuro con la funcion destruccion creada
+-G 
