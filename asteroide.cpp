@@ -5,7 +5,7 @@
 
 #include <iostream>
 using namespace std;
-asteroide::asteroide(Texture *tex_asteroide) {
+asteroide::asteroide(Texture *tex_asteroide,int id_num) {
 	//tex=tex_asteroide;
 	//spr.setTexture(*tex);
 	spr.setTexture(*tex_asteroide);
@@ -18,7 +18,12 @@ asteroide::asteroide(Texture *tex_asteroide) {
 Vector2f asteroide::posicion(){
 	return spr.getPosition();
 }
-
+float asteroide::tell_size(){
+	return size;
+}
+int asteroide::tell_id(){
+	return ast_id;
+}
 void asteroide::r_speed(){
 	speed=static_cast<float>(RNG(150,25)/100.0);
 }
@@ -26,7 +31,8 @@ void asteroide::r_speed(){
 void asteroide::r_size(){
 	size=static_cast<float>(RNG(500,50))/100.0;
 	spr.setScale(size,size);
-	cout<< size<<endl;
+	ast_hp=size*10;
+	//cout<<"size "<<size<<" hp "<<ast_hp<<endl;
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
 }
