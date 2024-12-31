@@ -15,6 +15,7 @@ class asteroide{
 	float size;							//valor de covercion 1=20 pixeles
 	int ast_hp;
 	int ast_id;
+	float radio;
 public:
 	asteroide(Texture *tex_asteroide, int id_num);	//shared_ptr es un puntero inteligente
 	void cambiar_objetivo();

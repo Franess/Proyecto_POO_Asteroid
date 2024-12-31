@@ -35,6 +35,7 @@ void asteroide::r_size(){
 	//cout<<"size "<<size<<" hp "<<ast_hp<<endl;
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
+	radio=limites.width/2;
 }
 
 void asteroide::reposicionar(){
