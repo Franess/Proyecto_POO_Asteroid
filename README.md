@@ -25,3 +25,8 @@ cansado de la vida -G.
 
 36d9829 / ab33400 (nuevo_asteroide): se añadieron valores como hp e id para facilitar el manejo y trabajar a futuro con la funcion destruccion creada
 -G 
+
+30/12/24
+
+(puntaje): creada branch puntaje, los asteroides estan listos, espero a la funcion disparo de la nave y r de la nave. Por ende empiezo a trabajar en el sistema de puntaje.
+-G
