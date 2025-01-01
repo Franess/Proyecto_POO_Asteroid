@@ -6,6 +6,7 @@
 #include <vector>
 #include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
+#include "puntje.h"
 using namespace std;
 using namespace sf;
 
@@ -15,7 +16,7 @@ int main(int argc, char *argv[]){
 	Texture* tex_asteroide= new Texture; 			//make_shared es un gestor mas eficiente y seguro que un new Texture, pero en poo dimos new asi que usamo new
 	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
 	vector <asteroide> ast;
-	
+	puntaje();
 	Nave navesita(40,3);
 	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
 
