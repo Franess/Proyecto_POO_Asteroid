@@ -13,6 +13,7 @@ public:
 	tabla_de_puntos(string nombre_archi);
 	void actualizar_archivo_puntaje();
 	void actualizar_puntos_j(int puntos_a_sumar);
+	void recibir_nombre_j(string nombre_j);
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <cstring>
 using namespace std;
 
 tabla_de_puntos::tabla_de_puntos(string nombre_archi) {
@@ -39,4 +40,7 @@ void tabla_de_puntos::actualizar_archivo_puntaje(){
 	
 void tabla_de_puntos::actualizar_puntos_j(int puntos_a_sumar){
 	puntos_jugador.puntos+=puntos_a_sumar;
+}
+void tabla_de_puntos::recibir_nombre_j(string nombre_j){
+	strncpy(puntos_jugador.nombre,nombre_j.c_str(),sizeof (nombre_j)-1);	//sizeof se utiliza para evitar la sobreescritura en la memoria
 }
