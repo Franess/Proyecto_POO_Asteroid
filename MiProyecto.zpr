@@ -15,7 +15,7 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=.
 inherits_from=
-current_source=tabla_de_puntos.h
+current_source=tabla_de_puntos.cpp
 path_char=\
 [source]
 path=main.cpp
