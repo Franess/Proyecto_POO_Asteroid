@@ -33,4 +33,6 @@ cansado de la vida -G.
 
 02/01/2025 5ed2b29 (archivo_setting)
 
-Se implementa la rama setting con la funcionalidad de obtenerControles lista para usar. Esta funcionando, podes cambiar los controles, le agregue las flechas en el formato "Flecha-(Direccion)" siempre la direccion sin abreviar y con mayuscula al inicio. -M.
+Se implementa la rama setting con la funcionalidad de obtenerControles lista para usar. Esta funcionando, podes cambiar los controles, le agregue las flechas en el formato "Flecha-(Direccion)" siempre la direccion sin abreviar y con mayuscula al inicio. Parecia al principio mas trabajoso, pero resulto ser bastante practico, una vez que entendes como funciona la carga desde el archivo y la busqueda de los strings, es facil de ampliar
+
+-M. 
