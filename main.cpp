@@ -21,8 +21,8 @@ int main(int argc, char *argv[]){
 	asteroide ast;
 	ast.cambiar_objetivo();
 	ast.reposicionar();
-	Settings yep;
-	Nave navesita(40,3,yep);
+	Settings sett;
+	Nave navesita(20,3,sett);
 	int prueba=0;	//simplemente para probar el sistema de respawn de asteroides;
 	
 	while(win.isOpen()) {

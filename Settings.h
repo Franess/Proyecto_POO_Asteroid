@@ -2,15 +2,16 @@
 #define SETTINGS_H
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
+#include <string>
 using namespace std;
 using namespace sf;
 
 class Settings {
 public:
 	Settings();
-	vector<Keyboard::Key>  obtenerTeclas() const;
+	vector<Keyboard::Key>obtenerControles() ;
 private:
-	vector<Keyboard::Key> teclas_nave;
+	vector<string> m_stringsTeclas;
 };
 
 #endif

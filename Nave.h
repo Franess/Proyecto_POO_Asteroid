@@ -9,7 +9,7 @@ using namespace std;
 using namespace sf;
 class Nave{
 public:
-	Nave(float r, int p,const Settings &s);
+	Nave(float r, int p,  Settings &s);
 	void actualizar();
 	void dibujar(RenderWindow &win);
 private:
