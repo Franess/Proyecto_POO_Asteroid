@@ -1,8 +1,8 @@
 #Las lineas que comienzan con ' # ' seran ignoradas
 #Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.
 #Rotar derecha
-Flecha-Derecha
+D
 #Rotar izquierda
-Flecha-Izquierda
+A
 #Avanzar
-Flecha-Arriba
+W
