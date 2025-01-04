@@ -1,6 +1,6 @@
 #ifndef NAVE_H
 #define NAVE_H
-#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Settings.h"
 #include <vector>
@@ -9,11 +9,13 @@ using namespace std;
 using namespace sf;
 class Nave{
 public:
-	Nave(float r, int p,  Settings &s);
+	Nave(Settings &s);
 	void actualizar();
 	void dibujar(RenderWindow &win);
+	bool disparar()const;
+	
 private:
-	CircleShape m_nave;
+	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
 };
 #endif
