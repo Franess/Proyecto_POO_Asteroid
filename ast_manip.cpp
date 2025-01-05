@@ -39,21 +39,23 @@ void respawn(vector<asteroide> &a){
 	}
 
 	void colision(vector<asteroide> &v){
+		float e=0.85;
 		for(int i=0;i<v.size();i++) { 
 			for(int j=i+1;j<v.size();j++) { 
-				if (i != j) {asteroide a=v[i],b=v[j];
+				asteroide a=v[i],b=v[j];
 				Vector2f aux= a.get_posicion()-b.get_posicion();
 				if (sqrt( aux.x*aux.x + aux.y*aux.y )<a.get_rad()+b.get_rad()){
+					
 					Vector2f Vx=a.get_velocidad()-b.get_velocidad();
 					Vector2f Px=a.get_posicion()-b.get_posicion();
 					Vector2f norm=normal_v(Px);
-					float factor_m=((2*b.get_size())/(a.get_size()+b.get_size()));
+					float factor_m=(((1+e)*b.get_size())/(a.get_size()+b.get_size()));
 					Vector2f vf_A=a.get_velocidad()-factor_m*producto_escalar(Vx,norm)*norm;
 					
 					Vx=b.get_velocidad()-a.get_velocidad();
 					Px=b.get_posicion()-a.get_posicion();
 					norm=normal_v(Px);
-					factor_m=((2*a.get_size())/(a.get_size()+b.get_size()));
+					factor_m=(((1+e)*a.get_size())/(a.get_size()+b.get_size()));
 					Vector2f vf_B=b.get_velocidad()-factor_m*producto_escalar(Vx,norm)*norm;
 					
 					v[i].set_velocidad(vf_A);
@@ -70,26 +72,3 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
-	}
-	/*
-		void colision(asteroide &a, asteroide &b){
-		Vector2f aux= a.get_posicion()-b.get_posicion();
-		if (sqrt( aux.x*aux.x + aux.y*aux.y )<a.get_rad()+b.get_rad()){
-			Vector2f Vx=a.get_velocidad()-b.get_velocidad();
-			Vector2f Px=a.get_posicion()-b.get_posicion();
-			Vector2f norm=normal_v(Px);
-			float factor_m=((2*b.get_size())/(a.get_size()+b.get_size()));
-			Vector2f vf_A=a.get_velocidad()-factor_m*producto_escalar(Vx,norm)*norm;
-			
-			Vx=b.get_velocidad()-a.get_velocidad();
-			Px=b.get_posicion()-a.get_posicion();
-			norm=normal_v(Px);
-			float factor_m=((2*a.get_size())/(a.get_size()+b.get_size()));
-			Vector2f vf_A=b.get_velocidad()-factor_m*producto_escalar(Vx,norm)*norm;
-			
-			a.set_velocidad(vf_A);
-			b.set_velocidad(vf_B);
-			
-			
-		}
-	}*/
