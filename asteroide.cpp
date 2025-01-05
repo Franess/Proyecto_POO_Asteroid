@@ -34,7 +34,7 @@ Vector2f asteroide::get_velocidad(){
 
 
 void asteroide::r_size(){
-	size=static_cast<float>(RNG(500,50))/100.0;
+	size=static_cast<float>(RNG(300,50))/100.0;
 	spr.setScale(size,size);
 	ast_hp=size*10;
 	radio=size*9;
@@ -85,7 +85,7 @@ void asteroide::cambiar_objetivo(){
 	objetivo.y=y;
 }
 void asteroide::set_direccion(){
-	magnitud=static_cast<float>(RNG(150,25)/100.0);
+	magnitud=static_cast<float>(RNG(300,25)/100.0);
 	Vector2f aux=spr.getPosition();
 	direccion=(objetivo-aux);
 	normal_v(direccion);

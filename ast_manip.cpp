@@ -6,7 +6,7 @@ using namespace std;
 
 
 void spawn (vector<asteroide> &a, Texture* tex){
-	if (a.size()<10){
+	if (a.size()<15){
 		int id= a.size()-1;
 		a.push_back(asteroide(tex,id));
 		a[a.size()-1].r_size();
@@ -58,19 +58,13 @@ void respawn(vector<asteroide> &a){
 					
 					v[i].set_velocidad(vf_A);
 					v[j].set_velocidad(vf_B);
+					//detalles de la formula en header
 					
 					float solapamiento= sqrt(aux.x*aux.x+aux.y*aux.y)-(a.get_rad()+b.get_rad());
 					Vector2f correccion= norm*(solapamiento/2);
 					v[i].set_posicion(v[i].get_posicion()+correccion*(v[i].get_size()/(v[i].get_size()+v[j].get_size())));
 					v[j].set_posicion(v[j].get_posicion()-correccion*(v[j].get_size()/(v[i].get_size()+v[j].get_size())));
-					
-					
-					/*
-					aqui la foormula en cuestion
-					Vx=vi_A-vi_B;
-					n=normal_v(A_pos -B_pos);
-					vf_A=(vi_A)-((2*masa_B)/(masa_A+masa_B))producto_escalar(Vx,n);
-					*/
+					//un simple reajuste de posicion que calcula el solapamiento de asteroides y mueve los asteroides en la direccion correspondiente mediante norm
 					
 				}
 			}
