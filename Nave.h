@@ -5,6 +5,7 @@
 #include "Settings.h"
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
+#include "Proyectil.h"
 using namespace std;
 using namespace sf;
 class Nave{
@@ -12,7 +13,8 @@ public:
 	Nave(Settings &s);
 	void actualizar();
 	void dibujar(RenderWindow &win);
-	bool disparar()const;
+	bool disparar();
+	Proyectil generarDisparo()const;
 	
 private:
 	ConvexShape m_nave;

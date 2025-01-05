@@ -24,11 +24,11 @@ Nave::Nave(Settings &s)  {
 }
 void Nave::actualizar()
 {
-	if(Keyboard::isKeyPressed(m_teclas[0]))//rotar derecha
+	if(Keyboard::isKeyPressed(m_teclas[1]))//rotar derecha
 		m_nave.rotate(2);
-	if(Keyboard::isKeyPressed(m_teclas[1]))//Rotar izquierda
+	if(Keyboard::isKeyPressed(m_teclas[2]))//Rotar izquierda
 		m_nave.rotate(-2);	
-	if(Keyboard::isKeyPressed(m_teclas[2])){	//Avanzar nave
+	if(Keyboard::isKeyPressed(m_teclas[3])){	//Avanzar nave
 		float radianes_rot = m_nave.getRotation()*M_PI/180;
 		m_nave.move(2*cos(radianes_rot-M_PI/2),2*sin(radianes_rot-M_PI/2));
 	}
@@ -39,9 +39,14 @@ void Nave::dibujar(RenderWindow &win)
 }
 
 bool Nave::disparar(){
-	if(Keyboard::isKeyPressed(m_teclas[3])){
+	if(Keyboard::isKeyPressed(m_teclas[0])){
 		return true;
 	}else{
 		return false;
 	}
+}
+
+Proyectil Nave::generarDisparo()const{
+	Proyectil proye(m_nave.getPosition(),m_nave.getRotation());
+	return proye;
 }

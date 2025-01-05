@@ -6,7 +6,7 @@ using namespace sf;
 
 class Proyectil {
 public:
-	Proyectil();
+	Proyectil(Vector2f set_p, float nave_rotation);
 	void actualizar();
 	void dibujar(RenderWindow &win);
 private:
