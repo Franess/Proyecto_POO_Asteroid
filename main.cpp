@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
 	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
 	vector <asteroide> ast;
 	
+	
 	Nave navesita(40,3);
 	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
 
@@ -35,6 +36,7 @@ int main(int argc, char *argv[]){
 			respawn(ast);
 			prueba=0;
 		} 
+		colision(ast);
 		for(int i=0;i<ast.size();i++) {  
 			ast[i].actualizar();
 			ast[i].dibujar(win);
