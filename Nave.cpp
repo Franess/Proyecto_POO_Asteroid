@@ -6,7 +6,8 @@ using namespace std;
 using namespace sf;
 
 
-Nave::Nave(Settings &s)  {
+Nave::Nave(Settings &s)
+{
 	m_nave.setPointCount(4);
 	//Definen la posicion de los vertices de la nava
 	m_nave.setPoint(0,Vector2f(10,0));
@@ -22,6 +23,7 @@ Nave::Nave(Settings &s)  {
 	m_nave.setFillColor({239,254,0,128});
 	m_teclas = s.obtenerControles();
 }
+
 void Nave::actualizar()
 {
 	if(Keyboard::isKeyPressed(m_teclas[1]))//rotar derecha
