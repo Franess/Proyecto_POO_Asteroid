@@ -15,7 +15,7 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=.
 inherits_from=
-current_source=main.cpp
+current_source=Settings.cpp
 path_char=/
 [source]
 path=main.cpp
@@ -35,7 +35,7 @@ cursor=14:0
 open=true
 [source]
 path=Settings.cpp
-cursor=0:0
+cursor=45:3
 open=true
 [source]
 path=ast_manip.cpp

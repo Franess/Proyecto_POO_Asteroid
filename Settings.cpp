@@ -45,25 +45,25 @@ vector<Keyboard::Key> Settings::obtenerControles() {
 		Keyboard::Down
 	};
 	
-	for(auto it = m_stringsTeclas.begin();it!=m_stringsTeclas.end();advance(it,1)){
-		
-		auto encontrar_Tecla = find(ref_teclas.begin(),ref_teclas.end(),*it);
+	for(string &x:m_stringsTeclas){
+		auto encontrar_Tecla = find(ref_teclas.begin(),ref_teclas.end(),x);
 		
 		if(encontrar_Tecla!=ref_teclas.end()){
 			int posicion = encontrar_Tecla-ref_teclas.begin();
 			teclas_nave.push_back(teclas_sfml[posicion]);
-		}
-	}
-	
-	for(string &x:m_stringsTeclas){
-		if(x.length()==1){
-			char p[2];//Es un caracter, pero tiene 2 espacios por el caracter especial del c_string	
-			strcpy(p,x.c_str());
-			int caract_ascii = static_cast<int>(p[0]);
-			if(caract_ascii>=65){
-				teclas_nave.push_back(static_cast<Keyboard::Key>(caract_ascii-65));
-			}else{
-				teclas_nave.push_back(static_cast<Keyboard::Key>(caract_ascii-22));
+			continue;
+		}else{
+			if(x.length()==1){
+				char p[2];//Es un caracter, pero tiene 2 espacios por el caracter especial del c_string	
+				strcpy(p,x.c_str());
+				int caract_ascii = static_cast<int>(p[0]);
+				if(caract_ascii>=65){
+					teclas_nave.push_back(static_cast<Keyboard::Key>(caract_ascii-65));
+					continue;
+				}else{
+					teclas_nave.push_back(static_cast<Keyboard::Key>(caract_ascii-22));
+					continue;
+				}
 			}
 		}
 	}
