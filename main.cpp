@@ -3,23 +3,35 @@
 #include "asteroide.h"
 #include "complemento_v.h"
 #include <SFML/Graphics/Color.hpp>
+#include "Settings.h"
 #include <vector>
 #include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
+#include <algorithm>
 using namespace std;
 using namespace sf;
+
+bool fuera_limites(Proyectil &d){
+	Vector2f pos_actual = d.obtenerPosicion();
+	if(pos_actual.x<0 or pos_actual.x>640)
+		return true;
+	if(pos_actual.y<0 or pos_actual.y>360) 
+		return true;
+	return false;
+}
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
 	win.setFramerateLimit(60);
+	Settings sett;
+	Nave navesita(sett);
 	Texture* tex_asteroide= new Texture; 			//make_shared es un gestor mas eficiente y seguro que un new Texture, pero en poo dimos new asi que usamo new
 	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
 	vector <asteroide> ast;
-	
-	
-	Nave navesita(40,3);
-	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
 
+	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
+	vector<Proyectil> proye_pantalla;
+ 	
 	while(win.isOpen()) {
 		Event e;
 		while(win.pollEvent(e)) {
@@ -41,12 +53,20 @@ int main(int argc, char *argv[]){
 			ast[i].actualizar();
 			ast[i].dibujar(win);
 		}
+		if(navesita.disparar()){
+			proye_pantalla.push_back(navesita.generarDisparo());
+		}
+		for(Proyectil &x:proye_pantalla){
+			x.actualizar();
+			x.dibujar(win);
+		}
+		auto it_rmproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);
+		proye_pantalla.erase(it_rmproye,proye_pantalla.end());
 		navesita.actualizar();
 		navesita.dibujar(win);
 		
 		win.display();
 	}
-	delete tex_asteroide;
 	return 0;
 }
 
