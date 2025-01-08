@@ -33,9 +33,3 @@ Vector2f operator* (Vector2f v1, Vector2f v2){
 	aux.y=v1.y*v2.y;
 	return aux;
 }
-Vector2f operator/ (Vector2f v1, Vector2f v2){
-	Vector2f aux;
-	aux.x=v1.x/v2.x;
-	aux.y=v1.y/v2.y;
-	return aux;
-}

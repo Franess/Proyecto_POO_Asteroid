@@ -39,7 +39,7 @@ void respawn(vector<asteroide> &a){
 	}
 
 	void colision(vector<asteroide> &v){
-		float e=0.85;
+		float e=0.90;
 		for(int i=0;i<v.size();i++) { 
 			for(int j=i+1;j<v.size();j++) { 
 				asteroide a=v[i],b=v[j];

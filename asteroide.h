@@ -17,7 +17,7 @@ class asteroide{
 	int ast_id;
 	//valores fisicos
 	float magnitud;						//magnitud escalar del valor de la velocidad
-	Vector2f velocidad;					//vector direccion*velocidad del asteroide
+	Vector2f velocidad;					//vector direccion*MAGNITUD del asteroide
 	float size;							//valor de covercion 1=20 pixeles, tambien hace de valor para masa 
 	float radio;
 public:
