@@ -58,8 +58,10 @@ int main(int argc, char *argv[]){
 			x.actualizar();
 			x.dibujar(win);
 		}
-		auto it_rmproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);
-		proye_pantalla.erase(it_rmproye,proye_pantalla.end());
+		//remueve el proyectil que se encuentra fuera de los limites de la pantalla de juego
+		auto it_elimproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);	//elimproye => eliminar proyectil
+		proye_pantalla.erase(it_elimproye,proye_pantalla.end());
+		
 		navesita.actualizar();
 		navesita.dibujar(win);
 		

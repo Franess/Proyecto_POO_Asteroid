@@ -33,6 +33,7 @@ void respawn(vector<asteroide> &a){
 		if(id!=-1){
 			a[id].r_size();
 			a[id].r_speed();
+			
 			a[id].cambiar_objetivo();
 			a[id].reposicionar();
 		}
