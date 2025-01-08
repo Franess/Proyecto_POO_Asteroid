@@ -20,3 +20,6 @@ void Proyectil::actualizar(){
 void Proyectil::dibujar(RenderWindow &win){
 	win.draw(m_formaProye);
 }
+ Vector2f Proyectil::obtenerPosicion()const{
+	return m_formaProye.getPosition();
+}

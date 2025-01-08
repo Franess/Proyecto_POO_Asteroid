@@ -7,8 +7,18 @@
 #include <vector>
 #include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
+#include <algorithm>
 using namespace std;
 using namespace sf;
+
+bool fuera_limites(Proyectil &d){
+	Vector2f pos_actual = d.obtenerPosicion();
+	if(pos_actual.x<0 or pos_actual.x>640)
+		return true;
+	if(pos_actual.y<0 or pos_actual.y>360) 
+		return true;
+	return false;
+}
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
@@ -47,7 +57,9 @@ int main(int argc, char *argv[]){
 		for(Proyectil &x:proye_pantalla){
 			x.actualizar();
 			x.dibujar(win);
-		} 
+		}
+		auto it_rmproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);
+		proye_pantalla.erase(it_rmproye,proye_pantalla.end());
 		navesita.actualizar();
 		navesita.dibujar(win);
 		

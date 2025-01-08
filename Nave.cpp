@@ -49,6 +49,13 @@ bool Nave::disparar(){
 }
 
 Proyectil Nave::generarDisparo()const{
-	Proyectil proye(m_nave.getPosition(),m_nave.getRotation());
+	float radianes_rot = m_nave.getRotation()*M_PI/180;
+	/*La posicion del disparo esta dada por la ecuacion parametrica de la circunferencia donde
+	x=a+r*cos(t) // y =b+r*sen(t)
+	con (a,b) coordenadas del centro de la circunferencia, r el radio y t el angulo en radianes*/
+	Vector2f vec_posicion = m_nave.getPosition(); 
+	Vector2f pos_bala(vec_posicion.x+20*cos(radianes_rot-M_PI/2),vec_posicion.y+20*sin(radianes_rot-M_PI/2));
+	
+	Proyectil proye(pos_bala,m_nave.getRotation());
 	return proye;
 }
