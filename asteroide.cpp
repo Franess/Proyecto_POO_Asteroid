@@ -8,6 +8,7 @@ using namespace std;
 asteroide::asteroide(Texture *tex_asteroide,int id_num) {
 	//tex=tex_asteroide;
 	//spr.setTexture(*tex);
+	ast_id=id_num;
 	spr.setTexture(*tex_asteroide);
 	magnitud=1;
 	size=1;
