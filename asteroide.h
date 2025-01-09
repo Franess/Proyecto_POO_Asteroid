@@ -31,6 +31,7 @@ public:
 	void r_size();
 	void set_velocidad(Vector2f new_v);
 	void set_posicion(Vector2f v);
+	void ser_id();
 	
 	float get_rad();
 	float get_size();
