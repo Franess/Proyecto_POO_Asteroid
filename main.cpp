@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 		win.clear(Color(40,40,50,255));
 		
 		prueba++;
-		if (prueba>20){
+		if (prueba>120){
 			spawn(ast,tex_asteroide);
 			respawn(ast);
 			prueba=0;

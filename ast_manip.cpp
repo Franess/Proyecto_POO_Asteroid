@@ -8,7 +8,7 @@ using namespace std;
 
 
 void spawn (vector<asteroide> &a, Texture* tex){
-	if (a.size()<5){
+	if (a.size()<50){
 		int id= a.size();
 		a.push_back(asteroide(tex,id));
 		a[a.size()-1].r_size();
@@ -38,7 +38,7 @@ void respawn(vector<asteroide> &a){
 			for(int j=i+1;j<v.size();j++) { 
 				asteroide a=v[i],b=v[j];
 				Vector2f aux= a.get_posicion()-b.get_posicion();
-				if (sqrt( aux.x*aux.x + aux.y*aux.y )<a.get_rad()+b.get_rad()){
+				if (sqrt(aux.x*aux.x+aux.y*aux.y)<a.get_rad()+b.get_rad()){
 					
 					Vector2f Vx=a.get_velocidad()-b.get_velocidad();
 					Vector2f Px=a.get_posicion()-b.get_posicion();
@@ -73,12 +73,14 @@ void respawn(vector<asteroide> &a){
 				Proyectil p= pro[i];
 				Vector2f aux= a.get_posicion()-p.obtenerPosicion();
 				if (sqrt( aux.x*aux.x + aux.y*aux.y )<(a.get_rad()+3.5)){
-					
-					tabla.actualizar_puntos_j(static_cast<int>(a.get_size()*100));
-					ast[j].r_size();
-					ast[j].cambiar_objetivo();
-					ast[j].reposicionar();
-					ast[j].set_direccion();
+					ast[j].disminuir_hp(100);
+					if (ast[j].get_hp()<0){
+						tabla.actualizar_puntos_j(static_cast<int>(ast[j].get_size()*100));
+						ast[j].r_size();
+						ast[j].cambiar_objetivo();
+						ast[j].reposicionar();
+						ast[j].set_direccion();
+					}
 					pro.erase(pro.begin()+i);
 					
 					

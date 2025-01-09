@@ -13,7 +13,7 @@ asteroide::asteroide(Texture *tex_asteroide,int id_num) {
 	magnitud=1;
 	size=1;
 	spr.setScale(size,size);
-	radio=size*10;
+	radio=(size*9)+(0.25*size/3);
 	spr.setOrigin(size*10,size*10);
 }
 
@@ -32,17 +32,22 @@ float asteroide::get_rad(){
 Vector2f asteroide::get_velocidad(){
 	return velocidad;
 }
+int asteroide::get_hp(){
+	return ast_hp;
+}
 
+void asteroide::disminuir_hp(int danio){
+	ast_hp-=danio;
+}
 
 void asteroide::r_size(){
 	size=static_cast<float>(RNG(300,50))/100.0;
 	spr.setScale(size,size);
-	ast_hp=size*10;
-	radio=size*9;
+	ast_hp=static_cast<int>(size*100);
+	radio=size*9+0.25*size/3;
 	//cout<<"size "<<size<<" hp "<<ast_hp<<endl;
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
-	radio=limites.width/2;
 }
 
 void asteroide::reposicionar(){
@@ -87,7 +92,7 @@ void asteroide::cambiar_objetivo(){
 	objetivo.y=y;
 }
 void asteroide::set_direccion(){
-	magnitud=static_cast<float>(RNG(300,25)/100.0);
+	magnitud=static_cast<float>(RNG(200,50)/100.0);
 	Vector2f aux=spr.getPosition();
 	direccion=(objetivo-aux);
 	normal_v(direccion);

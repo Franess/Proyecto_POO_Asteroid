@@ -26,17 +26,19 @@ public:
 	void actualizar();								//mueve el ast al objetivo
 	void dibujar(RenderWindow &win);	
 	
+	void disminuir_hp(int danio);
 	void cambiar_objetivo();
 	void reposicionar();
 	void set_direccion();
 	void r_size();
 	void set_velocidad(Vector2f new_v);
 	void set_posicion(Vector2f v);
-	void ser_id();
+	void set_id();
 	
 	float get_rad();
 	float get_size();
 	int get_id();
+	int get_hp();
 	Vector2f get_posicion();
 	Vector2f get_velocidad();
 };

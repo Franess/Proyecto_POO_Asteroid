@@ -10,13 +10,13 @@ struct puntaje{
 int main() {
 	vector<string> s ={
 		"Luigi",
+		"Videla",
+		"Peron",
 		"Ñefi",
-		"Driptofen",
-		"Valen12123",
 		"BAD_Ceju",
 		"Brass_Sniper",
 		"Jalapeño417",
-		"Mayy",	
+		"Mayy_23",	
 		"Fran.co",	
 		"Glass"	
 	};
