@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "Proyectil.h"
+#include "tabla_de_puntos.h"
 using namespace std;
 
 
@@ -65,19 +66,22 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
-	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro){
+	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, tabla_de_puntos &tabla){
 		for(int i=0;i<pro.size();i++) { 
 			for(int j=0;j<ast.size();j++) {
 				asteroide a= ast[j];
 				Proyectil p= pro[i];
 				Vector2f aux= a.get_posicion()-p.obtenerPosicion();
 				if (sqrt( aux.x*aux.x + aux.y*aux.y )<(a.get_rad()+3.5)){
+					
+					tabla.actualizar_puntos_j(static_cast<int>(a.get_size()*100));
 					ast[j].r_size();
 					ast[j].cambiar_objetivo();
 					ast[j].reposicionar();
 					ast[j].set_direccion();
-					
 					pro.erase(pro.begin()+i);
+					
+					
 					
 				}
 			}
