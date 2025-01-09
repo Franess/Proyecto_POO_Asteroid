@@ -7,7 +7,7 @@
 #include <vector>
 #include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
-#include "puntje.h"
+#include "tabla_de_puntos.h"
 #include <algorithm>
 #include "Proyectil.h"
 
@@ -30,14 +30,9 @@ int main(int argc, char *argv[]){
 	Nave navesita(sett);
 	Texture* tex_asteroide= new Texture; 			//make_shared es un gestor mas eficiente y seguro que un new Texture, pero en poo dimos new asi que usamo new
 	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
+	
 	vector <asteroide> ast;
-<<<<<<< HEAD
-	puntaje();
-	Nave navesita(40,3);
-	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
-=======
->>>>>>> main
-
+	tabla_de_puntos tabla("puntos.poo");
 	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
 	vector<Proyectil> proye_pantalla;
  	
@@ -57,7 +52,7 @@ int main(int argc, char *argv[]){
 			respawn(ast);
 			prueba=0;
 		} 
-		destruir(ast,proye_pantalla);
+		destruir(ast,proye_pantalla,tabla);
 		colision(ast);
 		for(int i=0;i<ast.size();i++) {  
 			ast[i].actualizar();
