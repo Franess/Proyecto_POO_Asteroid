@@ -30,16 +30,6 @@ void respawn(vector<asteroide> &a){
 		}
 	}
 }
-<<<<<<< HEAD
-	void destruir (vector<asteroide> &a, size_t id=-1){
-		if(id!=-1){
-			a[id].r_size();
-			a[id].r_speed();
-			
-			a[id].cambiar_objetivo();
-			a[id].reposicionar();
-=======
-
 	void colision(vector<asteroide> &v){
 		float e=0.90;
 		for(int i=0;i<v.size();i++) { 
@@ -72,7 +62,6 @@ void respawn(vector<asteroide> &a){
 					
 				}
 			}
->>>>>>> b367b3a05a0e058089afc62c4e1063a0f1077da2
 		}
 	}
 	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro){
