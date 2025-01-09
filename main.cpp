@@ -8,6 +8,7 @@
 #include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <algorithm>
+#include "Proyectil.h"
 using namespace std;
 using namespace sf;
 
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]){
 	Texture* tex_asteroide= new Texture; 			//make_shared es un gestor mas eficiente y seguro que un new Texture, pero en poo dimos new asi que usamo new
 	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
 	vector <asteroide> ast;
+
 	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
 	vector<Proyectil> proye_pantalla;
  	
@@ -47,6 +49,8 @@ int main(int argc, char *argv[]){
 			respawn(ast);
 			prueba=0;
 		} 
+		destruir(ast,proye_pantalla);
+		colision(ast);
 		for(int i=0;i<ast.size();i++) {  
 			ast[i].actualizar();
 			ast[i].dibujar(win);
@@ -69,4 +73,4 @@ int main(int argc, char *argv[]){
 	}
 	return 0;
 }
-
+	
