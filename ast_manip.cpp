@@ -2,13 +2,15 @@
 #include "asteroide.h"
 #include <vector>
 #include <iostream>
+#include "Proyectil.h"
 using namespace std;
 
 
 void spawn (vector<asteroide> &a, Texture* tex){
-	if (a.size()<15){
-		int id= a.size()-1;
+	if (a.size()<5){
+		int id= a.size();
 		a.push_back(asteroide(tex,id));
+		cout<<id<<endl;
 		a[a.size()-1].r_size();
 		a[a.size()-1].cambiar_objetivo();
 		a[a.size()-1].reposicionar();
@@ -29,14 +31,6 @@ void respawn(vector<asteroide> &a){
 		}
 	}
 }
-	void destruir (vector<asteroide> &a, size_t id=-1){
-		if(id!=-1){
-			a[id].r_size();
-			a[id].cambiar_objetivo();
-			a[id].set_direccion();
-			a[id].reposicionar();
-		}
-	}
 
 	void colision(vector<asteroide> &v){
 		float e=0.90;
@@ -72,3 +66,23 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
+	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro){
+		for(int i=0;i<pro.size();i++) { 
+			for(int j=0;j<ast.size();j++) {
+				asteroide a= ast[j];
+				Proyectil p= pro[i];
+				Vector2f aux= a.get_posicion()-p.obtenerPosicion();
+				if (sqrt( aux.x*aux.x + aux.y*aux.y )<(a.get_rad()+3.5)){
+					ast[j].r_size();
+					ast[j].cambiar_objetivo();
+					ast[j].reposicionar();
+					ast[j].set_direccion();
+					
+					pro.erase(pro.begin()+i);
+					
+				}
+			}
+		}
+		
+	}
+	
