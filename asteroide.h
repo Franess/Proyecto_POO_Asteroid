@@ -8,25 +8,37 @@
 using namespace std;
 using namespace sf;
 class asteroide{
+	//valores y datos caracteristicos
 	Texture* tex;
 	Sprite spr;
 	Vector2f objetivo;					//punto hacia el que se dirige el ast
-	float speed;
-	float size;							//valor de covercion 1=20 pixeles
+	Vector2f direccion;
 	int ast_hp;
 	int ast_id;
+
+	//valores fisicos
+	float magnitud;						//magnitud escalar del valor de la velocidad
+	Vector2f velocidad;					//vector direccion*MAGNITUD del asteroide
+	float size;							//valor de covercion 1=20 pixeles, tambien hace de valor para masa 
 	float radio;
 public:
 	asteroide(Texture *tex_asteroide, int id_num);	//shared_ptr es un puntero inteligente
-	void cambiar_objetivo();
-	void actualizar();					//mueve el ast al objetivo
+	void actualizar();								//mueve el ast al objetivo
 	void dibujar(RenderWindow &win);	
+	
+	void cambiar_objetivo();
 	void reposicionar();
-	void r_speed();
+	void set_direccion();
 	void r_size();
-	float tell_size();
-	int tell_id();
-	Vector2f posicion();
+	void set_velocidad(Vector2f new_v);
+	void set_posicion(Vector2f v);
+	void ser_id();
+	
+	float get_rad();
+	float get_size();
+	int get_id();
+	Vector2f get_posicion();
+	Vector2f get_velocidad();
 };
 
 #endif

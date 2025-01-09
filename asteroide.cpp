@@ -8,30 +8,37 @@ using namespace std;
 asteroide::asteroide(Texture *tex_asteroide,int id_num) {
 	//tex=tex_asteroide;
 	//spr.setTexture(*tex);
+	ast_id=id_num;
 	spr.setTexture(*tex_asteroide);
-	spr.setScale(1,1);
-	speed=1;
+	magnitud=1;
 	size=1;
+	spr.setScale(size,size);
+	radio=size*10;
 	spr.setOrigin(size*10,size*10);
 }
 
-Vector2f asteroide::posicion(){
+Vector2f asteroide::get_posicion(){
 	return spr.getPosition();
 }
-float asteroide::tell_size(){
+float asteroide::get_size(){
 	return size;
 }
-int asteroide::tell_id(){
+int asteroide::get_id(){
 	return ast_id;
 }
-void asteroide::r_speed(){
-	speed=static_cast<float>(RNG(150,25)/100.0);
+float asteroide::get_rad(){
+	return radio;
+}
+Vector2f asteroide::get_velocidad(){
+	return velocidad;
 }
 
+
 void asteroide::r_size(){
-	size=static_cast<float>(RNG(500,50))/100.0;
+	size=static_cast<float>(RNG(300,50))/100.0;
 	spr.setScale(size,size);
 	ast_hp=size*10;
+	radio=size*9;
 	//cout<<"size "<<size<<" hp "<<ast_hp<<endl;
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
@@ -79,12 +86,25 @@ void asteroide::cambiar_objetivo(){
 	objetivo.x=x;
 	objetivo.y=y;
 }
-void asteroide::actualizar(){
+void asteroide::set_direccion(){
+	magnitud=static_cast<float>(RNG(300,25)/100.0);
 	Vector2f aux=spr.getPosition();
-	Vector2f direccion= (objetivo-aux);
+	direccion=(objetivo-aux);
 	normal_v(direccion);
-	spr.move(direccion.x*speed,direccion.y*speed);	
+	velocidad=(direccion*magnitud);	
+}
+void asteroide::set_posicion(Vector2f v){
+	spr.setPosition(v);
+}
+void asteroide::set_velocidad(Vector2f new_v){
+	velocidad=new_v;
+}
+
+void asteroide::actualizar(){
+	spr.move(velocidad);
 }
 void asteroide::dibujar(RenderWindow &win){
 	win.draw(spr);
 }
+
+
