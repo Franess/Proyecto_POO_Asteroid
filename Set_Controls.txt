@@ -1,8 +1,12 @@
 #Las lineas que comienzan con ' # ' seran ignoradas
 #Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.
+#Jugador 1
+#Disparar
+Space
 #Rotar derecha
-D
+H
 #Rotar izquierda
-A
+F
 #Avanzar
-W
+T
+

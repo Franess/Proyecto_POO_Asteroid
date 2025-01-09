@@ -6,24 +6,31 @@ using namespace std;
 using namespace sf;
 
 
-Nave::Nave(float r, int p, Settings &s)  {
-	m_nave.setRadius(r);
-	m_nave.setPointCount(p);
-	m_nave.setOrigin(r,r);
+Nave::Nave(Settings &s)
+{
+	m_nave.setPointCount(4);
+	//Definen la posicion de los vertices de la nava
+	m_nave.setPoint(0,Vector2f(10,0));
+	m_nave.setPoint(1,Vector2f(20,30));
+	m_nave.setPoint(2,Vector2f(10,20));
+	m_nave.setPoint(3,Vector2f(0,30));
+	//El diseño esta pensado para tener un tamanio de 20x30 pixeles
 	m_nave.setOutlineThickness(2);
-	m_nave.setOutlineColor({0,0,0});
+	m_nave.setOutlineColor({255,255,255,255});
 	
+	m_nave.setOrigin(10,15);
 	m_nave.setPosition(100,100);
-	m_nave.setFillColor({239,254,0});
+	m_nave.setFillColor({239,254,0,128});
 	m_teclas = s.obtenerControles();
 }
+
 void Nave::actualizar()
 {
-	if(Keyboard::isKeyPressed(m_teclas[0]))//rotar derecha
+	if(Keyboard::isKeyPressed(m_teclas[1]))//rotar derecha
 		m_nave.rotate(2);
-	if(Keyboard::isKeyPressed(m_teclas[1]))//Rotar izquierda
+	if(Keyboard::isKeyPressed(m_teclas[2]))//Rotar izquierda
 		m_nave.rotate(-2);	
-	if(Keyboard::isKeyPressed(m_teclas[2])){	//Avanzar nave
+	if(Keyboard::isKeyPressed(m_teclas[3])){	//Avanzar nave
 		float radianes_rot = m_nave.getRotation()*M_PI/180;
 		m_nave.move(2*cos(radianes_rot-M_PI/2),2*sin(radianes_rot-M_PI/2));
 	}
@@ -31,4 +38,24 @@ void Nave::actualizar()
 void Nave::dibujar(RenderWindow &win)
 {
 	win.draw(m_nave);
+}
+
+bool Nave::disparar(){
+	if(Keyboard::isKeyPressed(m_teclas[0])){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+Proyectil Nave::generarDisparo()const{
+	float radianes_rot = m_nave.getRotation()*M_PI/180;
+	/*La posicion del disparo esta dada por la ecuacion parametrica de la circunferencia donde
+	x=a+r*cos(t) // y =b+r*sen(t)
+	con (a,b) coordenadas del centro de la circunferencia, r el radio y t el angulo en radianes*/
+	Vector2f vec_posicion = m_nave.getPosition(); 
+	Vector2f pos_bala(vec_posicion.x+20*cos(radianes_rot-M_PI/2),vec_posicion.y+20*sin(radianes_rot-M_PI/2));
+	
+	Proyectil proye(pos_bala,m_nave.getRotation());
+	return proye;
 }
