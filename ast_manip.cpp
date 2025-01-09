@@ -10,7 +10,6 @@ void spawn (vector<asteroide> &a, Texture* tex){
 	if (a.size()<5){
 		int id= a.size();
 		a.push_back(asteroide(tex,id));
-		cout<<id<<endl;
 		a[a.size()-1].r_size();
 		a[a.size()-1].cambiar_objetivo();
 		a[a.size()-1].reposicionar();

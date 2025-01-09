@@ -15,11 +15,11 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=.
 inherits_from=
-current_source=complemento_v.h
+current_source=ast_manip.cpp
 path_char=\
 [source]
 path=main.cpp
-cursor=48:6
+cursor=34:2
 open=true
 [source]
 path=Nave.cpp
@@ -39,7 +39,7 @@ cursor=52:5
 open=true
 [source]
 path=ast_manip.cpp
-cursor=80:30
+cursor=11:33
 open=true
 [source]
 path=Proyectil.cpp
