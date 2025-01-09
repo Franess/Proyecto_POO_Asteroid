@@ -8,6 +8,7 @@
 #include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <algorithm>
+#include "Proyectil.h"
 using namespace std;
 using namespace sf;
 
@@ -48,6 +49,7 @@ int main(int argc, char *argv[]){
 			respawn(ast);
 			prueba=0;
 		} 
+		destruir(ast,proye_pantalla);
 		colision(ast);
 		for(int i=0;i<ast.size();i++) {  
 			ast[i].actualizar();
@@ -69,4 +71,4 @@ int main(int argc, char *argv[]){
 	}
 	return 0;
 }
-
+	
