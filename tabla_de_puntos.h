@@ -4,7 +4,7 @@
 using namespace std;
 struct puntaje{
 	int puntos;
-	char nombre[32];
+	char nombre[16];
 };
 class tabla_de_puntos {
 	string archivo_puntos;
