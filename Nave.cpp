@@ -28,34 +28,41 @@ Nave::Nave(Settings &s)
 }
 
 void Nave::actualizar(){
-	if(Keyboard::isKeyPressed(m_teclas[1]))//rotar derecha
+	if(Keyboard::isKeyPressed(m_teclas[1])){//rotar derecha
 		m_nave.rotate(3);
-	if(Keyboard::isKeyPressed(m_teclas[2]))//Rotar izquierda
-		m_nave.rotate(-3);	
+		if(time_pressed>0 and !Keyboard::isKeyPressed(m_teclas[3])){
+			time_pressed-=1.0/45;
+		}
+	}
+	if(Keyboard::isKeyPressed(m_teclas[2])){//Rotar izquierda
+		m_nave.rotate(-3);
+		if(time_pressed>0 and !Keyboard::isKeyPressed(m_teclas[3])){ 
+			time_pressed-=1.0/45;
+		}
+	}	
 	if(Keyboard::isKeyPressed(m_teclas[3])){	//Avanzar nave
-		float m_rapidez=(1.0/4)*(exp(elapsed_time)-1);	//la rapidez es una funcion con respecto al tiempo
+		float m_rapidez=(1.0/4)*(exp(time_pressed)-1);	//la rapidez es una funcion con respecto al tiempo
 		radianes_rot = m_nave.getRotation()*M_PI/180;
 		m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
 		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
 		Vector2f nueva_direccion(m_rapidez*cos(radianes_rot-M_PI/2),m_rapidez*sin(radianes_rot-M_PI/2));
 		m_nave.move(m_vecDireccion);
-		if(elapsed_time<=(6.0/2)){//Tiempo que se mantiene presionada la tecla.
-			elapsed_time+=1.0/40;
+		if(time_pressed<=(6.0/2)){//Tiempo que se mantiene presionada la tecla.
+			time_pressed+=1.0/40;
 		}
-	}else{
-		if(elapsed_time>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
-			elapsed_time-=1.0/120;
-		}
-		float m_rapidez=-log(conversionElapsed(elapsed_time))+2.3;	//la rapidez es una funcion con respecto al tiempo
-		m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
-		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
-		m_nave.move(m_vecDireccion);		
 	}
 	if(Keyboard::isKeyPressed(m_teclas[4])){
-		if(elapsed_time>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
-			elapsed_time-=1.0/30;
+		if(time_pressed>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
+			time_pressed-=1.0/20;
 		}
 	}
+	if(time_pressed>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
+		time_pressed-=1.0/120;
+	}
+	float m_rapidez=-log(conversionElapsed(time_pressed))+2.3;	//la rapidez es una funcion con respecto al tiempo
+	m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
+	m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
+	m_nave.move(m_vecDireccion);
 }
 void Nave::dibujar(RenderWindow &win)
 {

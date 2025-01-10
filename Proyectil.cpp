@@ -14,7 +14,7 @@ Proyectil::Proyectil(Vector2f set_p, float nave_rotation) {
 
 void Proyectil::actualizar(){
 	float radianes_rot = m_formaProye.getRotation()*M_PI/180;
-	m_formaProye.move(3*cos(radianes_rot-M_PI/2),3*sin(radianes_rot-M_PI/2));
+	m_formaProye.move(7*cos(radianes_rot-M_PI/2),7*sin(radianes_rot-M_PI/2));
 }
 
 void Proyectil::dibujar(RenderWindow &win){
