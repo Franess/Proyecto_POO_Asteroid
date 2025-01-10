@@ -15,13 +15,17 @@ public:
 	void dibujar(RenderWindow &win);
 	bool disparar();
 	Proyectil generarDisparo()const;
-	
+	Vector2f obtenerFoco1()const;//El menor
+	Vector2f obtenerFoco2()const;//El mayor
+	float obtenerRadioFoco1()const;
+	float obtenerRadioFoco2()const;
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
 	float time_pressed=0;
 	Vector2f m_vecDireccion;
 	float radianes_rot;
+	float m_radio; //Es el radio de una circunferencia imaginaria al rededor de la nave.
 };
 #endif
 

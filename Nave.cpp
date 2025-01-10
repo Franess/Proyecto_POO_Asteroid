@@ -8,14 +8,14 @@ using namespace sf;
 float conversionElapsed(float x){
 	return exp(log(10)-x);
 }
-
+	
 Nave::Nave(Settings &s)
 {
 	m_nave.setPointCount(4);
 	//Definen la posicion de los vertices de la nava
 	m_nave.setPoint(0,Vector2f(10,0));
 	m_nave.setPoint(1,Vector2f(20,30));
-	m_nave.setPoint(2,Vector2f(10,20));
+	m_nave.setPoint(2,Vector2f(10,25));
 	m_nave.setPoint(3,Vector2f(0,30));
 	//El diseño esta pensado para tener un tamanio de 20x30 pixeles
 	m_nave.setOutlineThickness(2);
@@ -25,6 +25,8 @@ Nave::Nave(Settings &s)
 	m_nave.setPosition(100,100);
 	m_nave.setFillColor({239,254,0,128});
 	m_teclas = s.obtenerControles();
+	Vector2f aux = m_nave.getOrigin() - m_nave.getPoint(0);
+	m_radio=sqrt(aux.x*aux.x + aux.y*aux.y);
 }
 
 void Nave::actualizar(){
@@ -82,9 +84,26 @@ Proyectil Nave::generarDisparo()const{
 	/*La posicion del disparo esta dada por la ecuacion parametrica de la circunferencia donde
 	x=a+r*cos(t) // y =b+r*sen(t)
 	con (a,b) coordenadas del centro de la circunferencia, r el radio y t el angulo en radianes*/
-	Vector2f vec_posicion = m_nave.getPosition(); 
-	Vector2f pos_bala(vec_posicion.x+20*cos(radianes_rot-M_PI/2),vec_posicion.y+20*sin(radianes_rot-M_PI/2));
+	Vector2f vec_posicion = m_nave.getPosition();
+	Vector2f pos_bala(vec_posicion.x+(m_radio+2)*cos(radianes_rot-M_PI/2),vec_posicion.y+(m_radio+2)*sin(radianes_rot-M_PI/2));
 	
 	Proyectil proye(pos_bala,m_nave.getRotation());
 	return proye;
+}
+Vector2f Nave::obtenerFoco1()const{
+	Vector2f vec_posicion = m_nave.getPosition();
+	Vector2f aux(vec_posicion.x+(4.0/15)*m_radio*cos(radianes_rot-M_PI/2),vec_posicion.y+(4.0/15)*m_radio*sin(radianes_rot-M_PI/2));
+	return aux;
+}
+Vector2f Nave::obtenerFoco2()const{
+	Vector2f vec_posicion = m_nave.getPosition();
+	Vector2f aux(vec_posicion.x+(1.0/3)*m_radio*cos(radianes_rot+M_PI/2),vec_posicion.y+(1.0/3)*m_radio*sin(radianes_rot+M_PI/2));
+	return aux;
+}//El mayor
+
+float Nave::obtenerRadioFoco1()const{
+	return m_radio*(4.0/15);
+}
+float Nave::obtenerRadioFoco2()const{
+	return m_radio*(1.0/3);
 }

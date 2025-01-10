@@ -20,6 +20,9 @@ bool fuera_limites(Proyectil &d){
 		return true;
 	return false;
 }
+void colision_naveaste(Nave &n, vector<asteroide> &v){
+		
+}
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
