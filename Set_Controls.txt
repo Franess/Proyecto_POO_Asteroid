@@ -9,4 +9,5 @@ D
 A
 #Avanzar
 W
-
+#Frenar
+S

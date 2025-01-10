@@ -2,7 +2,6 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <cmath>
 #include "Settings.h"
-#include <iostream>
 using namespace std;
 using namespace sf;
 //Funcion Auxiliar
@@ -28,31 +27,34 @@ Nave::Nave(Settings &s)
 	m_teclas = s.obtenerControles();
 }
 
-void Nave::actualizar()
-{
-	
+void Nave::actualizar(){
 	if(Keyboard::isKeyPressed(m_teclas[1]))//rotar derecha
 		m_nave.rotate(3);
 	if(Keyboard::isKeyPressed(m_teclas[2]))//Rotar izquierda
 		m_nave.rotate(-3);	
 	if(Keyboard::isKeyPressed(m_teclas[3])){	//Avanzar nave
-		float m_rapidez=(1.0/4)*(exp(elapsed_time)-1);	//la velocidad es una funcion con respecto al tiempodd
+		float m_rapidez=(1.0/4)*(exp(elapsed_time)-1);	//la rapidez es una funcion con respecto al tiempo
 		radianes_rot = m_nave.getRotation()*M_PI/180;
 		m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
 		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
+		Vector2f nueva_direccion(m_rapidez*cos(radianes_rot-M_PI/2),m_rapidez*sin(radianes_rot-M_PI/2));
 		m_nave.move(m_vecDireccion);
-		if(elapsed_time<=(6.0/2)){
+		if(elapsed_time<=(6.0/2)){//Tiempo que se mantiene presionada la tecla.
 			elapsed_time+=1.0/40;
 		}
 	}else{
-		if(elapsed_time>0){
+		if(elapsed_time>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
 			elapsed_time-=1.0/120;
 		}
-		cout<<conversionElapsed((1.0/4)*(exp(elapsed_time)-1))<<endl;
-		float m_rapidez=-log(conversionElapsed(elapsed_time))+2.3;	//la velocidad es una funcion con respecto al tiempo
+		float m_rapidez=-log(conversionElapsed(elapsed_time))+2.3;	//la rapidez es una funcion con respecto al tiempo
 		m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
 		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
 		m_nave.move(m_vecDireccion);		
+	}
+	if(Keyboard::isKeyPressed(m_teclas[4])){
+		if(elapsed_time>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
+			elapsed_time-=1.0/30;
+		}
 	}
 }
 void Nave::dibujar(RenderWindow &win)
