@@ -2,9 +2,13 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <cmath>
 #include "Settings.h"
+#include <iostream>
 using namespace std;
 using namespace sf;
-
+//Funcion Auxiliar
+float conversionElapsed(float x){
+	return exp(log(10)-x);
+}
 
 Nave::Nave(Settings &s)
 {
@@ -28,26 +32,28 @@ void Nave::actualizar()
 {
 	
 	if(Keyboard::isKeyPressed(m_teclas[1]))//rotar derecha
-		m_nave.rotate(2);
+		m_nave.rotate(3);
 	if(Keyboard::isKeyPressed(m_teclas[2]))//Rotar izquierda
-		m_nave.rotate(-2);	
+		m_nave.rotate(-3);	
 	if(Keyboard::isKeyPressed(m_teclas[3])){	//Avanzar nave
-		if(elapsed_time<=3.0/2){
-			elapsed_time+=1.0/60;
-		}
-		float m_rapidez=(-8.0/9)*pow(elapsed_time,2)+(3.0/2)*(elapsed_time);
+		float m_rapidez=(1.0/4)*(exp(elapsed_time)-1);	//la velocidad es una funcion con respecto al tiempodd
 		radianes_rot = m_nave.getRotation()*M_PI/180;
-		m_vecVelocidad.x=elapsed_time*cos(radianes_rot-M_PI/2);
-		m_vecVelocidad.y=elapsed_time*sin(radianes_rot-M_PI/2);
-		m_nave.move(m_vecVelocidad);
+		m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
+		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
+		m_nave.move(m_vecDireccion);
+		if(elapsed_time<=(6.0/2)){
+			elapsed_time+=1.0/40;
+		}
 	}else{
 		if(elapsed_time>0){
-			elapsed_time-=1.0/240;
+			elapsed_time-=1.0/120;
 		}
-		float m_rapidez=(-8.0/9)*pow(elapsed_time,2)+(3.0/2)*(elapsed_time);
-		m_vecVelocidad.x=elapsed_time*cos(radianes_rot-M_PI/2);
-		m_vecVelocidad.y=elapsed_time*sin(radianes_rot-M_PI/2);
-		m_nave.move(m_vecVelocidad);	}
+		cout<<conversionElapsed((1.0/4)*(exp(elapsed_time)-1))<<endl;
+		float m_rapidez=-log(conversionElapsed(elapsed_time))+2.3;	//la velocidad es una funcion con respecto al tiempo
+		m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
+		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
+		m_nave.move(m_vecDireccion);		
+	}
 }
 void Nave::dibujar(RenderWindow &win)
 {

@@ -20,7 +20,7 @@ private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
 	float elapsed_time=0;
-	Vector2f m_vecVelocidad;
+	Vector2f m_vecDireccion;
 	float radianes_rot;
 };
 #endif
