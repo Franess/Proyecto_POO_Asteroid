@@ -10,6 +10,7 @@ using namespace std;
 void spawn (vector<asteroide> &a, Texture* tex){
 	if (a.size()<50){
 		int id= a.size();
+		cout<<"spawn "<<id<<endl;
 		a.push_back(asteroide(tex,id));
 		a[a.size()-1].r_size();
 		a[a.size()-1].cambiar_objetivo();
@@ -66,6 +67,14 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
+	/*void indicador_d(vector<asteroide> &ast){
+		for(int i=0;i<ast.size();i++) { 
+			Color c=ast[i].get_color();
+			if((c.g<255)&&(c.g>0)){
+				ast[i].set_color(255,c.g+1,c.b+1);
+			}
+		}
+	}*/
 	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, tabla_de_puntos &tabla){
 		for(int i=0;i<pro.size();i++) { 
 			for(int j=0;j<ast.size();j++) {
@@ -80,14 +89,13 @@ void respawn(vector<asteroide> &a){
 						ast[j].cambiar_objetivo();
 						ast[j].reposicionar();
 						ast[j].set_direccion();
+						ast[j].set_color();
+					}else{
+						ast[j].set_color(255,55,55);
 					}
 					pro.erase(pro.begin()+i);
-					
-					
-					
 				}
 			}
 		}
-		
 	}
 	
