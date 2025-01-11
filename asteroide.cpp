@@ -15,6 +15,7 @@ asteroide::asteroide(Texture *tex_asteroide,int id_num) {
 	spr.setScale(size,size);
 	radio=(size*9)+(0.25*size/3);
 	spr.setOrigin(size*10,size*10);
+	ast_color=Color(255,255,255,255);
 }
 
 Vector2f asteroide::get_posicion(){
@@ -106,10 +107,17 @@ void asteroide::set_velocidad(Vector2f new_v){
 }
 
 void asteroide::actualizar(){
+	if((ast_color.g<255)&&(ast_color.g>0)){
+		ast_color=Color(255,ast_color.g+20,ast_color.b+20);
+		spr.setColor(Color(ast_color.r,ast_color.g,ast_color.b));
+	}
 	spr.move(velocidad);
 }
 void asteroide::dibujar(RenderWindow &win){
 	win.draw(spr);
 }
-
+void asteroide::set_color(int r, int g, int b, int a){
+	ast_color=Color(r,g,b,a);
+	spr.setColor(ast_color);
+}
 

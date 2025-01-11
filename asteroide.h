@@ -15,6 +15,7 @@ class asteroide{
 	Vector2f direccion;
 	int ast_hp;
 	int ast_id;
+	Color ast_color;
 
 	//valores fisicos
 	float magnitud;						//magnitud escalar del valor de la velocidad
@@ -34,6 +35,7 @@ public:
 	void set_velocidad(Vector2f new_v);
 	void set_posicion(Vector2f v);
 	void set_id();
+	void set_color(int r=255, int g=255, int b=255, int a=255);
 	
 	float get_rad();
 	float get_size();
