@@ -20,6 +20,8 @@ public:
 	float obtenerRadioFoco1()const;
 	float obtenerRadioFoco2()const;
 	void respawn();
+	bool obtenerInmunidad();
+	void cambiarInmunidad();
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
@@ -27,6 +29,7 @@ private:
 	Vector2f m_vecDireccion;
 	float radianes_rot;
 	float m_radio; //Es el radio de una circunferencia imaginaria al rededor de la nave.
+	bool m_Noinmunidad=true;
 };
 #endif
 

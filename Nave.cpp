@@ -53,7 +53,8 @@ void Nave::actualizar(){
 			time_pressed+=1.0/40;
 		}
 	}
-	if(Keyboard::isKeyPressed(m_teclas[4])){
+	if(Keyboard::isKeyPressed(m_teclas[4])){//Frenar Nave
+		cambiarInmunidad();
 		if(time_pressed>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
 			time_pressed-=1.0/20;
 		}
@@ -110,4 +111,14 @@ float Nave::obtenerRadioFoco2()const{
 
 void Nave::respawn(){
 	m_nave.setPosition(320,180);
+}
+bool Nave::obtenerInmunidad(){
+	return m_Noinmunidad;
+}
+void Nave::cambiarInmunidad(){
+	if(m_Noinmunidad)
+		m_Noinmunidad=false;
+	else
+		m_Noinmunidad=true;
+	   
 }

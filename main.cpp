@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
 		proye_pantalla.erase(it_elimproye,proye_pantalla.end());
 		
 		auto it_colisionAsteNave = find_if(ast.begin(),ast.end(),[&navesita](asteroide &a){return colision_naveaste(navesita,a);});
-		if(it_colisionAsteNave!=ast.end()){
+		if(it_colisionAsteNave!=ast.end() && navesita.obtenerInmunidad()){
 			(*it_colisionAsteNave).r_size();
 			(*it_colisionAsteNave).cambiar_objetivo();
 			(*it_colisionAsteNave).reposicionar();

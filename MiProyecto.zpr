@@ -19,11 +19,11 @@ current_source=Nave.cpp
 path_char=/
 [source]
 path=main.cpp
-cursor=94:2
+cursor=82:66
 open=true
 [source]
 path=Nave.cpp
-cursor=111:23
+cursor=56:21
 open=true
 [source]
 path=asteroide.cpp
@@ -42,7 +42,7 @@ path=Proyectil.cpp
 cursor=16:47
 [header]
 path=Nave.h
-cursor=21:1
+cursor=31:25
 open=true
 [header]
 path=asteroide.h
