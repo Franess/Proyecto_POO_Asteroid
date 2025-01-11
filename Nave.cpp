@@ -22,7 +22,7 @@ Nave::Nave(Settings &s)
 	m_nave.setOutlineColor({255,255,255,255});
 	
 	m_nave.setOrigin(10,15);
-	m_nave.setPosition(100,100);
+	m_nave.setPosition(320,180);
 	m_nave.setFillColor({239,254,0,128});
 	m_teclas = s.obtenerControles();
 	Vector2f aux = m_nave.getOrigin() - m_nave.getPoint(0);
@@ -102,8 +102,12 @@ Vector2f Nave::obtenerFoco2()const{
 }//El mayor
 
 float Nave::obtenerRadioFoco1()const{
-	return m_radio*(4.0/15);
+	return m_radio*(11.f/15);
 }
 float Nave::obtenerRadioFoco2()const{
-	return m_radio*(1.0/3);
+	return m_radio*(13.f/15);
+}
+
+void Nave::respawn(){
+	m_nave.setPosition(320,180);
 }

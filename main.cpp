@@ -20,8 +20,18 @@ bool fuera_limites(Proyectil &d){
 		return true;
 	return false;
 }
-void colision_naveaste(Nave &n, vector<asteroide> &v){
-		
+bool colision_naveaste(Nave &n, asteroide &a){
+	Vector2f vec_foco1 = n.obtenerFoco1() - a.get_posicion();
+	Vector2f vec_foco2 = n.obtenerFoco2() - a.get_posicion();
+	float limiteNorma_foco1 = n.obtenerRadioFoco1() + a.get_rad(); 
+	float limiteNorma_foco2 = n.obtenerRadioFoco2() + a.get_rad();
+	float norma_foco1 = sqrt(vec_foco1.x*vec_foco1.x + vec_foco1.y*vec_foco1.y);
+	float norma_foco2 = sqrt(vec_foco2.x*vec_foco1.x + vec_foco2.y*vec_foco2.y);
+	if(norma_foco1<=limiteNorma_foco1 || norma_foco2<=limiteNorma_foco2 )
+		return true;
+	else
+		return false;
+	
 }
 
 int main(int argc, char *argv[]){
@@ -68,6 +78,15 @@ int main(int argc, char *argv[]){
 		//remueve el proyectil que se encuentra fuera de los limites de la pantalla de juego
 		auto it_elimproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);	//elimproye => eliminar proyectil
 		proye_pantalla.erase(it_elimproye,proye_pantalla.end());
+		
+		auto it_colisionAsteNave = find_if(ast.begin(),ast.end(),[&navesita](asteroide &a){return colision_naveaste(navesita,a);});
+		if(it_colisionAsteNave!=ast.end()){
+			(*it_colisionAsteNave).r_size();
+			(*it_colisionAsteNave).cambiar_objetivo();
+			(*it_colisionAsteNave).reposicionar();
+			(*it_colisionAsteNave).set_direccion();
+			navesita.respawn();
+		}
 		
 		navesita.actualizar();
 		navesita.dibujar(win);

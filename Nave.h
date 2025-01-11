@@ -19,6 +19,7 @@ public:
 	Vector2f obtenerFoco2()const;//El mayor
 	float obtenerRadioFoco1()const;
 	float obtenerRadioFoco2()const;
+	void respawn();
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
