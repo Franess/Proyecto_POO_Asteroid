@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "Proyectil.h"
 
+#include <iostream>
 using namespace std;
 using namespace sf;
 
@@ -33,7 +34,8 @@ int main(int argc, char *argv[]){
 	
 	vector <asteroide> ast;
 	tabla_de_puntos tabla("puntos.poo");
-	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
+	int prueba=0;							//simplemente para probar el sistema de respawn de asteroides;
+	int puntos_para_siguiente=75;
 	vector<Proyectil> proye_pantalla;
  	
 	while(win.isOpen()) {
@@ -47,19 +49,28 @@ int main(int argc, char *argv[]){
 		win.clear(Color(40,40,50,255));
 		
 		prueba++;
-		if (prueba>120){
-			spawn(ast,tex_asteroide);
+		if (prueba%120==0){
 			respawn(ast);
-			prueba=0;
+			if(  (ast.size()<3) or (tabla.get_puntos()>puntos_para_siguiente)  ){
+				spawn(ast,tex_asteroide);
+				puntos_para_siguiente=puntos_para_siguiente*1.6;
+			}
+			tabla.actualizar_puntos_j(ast.size()*10);
 		} 
+		if (prueba%60==0){
+			cout<<prueba/60<<endl;;
+		} 
+		
 		destruir(ast,proye_pantalla,tabla);
 		colision(ast);
 		for(int i=0;i<ast.size();i++) {  
 			ast[i].actualizar();
 			ast[i].dibujar(win);
 		}
-		if(navesita.disparar()){
-			proye_pantalla.push_back(navesita.generarDisparo());
+		if (prueba%10==0){
+			if(navesita.disparar()){
+				proye_pantalla.push_back(navesita.generarDisparo());
+			}
 		}
 		for(Proyectil &x:proye_pantalla){
 			x.actualizar();
