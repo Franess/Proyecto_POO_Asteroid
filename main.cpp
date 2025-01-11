@@ -57,9 +57,6 @@ int main(int argc, char *argv[]){
 			}
 			tabla.actualizar_puntos_j(ast.size()*10);
 		} 
-		if (prueba%60==0){
-			cout<<prueba/60<<endl;;
-		} 
 		
 		destruir(ast,proye_pantalla,tabla);
 		colision(ast);
