@@ -13,7 +13,7 @@ public:
 	Nave(Settings &s);
 	void actualizar();
 	void dibujar(RenderWindow &win);
-	bool disparar();
+	bool disparar(int cant_proye);
 	Proyectil generarDisparo()const;
 	Vector2f obtenerFoco1()const;//El menor
 	Vector2f obtenerFoco2()const;//El mayor
@@ -30,6 +30,7 @@ private:
 	float radianes_rot;
 	float m_radio; //Es el radio de una circunferencia imaginaria al rededor de la nave.
 	bool m_Noinmunidad=true;
+	bool no_disparo = true;
 };
 #endif
 

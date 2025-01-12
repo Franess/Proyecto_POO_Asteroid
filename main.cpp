@@ -1,14 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include "Nave.h"
-#include "asteroide.h"
-#include "complemento_v.h"
 #include <SFML/Graphics/Color.hpp>
-#include "Settings.h"
-#include <vector>
-#include "ast_manip.h"
 #include <SFML/Graphics/Texture.hpp>
+#include <vector>
 #include <algorithm>
+#include "Settings.h"
+#include "Nave.h"
 #include "Proyectil.h"
+#include "asteroide.h"
+#include "ast_manip.h"
+#include "complemento_v.h"
 using namespace std;
 using namespace sf;
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
 			ast[i].actualizar();
 			ast[i].dibujar(win);
 		}
-		if(navesita.disparar()){
+		if(navesita.disparar(proye_pantalla.size())){
 			proye_pantalla.push_back(navesita.generarDisparo());
 		}
 		for(Proyectil &x:proye_pantalla){

@@ -54,7 +54,7 @@ void Nave::actualizar(){
 		}
 	}
 	if(Keyboard::isKeyPressed(m_teclas[4])){//Frenar Nave
-		cambiarInmunidad();
+		/*cambiarInmunidad();*/
 		if(time_pressed>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
 			time_pressed-=1.0/20;
 		}
@@ -62,7 +62,7 @@ void Nave::actualizar(){
 	if(time_pressed>0){//Cuando se suelta la tecla, ese tiempo se "Reduce", que determina el efecto de  
 		time_pressed-=1.0/120;
 	}
-	float m_rapidez=-log(conversionElapsed(time_pressed))+2.3;	//la rapidez es una funcion con respecto al tiempo
+	float m_rapidez=-log(conversionElapsed((1.0/4)*(exp(time_pressed)-1)))+2.3;	//la rapidez es una funcion con respecto al tiempo
 	m_vecDireccion.x=m_rapidez*cos(radianes_rot-M_PI/2);
 	m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
 	m_nave.move(m_vecDireccion);
@@ -72,12 +72,16 @@ void Nave::dibujar(RenderWindow &win)
 	win.draw(m_nave);
 }
 
-bool Nave::disparar(){
-	if(Keyboard::isKeyPressed(m_teclas[0])){
+bool Nave::disparar(int cant_proye){
+	if(Keyboard::isKeyPressed(m_teclas[0]) && cant_proye<=5 && ya_disparo){
+		ya_disparo = false;
 		return true;
-	}else{
-		return false;
 	}
+	if(!Keyboard::isKeyPressed(m_teclas[0]))
+		ya_disparo=true;
+	return false;
+	
+	
 }
 
 Proyectil Nave::generarDisparo()const{
