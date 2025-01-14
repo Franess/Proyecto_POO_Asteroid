@@ -87,12 +87,7 @@ int main(int argc, char *argv[]){
 			(*it_colisionAsteNave).reposicionar();
 			(*it_colisionAsteNave).set_direccion();
 			navesita.marcarTiempo();
-			while((navesita.obtenerTiempo()).asMilliseconds()<3000){
-				cout<<"Banana"<<endl;
-				win.clear();
-				win.display();
-			}
-			navesita.respawn();
+			/*navesita.respawn();*/
 		}
 		navesita.actualizar();
 		navesita.dibujar(win);

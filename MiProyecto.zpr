@@ -19,7 +19,7 @@ current_source=main.cpp
 path_char=/
 [source]
 path=main.cpp
-cursor=93:4
+cursor=67:35
 open=true
 [source]
 path=Nave.cpp
@@ -67,7 +67,7 @@ path=Leeme.txt
 cursor=4:447
 [other]
 path=Set_Controls.txt
-cursor=12:1
+cursor=13:0
 open=true
 [config]
 name=Debug_Win32
