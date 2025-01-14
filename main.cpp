@@ -9,6 +9,7 @@
 #include "asteroide.h"
 #include "ast_manip.h"
 #include "complemento_v.h"
+#include <iostream>
 using namespace std;
 using namespace sf;
 
@@ -42,10 +43,10 @@ int main(int argc, char *argv[]){
 	Texture* tex_asteroide= new Texture; 			//make_shared es un gestor mas eficiente y seguro que un new Texture, pero en poo dimos new asi que usamo new
 	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
 	vector <asteroide> ast;
-
-	int prueba=0;									//simplemente para probar el sistema de respawn de asteroides;
+	int prueba=0;//simplemente para probar el sistema de respawn de asteroides;
 	vector<Proyectil> proye_pantalla;
- 	
+ 	Clock aux;
+	Time t1 = aux.restart();
 	while(win.isOpen()) {
 		Event e;
 		while(win.pollEvent(e)) {
@@ -85,12 +86,15 @@ int main(int argc, char *argv[]){
 			(*it_colisionAsteNave).cambiar_objetivo();
 			(*it_colisionAsteNave).reposicionar();
 			(*it_colisionAsteNave).set_direccion();
+			navesita.marcarTiempo();
+			while((navesita.obtenerTiempo()).asMilliseconds()<3000){
+				cout<<"Banana"<<endl;
+				win.display();
+			}
 			navesita.respawn();
 		}
-		
 		navesita.actualizar();
 		navesita.dibujar(win);
-		
 		win.display();
 	}
 	return 0;

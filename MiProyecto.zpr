@@ -15,15 +15,15 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=.
 inherits_from=
-current_source=Nave.h
+current_source=main.cpp
 path_char=/
 [source]
 path=main.cpp
-cursor=71:46
+cursor=92:4
 open=true
 [source]
 path=Nave.cpp
-cursor=84:1
+cursor=132:15
 open=true
 [source]
 path=asteroide.cpp
@@ -42,7 +42,7 @@ path=Proyectil.cpp
 cursor=16:47
 [header]
 path=Nave.h
-cursor=33:2
+cursor=35:15
 open=true
 [header]
 path=asteroide.h

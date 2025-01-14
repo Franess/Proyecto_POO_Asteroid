@@ -22,6 +22,8 @@ public:
 	void respawn();
 	bool obtenerInmunidad();
 	void cambiarInmunidad();
+	void marcarTiempo();
+	Time obtenerTiempo();
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
@@ -31,6 +33,8 @@ private:
 	float m_radio; //Es el radio de una circunferencia imaginaria al rededor de la nave.
 	bool m_Noinmunidad=true;
 	bool no_disparo = true;
+	Clock m_reloj;
+	Time m_tiempo;
 };
 #endif
 

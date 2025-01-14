@@ -73,12 +73,12 @@ void Nave::dibujar(RenderWindow &win)
 }
 
 bool Nave::disparar(int cant_proye){
-	if(Keyboard::isKeyPressed(m_teclas[0]) && cant_proye<=5 && ya_disparo){
-		ya_disparo = false;
+	if(Keyboard::isKeyPressed(m_teclas[0]) && cant_proye<=5 && no_disparo){
+		no_disparo= false;
 		return true;
 	}
 	if(!Keyboard::isKeyPressed(m_teclas[0]))
-		ya_disparo=true;
+		no_disparo=true;
 	return false;
 	
 	
@@ -125,4 +125,10 @@ void Nave::cambiarInmunidad(){
 	else
 		m_Noinmunidad=true;
 	   
+}	
+void Nave::marcarTiempo(){
+	m_tiempo = m_reloj.restart();
+}
+Time Nave::obtenerTiempo(){
+	return m_reloj.getElapsedTime();
 }
