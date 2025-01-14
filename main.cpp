@@ -89,6 +89,7 @@ int main(int argc, char *argv[]){
 			navesita.marcarTiempo();
 			while((navesita.obtenerTiempo()).asMilliseconds()<3000){
 				cout<<"Banana"<<endl;
+				win.clear();
 				win.display();
 			}
 			navesita.respawn();
