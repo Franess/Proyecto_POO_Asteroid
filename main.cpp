@@ -86,7 +86,8 @@ int main(int argc, char *argv[]){
 			(*it_colisionAsteNave).cambiar_objetivo();
 			(*it_colisionAsteNave).reposicionar();
 			(*it_colisionAsteNave).set_direccion();
-			navesita.marcarTiempo();
+			/*navesita.marcarTiempo();*/
+			navesita.respawn();
 		}
 		navesita.actualizar();
 		navesita.dibujar(win);
