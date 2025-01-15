@@ -19,7 +19,7 @@ current_source=main.cpp
 path_char=/
 [source]
 path=main.cpp
-cursor=67:35
+cursor=93:16
 open=true
 [source]
 path=Nave.cpp
