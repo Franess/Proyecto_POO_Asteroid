@@ -21,9 +21,14 @@ public:
 	float obtenerRadioFoco2()const;
 	void respawn();
 	bool obtenerInmunidad();
+	bool obtenerColision();
 	void cambiarInmunidad();
+	void cambiarColision();
 	void marcarTiempo();
 	Time obtenerTiempo();
+	Vector2f obtenerPosicion()const;
+	float obtenerRadioNave()const;
+	void cambiarTransparencia();
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
@@ -35,6 +40,7 @@ private:
 	bool no_disparo = true;
 	Clock m_reloj;
 	Time m_tiempo;
+	bool m_colision=false;
 };
 #endif
 

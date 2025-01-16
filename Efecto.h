@@ -1,7 +1,6 @@
 #ifndef EFECTO_H
 #define EFECTO_H
 #include <SFML/Graphics.hpp>
-
 class Efecto{
 public:
 	virtual void actualizar()=0;

@@ -9,31 +9,14 @@
 #include "asteroide.h"
 #include "ast_manip.h"
 #include "complemento_v.h"
-#include <iostream>
+#include "Efecto.h"
+#include "OndaConcentrica.h"
 using namespace std;
 using namespace sf;
 
-bool fuera_limites(Proyectil &d){
-	Vector2f pos_actual = d.obtenerPosicion();
-	if(pos_actual.x<0 or pos_actual.x>640)
-		return true;
-	if(pos_actual.y<0 or pos_actual.y>360) 
-		return true;
-	return false;
-}
-bool colision_naveaste(Nave &n, asteroide &a){
-	Vector2f vec_foco1 = n.obtenerFoco1() - a.get_posicion();
-	Vector2f vec_foco2 = n.obtenerFoco2() - a.get_posicion();
-	float limiteNorma_foco1 = n.obtenerRadioFoco1() + a.get_rad(); 
-	float limiteNorma_foco2 = n.obtenerRadioFoco2() + a.get_rad();
-	float norma_foco1 = sqrt(vec_foco1.x*vec_foco1.x + vec_foco1.y*vec_foco1.y);
-	float norma_foco2 = sqrt(vec_foco2.x*vec_foco1.x + vec_foco2.y*vec_foco2.y);
-	if(norma_foco1<=limiteNorma_foco1 || norma_foco2<=limiteNorma_foco2 )
-		return true;
-	else
-		return false;
-	
-}
+bool fuera_limites(Proyectil &d);
+bool colision_naveaste(Nave &n, asteroide &a);
+void efectoNaveDestruccion(Efecto *e, Nave &n,RenderWindow &win);
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
@@ -45,13 +28,14 @@ int main(int argc, char *argv[]){
 	vector <asteroide> ast;
 	int prueba=0;//simplemente para probar el sistema de respawn de asteroides;
 	vector<Proyectil> proye_pantalla;
- 	Clock aux;
-	Time t1 = aux.restart();
+	Efecto *vfx;
+	
 	while(win.isOpen()) {
 		Event e;
 		while(win.pollEvent(e)) {
 			if(e.type == Event::Closed){
 				delete tex_asteroide;
+				delete vfx;
 				win.close();
 			}
 		}
@@ -86,12 +70,52 @@ int main(int argc, char *argv[]){
 			(*it_colisionAsteNave).cambiar_objetivo();
 			(*it_colisionAsteNave).reposicionar();
 			(*it_colisionAsteNave).set_direccion();
+			vfx = new OndaConcentrica(navesita.obtenerPosicion(),navesita.obtenerRadioNave());
 			navesita.marcarTiempo();
+			navesita.cambiarColision();
+			navesita.cambiarTransparencia();
+			navesita.cambiarInmunidad();
 		}
+		efectoNaveDestruccion(vfx,navesita,win);
 		navesita.actualizar();
 		navesita.dibujar(win);
 		win.display();
 	}
+	
 	return 0;
 }
 	
+bool fuera_limites(Proyectil &d){
+	Vector2f pos_actual = d.obtenerPosicion();
+	if(pos_actual.x<0 or pos_actual.x>640)
+		return true;
+	if(pos_actual.y<0 or pos_actual.y>360) 
+		return true;
+	return false;
+}
+bool colision_naveaste(Nave &n, asteroide &a){
+	Vector2f vec_foco1 = n.obtenerFoco1() - a.get_posicion();
+	Vector2f vec_foco2 = n.obtenerFoco2() - a.get_posicion();
+	float limiteNorma_foco1 = n.obtenerRadioFoco1() + a.get_rad(); 
+	float limiteNorma_foco2 = n.obtenerRadioFoco2() + a.get_rad();
+	float norma_foco1 = sqrt(vec_foco1.x*vec_foco1.x + vec_foco1.y*vec_foco1.y);
+	float norma_foco2 = sqrt(vec_foco2.x*vec_foco1.x + vec_foco2.y*vec_foco2.y);
+	if(norma_foco1<=limiteNorma_foco1 || norma_foco2<=limiteNorma_foco2 )
+		return true;
+	else
+		return false;
+	
+}
+void efectoNaveDestruccion(Efecto *e, Nave &n,RenderWindow &win){
+	if((n.obtenerTiempo()).asMilliseconds()<3000 && n.obtenerColision()){
+		e->actualizar();
+		e->dibujar(win);
+		
+	}
+	if((n.obtenerTiempo()).asMilliseconds()>=3000 && n.obtenerColision()){
+		n.cambiarColision();
+		n.cambiarTransparencia();
+		n.cambiarInmunidad();
+		n.respawn();
+	}
+}

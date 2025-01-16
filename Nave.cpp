@@ -132,3 +132,29 @@ void Nave::marcarTiempo(){
 Time Nave::obtenerTiempo(){
 	return m_reloj.getElapsedTime();
 }
+
+Vector2f Nave::obtenerPosicion()const{
+	return m_nave.getPosition();
+}
+float Nave::obtenerRadioNave()const{
+	return m_radio;
+}
+void Nave::cambiarColision(){
+	if(m_colision)
+		m_colision=false;
+	else
+		m_colision=true;
+	
+}	
+bool Nave::obtenerColision(){
+	return m_colision;
+}
+void Nave::cambiarTransparencia(){
+	if(m_colision){
+		m_nave.setOutlineColor({255,255,255,0});
+		m_nave.setFillColor({239,254,0,0});
+	}else{
+		m_nave.setOutlineColor({255,255,255,255});
+		m_nave.setFillColor({239,254,0,128});
+	}
+}
