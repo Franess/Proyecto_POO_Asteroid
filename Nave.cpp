@@ -115,6 +115,7 @@ float Nave::obtenerRadioFoco2()const{
 
 void Nave::respawn(){
 	m_nave.setPosition(320,180);
+	time_pressed=0;
 }
 bool Nave::obtenerInmunidad(){
 	return m_Noinmunidad;

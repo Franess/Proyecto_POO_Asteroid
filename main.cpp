@@ -28,14 +28,16 @@ int main(int argc, char *argv[]){
 	vector <asteroide> ast;
 	int prueba=0;//simplemente para probar el sistema de respawn de asteroides;
 	vector<Proyectil> proye_pantalla;
-	Efecto *vfx;
+	Efecto *vfx = nullptr;
 	
 	while(win.isOpen()) {
 		Event e;
 		while(win.pollEvent(e)) {
 			if(e.type == Event::Closed){
+				if(!vfx){
+					delete vfx;
+				}
 				delete tex_asteroide;
-				delete vfx;
 				win.close();
 			}
 		}
@@ -70,6 +72,9 @@ int main(int argc, char *argv[]){
 			(*it_colisionAsteNave).cambiar_objetivo();
 			(*it_colisionAsteNave).reposicionar();
 			(*it_colisionAsteNave).set_direccion();
+			if(!vfx){
+				delete vfx;
+			}
 			vfx = new OndaConcentrica(navesita.obtenerPosicion(),navesita.obtenerRadioNave());
 			navesita.marcarTiempo();
 			navesita.cambiarColision();
