@@ -4,11 +4,12 @@
 #include "complemento_v.h"
 #include <vector>
 #include "Proyectil.h"
+#include "AsteroideExplosion.h"
 using namespace std;
 
 void spawn (vector<asteroide> &a, Texture* tex);
 void respawn(vector<asteroide> &a);
-void destruir (vector<asteroide> &ast, vector<Proyectil> &pro);
+void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp);
 
 void colision(vector<asteroide> &v);	
 /* 

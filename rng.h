@@ -3,10 +3,6 @@
 #include <ctime>
 #include <random>
 using namespace std;
-int RNG (int max, int min=0){
-	static mt19937 gen(time(nullptr));
-	uniform_int_distribution<> range(min, max);
-	return range(gen);
-}	
+int RNG (int max, int min=0);
 	
 #endif
