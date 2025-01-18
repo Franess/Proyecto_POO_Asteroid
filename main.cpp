@@ -19,6 +19,7 @@ bool fuera_limites(Proyectil &d);
 bool colision_naveaste(Nave &n, asteroide &a);
 void efectoNaveDestruccion(Efecto *e, Nave &n,RenderWindow &win);
 bool tiempoEfecto(AsteroideExplosion &aexp);
+Vector2f correccionPosicionNave(const Nave &n);
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
@@ -94,6 +95,8 @@ int main(int argc, char *argv[]){
 			x.dibujar(win);
 		}
 		efectoNaveDestruccion(vfx,navesita,win);
+		Vector2f vecPos_correccion = correccionPosicionNave(navesita);
+		navesita.establecerPosicion(vecPos_correccion);
 		navesita.actualizar();
 		navesita.dibujar(win);
 		win.display();
@@ -140,4 +143,28 @@ bool tiempoEfecto(AsteroideExplosion &aexp)
 		return true;
 	else
 		return false;
+}
+Vector2f correccionPosicionNave(const Nave &n)
+{
+	float margen_nave = n.obtenerRadioNave();
+	Vector2f pos_nave = n.obtenerPosicion();
+	/*Aplico la correcion en x y luego en y.
+	Se deja un margen para que la nave desaparezca de la pantalla
+	y luego reaparezca en la posicion que corresponda
+	*/
+	if(pos_nave.x<=(0-margen_nave))
+		pos_nave.x = 639+margen_nave;
+	else
+	{
+		if(pos_nave.x>=(640+margen_nave))
+			pos_nave.x = 1-margen_nave;
+	}
+	if(pos_nave.y<=(0-margen_nave))
+		pos_nave.y = 359+margen_nave;
+	else
+	{
+		if(pos_nave.y>=(360+margen_nave))
+			pos_nave.y = 1-margen_nave;
+	}
+	return pos_nave;
 }

@@ -29,6 +29,7 @@ public:
 	Vector2f obtenerPosicion()const;
 	float obtenerRadioNave()const;
 	void cambiarTransparencia();
+	void establecerPosicion(Vector2f pos_nueva);
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;

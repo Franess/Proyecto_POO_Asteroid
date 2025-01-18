@@ -159,3 +159,7 @@ void Nave::cambiarTransparencia(){
 		m_nave.setFillColor({239,254,0,128});
 	}
 }
+void Nave::establecerPosicion(Vector2f pos_nueva)
+{
+	m_nave.setPosition(pos_nueva);
+}
