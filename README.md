@@ -36,3 +36,22 @@ cansado de la vida -G.
 Se implementa la rama setting con la funcionalidad de obtenerControles lista para usar. Esta funcionando, podes cambiar los controles, le agregue las flechas en el formato "Flecha-(Direccion)" siempre la direccion sin abreviar y con mayuscula al inicio. Parecia al principio mas trabajoso, pero resulto ser bastante practico, una vez que entendes como funciona la carga desde el archivo y la busqueda de los strings, es facil de ampliar
 
 -M. 
+
+16/01/2025 61e2d1 (main)
+
+Se implementa clase abstracta efecto.h, clase OndaConcentrica, funcionamiento del efecto de colision de la nave
+
+-M
+
+18/01/2025 94a03de (main)
+
+Reestructuracion funcion RNG, se agrega rng.cpp
+Se agrega AsteroideExplosion (.h y .cpp) ya implementados
+Cambios en ast_manip para la generacion del efecto de explosion
+Se implementa la eliminacion del efecto. Se utiliza STL
+Se agrega la clase Particula con .h y .cpp. Se implementan todos sus metodos
+Queda implementado y completamente funcional el efecto de explosion del asteroide
+Es el commit mas significativo, el otro no hice grandes cambios. Este es el pesado
+
+-M
+
