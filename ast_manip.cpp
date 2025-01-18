@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "Proyectil.h"
+#include "AsteroideExplosion.h"
 using namespace std;
 
 
@@ -64,13 +65,16 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
-	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro){
+	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp){
 		for(int i=0;i<pro.size();i++) { 
 			for(int j=0;j<ast.size();j++) {
 				asteroide a= ast[j];
 				Proyectil p= pro[i];
 				Vector2f aux= a.get_posicion()-p.obtenerPosicion();
 				if (sqrt( aux.x*aux.x + aux.y*aux.y )<(a.get_rad()+3.5)){
+					AsteroideExplosion aux(a);//Efecto de explosion auxiliar
+					aux.marcarTiempo();
+					exp.push_back(aux);
 					ast[j].r_size();
 					ast[j].cambiar_objetivo();
 					ast[j].reposicionar();

@@ -11,12 +11,15 @@
 #include "complemento_v.h"
 #include "Efecto.h"
 #include "OndaConcentrica.h"
+#include "AsteroideExplosion.h"
+#include <iostream>
 using namespace std;
 using namespace sf;
 
 bool fuera_limites(Proyectil &d);
 bool colision_naveaste(Nave &n, asteroide &a);
 void efectoNaveDestruccion(Efecto *e, Nave &n,RenderWindow &win);
+bool tiempoEfecto(AsteroideExplosion &aexp);
 
 int main(int argc, char *argv[]){
 	RenderWindow win(VideoMode((640),(360)),"Asteroid");
@@ -28,6 +31,7 @@ int main(int argc, char *argv[]){
 	vector <asteroide> ast;
 	int prueba=0;//simplemente para probar el sistema de respawn de asteroides;
 	vector<Proyectil> proye_pantalla;
+	vector<AsteroideExplosion> efec_explosion;
 	Efecto *vfx = nullptr;
 	
 	while(win.isOpen()) {
@@ -49,7 +53,7 @@ int main(int argc, char *argv[]){
 			respawn(ast);
 			prueba=0;
 		} 
-		destruir(ast,proye_pantalla);
+		destruir(ast,proye_pantalla,efec_explosion);
 		colision(ast);
 		for(int i=0;i<ast.size();i++) {  
 			ast[i].actualizar();
@@ -66,6 +70,10 @@ int main(int argc, char *argv[]){
 		auto it_elimproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);	//elimproye => eliminar proyectil
 		proye_pantalla.erase(it_elimproye,proye_pantalla.end());
 		
+		//Elimina los efectos de explosion pasados un limite de tiempo
+		auto it_elimexp = remove_if(efec_explosion.begin(),efec_explosion.end(),tiempoEfecto);
+		efec_explosion.erase(it_elimexp,efec_explosion.end());
+		
 		auto it_colisionAsteNave = find_if(ast.begin(),ast.end(),[&navesita](asteroide &a){return colision_naveaste(navesita,a);});
 		if(it_colisionAsteNave!=ast.end() && navesita.obtenerInmunidad()){
 			(*it_colisionAsteNave).r_size();
@@ -81,15 +89,20 @@ int main(int argc, char *argv[]){
 			navesita.cambiarTransparencia();
 			navesita.cambiarInmunidad();
 		}
+		for(AsteroideExplosion &x:efec_explosion)
+		{
+			x.actualizar();
+			x.dibujar(win);
+		}
 		efectoNaveDestruccion(vfx,navesita,win);
 		navesita.actualizar();
 		navesita.dibujar(win);
 		win.display();
 	}
-	
+	cout<<efec_explosion.size()<<endl;
 	return 0;
 }
-	
+//Final main	
 bool fuera_limites(Proyectil &d){
 	Vector2f pos_actual = d.obtenerPosicion();
 	if(pos_actual.x<0 or pos_actual.x>640)
@@ -123,4 +136,11 @@ void efectoNaveDestruccion(Efecto *e, Nave &n,RenderWindow &win){
 		n.cambiarInmunidad();
 		n.respawn();
 	}
+}
+bool tiempoEfecto(AsteroideExplosion &aexp)
+{
+	if((aexp.obtenerTiempo()).asMilliseconds()>=500)
+		return true;
+	else
+		return false;
 }

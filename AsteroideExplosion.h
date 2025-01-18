@@ -3,15 +3,21 @@
 #include "Efecto.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Particula.h"
+#include "asteroide.h"
 
 class AsteroideExplosion : public Efecto {
 public:
-	AsteroideExplosion(float aste_radio, sf::Vector2f pos_aste);
-	sf::Vector2f generarVectorMove();
-	void actualizar ( );
+	AsteroideExplosion(asteroide &a);
+	void actualizar();
 	void dibujar (sf::RenderWindow & win);
+	int obtenerCantParticulas()const;
+	sf::Time obtenerTiempo()const;
+	void marcarTiempo();
 private:
-	std::vector<sf::CircleShape> m_vecParticulas;
+	std::vector<Particula> m_vecParticulas;
+	sf::Clock m_reloj;
+	sf::Time m_tiempo;
 };
 
 #endif
