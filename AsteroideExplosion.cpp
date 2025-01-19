@@ -11,7 +11,7 @@ sf::Vector2f generarVectorVelocidad(Particula &p){
 
 AsteroideExplosion::AsteroideExplosion(asteroide &a) {
 	int area_asteroide = std::pow(a.get_rad(),2)*M_PI;
-	float cant_asteroides = static_cast<int>(area_asteroide*(50.f/100));
+	int cant_asteroides = static_cast<int>(area_asteroide*(50.f/100));
 	for(int i=0;i<cant_asteroides;i++)
 	{ 
 		Particula parti(1,a.get_posicion());
