@@ -21,7 +21,7 @@ void Juego::jugar()
 			}
 		}
 		m_win.clear(sf::Color(40,40,50,255));
-		m_escenaActual->Actualizar();
+		m_escenaActual->Actualizar(*this);
 		m_escenaActual->Dibujar(m_win);
 		m_win.display();
 		if(m_escenaSiguiente)
