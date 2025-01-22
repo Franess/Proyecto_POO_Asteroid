@@ -5,6 +5,7 @@
 #include <vector>
 #include "Particula.h"
 #include "asteroide.h"
+#include "Efecto.h"
 
 class AsteroideExplosion : public Efecto {
 public:

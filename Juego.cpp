@@ -1,0 +1,35 @@
+#include "Juego.h"
+
+Juego::Juego(Escena* e):m_win(sf::VideoMode((640),(360)),"Asteroid") {
+	m_win.setFramerateLimit(60);
+	m_escenaActual=e;
+}
+Juego::~Juego()
+{
+	delete m_escenaActual;
+}
+void Juego::CambiarEscena(Escena *nueva){
+	m_escenaSiguiente = nueva;
+}
+void Juego::jugar()
+{
+	while(m_win.isOpen()) {
+		sf::Event e;
+		while(m_win.pollEvent(e)) {
+			if(e.type == sf::Event::Closed){
+				m_win.close();
+			}
+		}
+		m_win.clear(sf::Color(40,40,50,255));
+		m_escenaActual->Actualizar();
+		m_escenaActual->Dibujar(m_win);
+		m_win.display();
+		if(m_escenaSiguiente)
+		{
+			delete m_escenaActual;
+			m_escenaActual = m_escenaSiguiente;
+			m_escenaSiguiente = nullptr;
+		}
+		
+	}
+}

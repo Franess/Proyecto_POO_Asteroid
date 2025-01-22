@@ -1,4 +1,5 @@
 #include "OndaConcentrica.h"
+#include "Efecto.h"
 using namespace std;
 using namespace sf;
 
