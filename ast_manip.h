@@ -7,11 +7,14 @@
 #include "tabla_de_puntos.h"
 using namespace std;
 
+void partimiento_espacial(vector<vector<asteroide*>> a);
+
 void spawn (vector<asteroide> &a, Texture* tex);
 void respawn(vector<asteroide> &a);
 void destruir (vector<asteroide> &ast, vector<Proyectil> &pro, tabla_de_puntos &tabla);
 void indicador_d(vector<asteroide> &ast);
 void colision(vector<asteroide> &v);	
+
 /* 
 calcula una colision elastica total (sin perdidas de energia)
 la funcion utilizada es:

@@ -67,15 +67,8 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
-	/*void indicador_d(vector<asteroide> &ast){
-		for(int i=0;i<ast.size();i++) { 
-			Color c=ast[i].get_color();
-			if((c.g<255)&&(c.g>0)){
-				ast[i].set_color(255,c.g+1,c.b+1);
-			}
-		}
-	}*/
-	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, tabla_de_puntos &tabla){
+	
+	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro , tabla_de_puntos &tabla){
 		for(int i=0;i<pro.size();i++) { 
 			for(int j=0;j<ast.size();j++) {
 				asteroide a= ast[j];

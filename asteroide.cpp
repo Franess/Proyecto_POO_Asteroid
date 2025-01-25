@@ -50,7 +50,6 @@ void asteroide::r_size(){
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
 }
-
 void asteroide::reposicionar(){
 	int x=RNG(1), y= RNG(1);
 	if (x>0){
