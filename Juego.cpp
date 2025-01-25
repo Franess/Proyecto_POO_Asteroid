@@ -36,3 +36,7 @@ void Juego::jugar()
 		
 	}
 }
+void Juego::terminar()
+{
+	m_win.close();
+}

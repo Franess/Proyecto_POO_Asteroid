@@ -28,6 +28,8 @@ private:
 	vector<Proyectil> mproye_pantalla;
 	vector<AsteroideExplosion> mefec_explosion;
 	Efecto *m_vfx = nullptr;
+	sf::Font m_fuente;
+	sf::Text m_msjTeclaMenu;
 };
 
 #endif

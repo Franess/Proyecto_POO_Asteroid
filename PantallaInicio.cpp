@@ -17,22 +17,33 @@ bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b)
 
 PantallaInicio::PantallaInicio() 
 {
-	m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
-	m_textura.loadFromFile("asteroide.png");
+	bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
+	bool estado_textura = m_textura.loadFromFile("asteroide.png");
+	bool estado_imgFondo = m_imgFondo.loadFromFile("fondoPantallaInicio.jpg");
+	if(!estado_imgFondo) throw runtime_error("No se encuentra el fondo fondoPantallaInicio.jpg");
+	if(!estado_fuente) throw runtime_error("No se encuentra la fuente Roboto_Condensed-Bold.ttf");
+	if(!estado_textura) throw runtime_error("No se encuentra la textura asteroide.png");
 	m_imagenAsteroide.setTexture(m_textura);
 	m_comienzoNombre.setFont(m_fuente);
 	m_finalNombre.setFont(m_fuente);
+	m_mensajeSalir.setFont(m_fuente);
 	
+	m_mensajeSalir.setCharacterSize(10);
 	m_comienzoNombre.setCharacterSize(50);
 	m_finalNombre.setCharacterSize(50);
+	m_mensajeSalir.setFillColor({255,255,255});
 	m_comienzoNombre.setFillColor({255,255,255});
 	m_finalNombre.setFillColor({255,255,255});
+	m_mensajeSalir.setString("<Presione la tecla 'esc' para salir>");
 	m_comienzoNombre.setString("Aster");
 	m_finalNombre.setString("ids");
+	m_mensajeSalir.setOrigin(0,0);
 	m_comienzoNombre.setOrigin(0,0);
 	m_finalNombre.setOrigin(0,0);
+	m_mensajeSalir.setPosition(243,345);
 	m_comienzoNombre.setPosition(205,60);
 	m_finalNombre.setPosition(365,60);
+	
 	
 	m_imagenAsteroide.setScale(2.f,2.f);
 	m_imagenAsteroide.setOrigin(0,0);
@@ -40,11 +51,15 @@ PantallaInicio::PantallaInicio()
 	sf::Rect<float> aux_Bordesimg = m_imagenAsteroide.getLocalBounds();
 	m_imagenAsteroide.setOrigin((aux_Bordesimg.height)/2,(aux_Bordesimg.height)/2);
 	
+	m_sprFondo.setTexture(m_imgFondo);
+	m_sprFondo.setOrigin(0,0);
+	m_sprFondo.setPosition(0,0);
+	
 	Boton nuevo_boton("Jugar",&m_fuente,30);
-	nuevo_boton.establecerPosicion(320,240);
+	nuevo_boton.establecerPosicion(320,220);
 	vec_botones.push_back(nuevo_boton);
 	Boton nuevo_boton1("Puntaje",&m_fuente,30);
-	nuevo_boton1.establecerPosicion(320,300);
+	nuevo_boton1.establecerPosicion(320,280);
 	vec_botones.push_back(nuevo_boton1);
 	
 	
@@ -57,9 +72,11 @@ void PantallaInicio::Actualizar (Juego & j)
 }
 void PantallaInicio::Dibujar (sf::RenderWindow & win) {
 	win.clear({0,0,0});
+	win.draw(m_sprFondo);
 	win.draw(m_comienzoNombre);
 	win.draw(m_finalNombre);
 	win.draw(m_imagenAsteroide);
+	win.draw(m_mensajeSalir);
 	for(Boton &x:vec_botones){
 		x.dibujar(win);
 	}
@@ -76,7 +93,7 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 			}
 			else x.colorFondo({0,0,0,0});
 		}
-	}else{
+	}
 	if(e.type == sf::Event::MouseButtonReleased)
 	{
 		sf::Vector2f pos_mouse(e.mouseButton.x,e.mouseButton.y);
@@ -86,6 +103,9 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 			j.CambiarEscena(new OnePlayer(s));
 		}
 	}
+	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
+	{
+		j.terminar();
 	}
 }
 PantallaInicio::~PantallaInicio()

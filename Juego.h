@@ -8,6 +8,7 @@ public:
 	Juego(Escena *e);
 	void jugar();
 	void CambiarEscena(Escena *nueva);
+	void terminar();
 	~Juego();
 private:
 	sf::RenderWindow m_win;

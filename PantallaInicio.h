@@ -12,10 +12,10 @@ public:
 	void ProcesarEvento(Juego &j, sf::Event e)override;
 	~PantallaInicio();
 private:
-	sf::Text m_comienzoNombre, m_finalNombre;
-	sf::Sprite m_imagenAsteroide;
+	sf::Text m_comienzoNombre, m_finalNombre, m_mensajeSalir;
+	sf::Sprite m_imagenAsteroide, m_sprFondo;
 	sf::Font m_fuente;
-	sf::Texture m_textura;
+	sf::Texture m_textura, m_imgFondo;
 	vector<Boton> vec_botones;
 };
 
