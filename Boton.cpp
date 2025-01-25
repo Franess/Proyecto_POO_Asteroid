@@ -12,7 +12,8 @@ Boton::Boton(string texto_boton, sf::Font *fuente, int tamanio_letras)
 	float pos_origY = (info_BordesTexto.height)/2;
 	m_texto.setOrigin(pos_origX,pos_origY);
 	
-	sf::Vector2f tamanio_borde(info_BordesTexto.width+3,info_BordesTexto.height+15);
+	sf::Vector2f tamanio_borde(info_BordesTexto.width+4,info_BordesTexto.height+15);
+	m_tamanioBorde = tamanio_borde;
 	m_borde.setSize(tamanio_borde);
 	m_borde.setOrigin(pos_origX,pos_origY);
 	m_borde.setFillColor({0,0,0,0});
@@ -27,10 +28,11 @@ Boton::~Boton()
 
 void Boton::actualizar()
 {
-	
+	colorFondo({0,0,0,0});
 }
 void Boton::dibujar(sf::RenderWindow &win)
 {
+	
 	win.draw(m_texto);
 	win.draw(m_borde);
 }
@@ -68,4 +70,20 @@ void Boton::escalado(float multi)
 {
 	m_texto.setScale(multi,multi);
 	m_borde.setScale(multi,multi);
+}
+sf::Vector2f Boton::obtenerPunto(int i)const
+{
+	return m_borde.getPoint(i);
+}
+sf::Vector2f Boton::obtenerPosicion()const
+{
+	return m_borde.getPosition();
+}
+float Boton::obtenerAnchoBorde()const
+{
+	return m_tamanioBorde.x;
+}
+float Boton::obtenerAltoBorde()const
+{
+	return m_tamanioBorde.y;
 }

@@ -16,6 +16,11 @@ public:
 	void establecerColorBordes(sf::Color c);
 	void colorFondo(sf::Color c);
 	void escalado(float multi);
+	sf::Vector2f obtenerPunto(int i)const;
+	sf::Vector2f obtenerPosicion()const;
+	float obtenerAnchoBorde()const;
+	float obtenerAltoBorde()const;
+	
 	
 	void actualizar();
 	void dibujar(sf::RenderWindow &win);
@@ -23,6 +28,7 @@ public:
 private:
 	sf::Text m_texto;
 	sf::RectangleShape m_borde; //Es para hacer un recuadro que rodee al texto
+	sf::Vector2f m_tamanioBorde;
 };
 
 #endif

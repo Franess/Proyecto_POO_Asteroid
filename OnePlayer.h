@@ -18,6 +18,7 @@ public:
 	OnePlayer(Settings &s);
 	void Actualizar (Juego &j)override;
 	void Dibujar (sf::RenderWindow & win)override;
+	void ProcesarEvento(Juego &j, sf::Event e)override;
 	~OnePlayer();
 private:
 	Nave m_navesita;

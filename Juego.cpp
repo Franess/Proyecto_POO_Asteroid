@@ -18,6 +18,9 @@ void Juego::jugar()
 		while(m_win.pollEvent(e)) {
 			if(e.type == sf::Event::Closed){
 				m_win.close();
+			}else
+			{
+				m_escenaActual->ProcesarEvento(*this,e);
 			}
 		}
 		m_win.clear(sf::Color(40,40,50,255));

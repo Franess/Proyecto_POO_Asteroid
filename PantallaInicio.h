@@ -9,6 +9,7 @@ public:
 	PantallaInicio();
 	void Actualizar (Juego & j);
 	void Dibujar (sf::RenderWindow & win);
+	void ProcesarEvento(Juego &j, sf::Event e)override;
 	~PantallaInicio();
 private:
 	sf::Text m_comienzoNombre, m_finalNombre;

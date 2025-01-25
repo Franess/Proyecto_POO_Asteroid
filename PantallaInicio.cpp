@@ -1,4 +1,19 @@
 #include "PantallaInicio.h"
+#include <algorithm>
+#include "OnePlayer.h"
+#include "Settings.h"
+using namespace std;
+
+bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b)
+{
+	sf::Vector2f punto_1 = b.obtenerPunto(0);
+	sf::Vector2f punto_2 = b.obtenerPunto(2);
+	sf::Vector2f pos_actualBoton = b.obtenerPosicion();
+	bool zona_x = punto_1.x+pos_actualBoton.x-b.obtenerAnchoBorde()/2<=pos_puntero.x && pos_puntero.x<=punto_2.x+pos_actualBoton.x-b.obtenerAnchoBorde()/2;
+	bool zona_y = punto_1.y+pos_actualBoton.y-b.obtenerAltoBorde()/2<=pos_puntero.y && pos_puntero.y	<=punto_2.y+pos_actualBoton.y-b.obtenerAltoBorde()/2;
+	if(zona_x && zona_y) return true;
+	else return false;
+}
 
 PantallaInicio::PantallaInicio() 
 {
@@ -36,10 +51,10 @@ PantallaInicio::PantallaInicio()
 	
 }
 
-void PantallaInicio::Actualizar (Juego & j) {
+void PantallaInicio::Actualizar (Juego & j)
+{
 	m_imagenAsteroide.rotate(3);
 }
-
 void PantallaInicio::Dibujar (sf::RenderWindow & win) {
 	win.clear({0,0,0});
 	win.draw(m_comienzoNombre);
@@ -47,6 +62,30 @@ void PantallaInicio::Dibujar (sf::RenderWindow & win) {
 	win.draw(m_imagenAsteroide);
 	for(Boton &x:vec_botones){
 		x.dibujar(win);
+	}
+}
+void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
+{
+	if(e.type == sf::Event::MouseMoved)
+	{
+		sf::Vector2f pos_mouse(e.mouseMove.x,e.mouseMove.y);
+		for(Boton &x:vec_botones){
+			if(calculo_sobreposicion(pos_mouse,x))
+			{ 
+				x.colorFondo({190,255,250,50});
+			}
+			else x.colorFondo({0,0,0,0});
+		}
+	}else{
+	if(e.type == sf::Event::MouseButtonReleased)
+	{
+		sf::Vector2f pos_mouse(e.mouseButton.x,e.mouseButton.y);
+		if(calculo_sobreposicion(pos_mouse,vec_botones[0]) && e.mouseButton.button == sf::Mouse::Left)
+		{
+			Settings s;
+			j.CambiarEscena(new OnePlayer(s));
+		}
+	}
 	}
 }
 PantallaInicio::~PantallaInicio()

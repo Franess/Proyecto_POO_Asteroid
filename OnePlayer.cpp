@@ -152,3 +152,7 @@ OnePlayer::~OnePlayer()
 	}
 //	delete mtex_asteroide;
 }
+void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
+{
+	
+}
