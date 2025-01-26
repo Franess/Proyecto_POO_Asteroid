@@ -73,7 +73,7 @@ void Nave::dibujar(RenderWindow &win)
 }
 
 bool Nave::disparar(int cant_proye){
-	if(Keyboard::isKeyPressed(m_teclas[0]) && cant_proye<=5 && no_disparo){
+	if(Keyboard::isKeyPressed(m_teclas[0]) && cant_proye<=5 && no_disparo && !m_colision){
 		no_disparo= false;
 		return true;
 	}

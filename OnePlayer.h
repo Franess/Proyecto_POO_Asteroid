@@ -18,6 +18,7 @@ public:
 	OnePlayer(Settings &s);
 	void Actualizar (Juego &j)override;
 	void Dibujar (sf::RenderWindow & win)override;
+	void ProcesarEvento(Juego &j, sf::Event e)override;
 	~OnePlayer();
 private:
 	Nave m_navesita;
@@ -27,6 +28,8 @@ private:
 	vector<Proyectil> mproye_pantalla;
 	vector<AsteroideExplosion> mefec_explosion;
 	Efecto *m_vfx = nullptr;
+	sf::Font m_fuente;
+	sf::Text m_msjTeclaMenu;
 };
 
 #endif
