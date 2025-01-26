@@ -4,9 +4,10 @@
 #Disparar
 Space
 #Rotar derecha
-H
+D
 #Rotar izquierda
-F
+A
 #Avanzar
-T
-
+W
+#Frenar
+S

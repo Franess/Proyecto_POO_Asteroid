@@ -1,85 +1,17 @@
 #include <SFML/Graphics.hpp>
-#include "Nave.h"
-#include "asteroide.h"
-#include "complemento_v.h"
-#include <SFML/Graphics/Color.hpp>
+#include "OnePlayer.h"
 #include "Settings.h"
-#include <vector>
-#include "ast_manip.h"
-#include <SFML/Graphics/Texture.hpp>
-#include "tabla_de_puntos.h"
-#include <algorithm>
-#include "Proyectil.h"
 
-#include <iostream>
 using namespace std;
 using namespace sf;
 
-bool fuera_limites(Proyectil &d){
-	Vector2f pos_actual = d.obtenerPosicion();
-	if(pos_actual.x<0 or pos_actual.x>640)
-		return true;
-	if(pos_actual.y<0 or pos_actual.y>360) 
-		return true;
-	return false;
-}
 
 int main(int argc, char *argv[]){
-	RenderWindow win(VideoMode((640),(360)),"Asteroid");
-	win.setFramerateLimit(60);
 	Settings sett;
-	Nave navesita(sett);
-	Texture* tex_asteroide= new Texture; 			//make_shared es un gestor mas eficiente y seguro que un new Texture, pero en poo dimos new asi que usamo new
-	(*tex_asteroide).loadFromFile("asteroide.png");	//convendria usar shared_ptr para ahorrarnos la eliminacion del puntero
-	
-	vector <asteroide> ast;
-	tabla_de_puntos tabla("puntos.poo");
-	int prueba=0;							//simplemente para probar el sistema de respawn de asteroides;
-	int puntos_para_siguiente=75;
-	vector<Proyectil> proye_pantalla;
- 	
-	while(win.isOpen()) {
-		Event e;
-		while(win.pollEvent(e)) {
-			if(e.type == Event::Closed){
-				delete tex_asteroide;
-				win.close();
-			}
-		}
-		win.clear(Color(40,40,50,255));
-		
-		prueba++;
-		if (prueba%120==0){
-			respawn(ast);
-			if(  (ast.size()<3) or (tabla.get_puntos()>puntos_para_siguiente)  ){
-				spawn(ast,tex_asteroide);
-				puntos_para_siguiente=puntos_para_siguiente*1.6;
-			}
-			tabla.actualizar_puntos_j(ast.size()*10);
-		} 
-		
-		destruir(ast,proye_pantalla,tabla);
-		colision(ast);
-		for(int i=0;i<ast.size();i++) {  
-			ast[i].actualizar();
-			ast[i].dibujar(win);
-		}
-		if (prueba%10==0){
-			if(navesita.disparar()){
-				proye_pantalla.push_back(navesita.generarDisparo());
-			}
-		}
-		for(Proyectil &x:proye_pantalla){
-			x.actualizar();
-			x.dibujar(win);
-		}
-		auto it_rmproye = remove_if(proye_pantalla.begin(),proye_pantalla.end(),fuera_limites);
-		proye_pantalla.erase(it_rmproye,proye_pantalla.end());
-		navesita.actualizar();
-		navesita.dibujar(win);
-		
-		win.display();
-	}
+
+	Juego j(new OnePlayer(sett));
+	j.jugar();
 	return 0;
 }
-	
+//Final main	
+

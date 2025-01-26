@@ -5,14 +5,12 @@
 #include <vector>
 #include "Proyectil.h"
 #include "tabla_de_puntos.h"
+#include "AsteroideExplosion.h"
 using namespace std;
-
-void partimiento_espacial(vector<vector<asteroide*>> a);
-
 void spawn (vector<asteroide> &a, Texture* tex);
 void respawn(vector<asteroide> &a);
-void destruir (vector<asteroide> &ast, vector<Proyectil> &pro, tabla_de_puntos &tabla);
 void indicador_d(vector<asteroide> &ast);
+void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp, tabla_de_puntos &tabla);
 void colision(vector<asteroide> &v);	
 
 /* 

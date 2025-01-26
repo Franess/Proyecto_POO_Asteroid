@@ -5,8 +5,8 @@
 #include <cstring>
 using namespace std;
 
-tabla_de_puntos::tabla_de_puntos(string nombre_archi) {
-	archivo_puntos=nombre_archi;
+tabla_de_puntos::tabla_de_puntos() {
+	archivo_puntos="puntos.poo";
 	puntos_jugador.puntos=0;
 }
 

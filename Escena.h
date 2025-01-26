@@ -1,0 +1,13 @@
+#ifndef ESCENA_H
+#define ESCENA_H
+#include <SFML/Graphics.hpp>
+class Juego;
+
+class Escena
+{
+public:
+	virtual void Actualizar(Juego &j)=0;
+	virtual void Dibujar(sf::RenderWindow &win)=0;
+};
+
+#endif

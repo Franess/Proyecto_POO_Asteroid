@@ -1,0 +1,161 @@
+#include "OnePlayer.h"
+
+using namespace std;
+using namespace sf;
+
+
+bool fuera_limites(Proyectil &d)
+{
+	Vector2f pos_actual = d.obtenerPosicion();
+	if(pos_actual.x<0 or pos_actual.x>640)
+		return true;
+	if(pos_actual.y<0 or pos_actual.y>360) 
+		return true;
+	return false;
+}
+bool colision_naveaste(Nave &n, asteroide &a)
+{
+	Vector2f vec_foco1 = n.obtenerFoco1() - a.get_posicion();
+	Vector2f vec_foco2 = n.obtenerFoco2() - a.get_posicion();
+	float limiteNorma_foco1 = n.obtenerRadioFoco1() + a.get_rad(); 
+	float limiteNorma_foco2 = n.obtenerRadioFoco2() + a.get_rad();
+	float norma_foco1 = sqrt(vec_foco1.x*vec_foco1.x + vec_foco1.y*vec_foco1.y);
+	float norma_foco2 = sqrt(vec_foco2.x*vec_foco1.x + vec_foco2.y*vec_foco2.y);
+	if(norma_foco1<=limiteNorma_foco1 || norma_foco2<=limiteNorma_foco2 )
+		return true;
+	else
+		return false;
+	
+}
+void efectoNaveDestruccion(Efecto *e, Nave &n,RenderWindow &win)
+{
+	if((n.obtenerTiempo()).asMilliseconds()<3000 && n.obtenerColision()){
+		e->actualizar();
+		e->dibujar(win);
+	}
+	if((n.obtenerTiempo()).asMilliseconds()>=3000 && n.obtenerColision()){
+		n.cambiarColision();
+		n.cambiarTransparencia();
+		n.cambiarInmunidad();
+		n.respawn();
+	}
+}
+bool tiempoEfecto(AsteroideExplosion &aexp)
+{
+	if((aexp.obtenerTiempo()).asMilliseconds()>=500)
+		return true;
+	else
+		return false;
+}
+Vector2f correccionPosicionNave(const Nave &n)
+{
+	float margen_nave = n.obtenerRadioNave();
+	Vector2f pos_nave = n.obtenerPosicion();
+	/*Aplico la correcion en x y luego en y.
+	Se deja un margen para que la nave desaparezca de la pantalla
+	y luego reaparezca en la posicion que corresponda
+	*/
+	if(pos_nave.x<=(0-margen_nave))
+		pos_nave.x = 639+margen_nave;
+	else
+	{
+		if(pos_nave.x>=(640+margen_nave))
+			pos_nave.x = 1-margen_nave;
+	}
+	if(pos_nave.y<=(0-margen_nave))
+		pos_nave.y = 359+margen_nave;
+	else
+	{
+		if(pos_nave.y>=(360+margen_nave))
+			pos_nave.y = 1-margen_nave;
+	}
+	return pos_nave;
+}
+
+OnePlayer::OnePlayer(Settings &s):m_navesita(s) 
+{
+	mtex_asteroide = new Texture;
+	(*mtex_asteroide).loadFromFile("asteroide.png");
+}
+
+void OnePlayer::Actualizar (Juego &j) 
+{
+	
+	m_prueba++;
+	if (m_prueba%120==0){
+		respawn(m_ast);
+		if(  (m_ast.size()<3) or (m_tabla.get_puntos()>m_puntos_para_siguiente)  ){
+			spawn(m_ast,mtex_asteroide);
+			m_puntos_para_siguiente=m_puntos_para_siguiente*1.6;
+		}
+		m_tabla.actualizar_puntos_j(m_ast.size()*10);
+	} 
+	
+	destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla);
+	colision(m_ast);
+	for(int i=0;i<m_ast.size();i++) {  
+		m_ast[i].actualizar();
+	}
+	
+	if(m_navesita.disparar(mproye_pantalla.size())){
+		mproye_pantalla.push_back(m_navesita.generarDisparo());
+	}
+	for(Proyectil &x:mproye_pantalla) x.actualizar();
+	for(AsteroideExplosion &x:mefec_explosion) x.actualizar();
+	
+	//remueve el proyectil que se encuentra fuera de los limites de la pantalla de juego
+	auto it_elimproye = remove_if(mproye_pantalla.begin(),mproye_pantalla.end(),fuera_limites);	//elimproye => eliminar proyectil
+	mproye_pantalla.erase(it_elimproye,mproye_pantalla.end());
+	
+	//Elimina los efectos de explosion pasados un limite de tiempo
+	auto it_elimexp = remove_if(mefec_explosion.begin(),mefec_explosion.end(),tiempoEfecto);
+	mefec_explosion.erase(it_elimexp,mefec_explosion.end());
+	
+	Nave nav = this->m_navesita;
+	auto it_colisionAsteNave = find_if(m_ast.begin(),m_ast.end(),[&nav](asteroide &a){return colision_naveaste(nav,a);});
+	if(it_colisionAsteNave!=m_ast.end() && m_navesita.obtenerInmunidad()){
+		(*it_colisionAsteNave).r_size();
+		(*it_colisionAsteNave).cambiar_objetivo();
+		(*it_colisionAsteNave).reposicionar();
+		(*it_colisionAsteNave).set_direccion();
+		if(!m_vfx){
+			delete m_vfx;
+		}
+		m_vfx = new OndaConcentrica(m_navesita.obtenerPosicion(),m_navesita.obtenerRadioNave());
+		m_navesita.marcarTiempo();
+		m_navesita.cambiarColision();
+		m_navesita.cambiarTransparencia();
+		m_navesita.cambiarInmunidad();
+	}
+	
+	
+	
+	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->actualizar();
+	
+	if((m_navesita.obtenerTiempo()).asMilliseconds()>=3000 && m_navesita.obtenerColision()){
+		m_navesita.cambiarColision();
+		m_navesita.cambiarTransparencia();
+		m_navesita.cambiarInmunidad();
+		m_navesita.respawn();
+	}
+	
+	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
+	m_navesita.establecerPosicion(vecPos_correccion);
+	m_navesita.actualizar();
+}
+
+void OnePlayer::Dibujar (sf::RenderWindow & win) 
+{
+	for(int i=0;i<m_ast.size();i++) m_ast[i].dibujar(win);
+	for(Proyectil &x:mproye_pantalla) x.dibujar(win);
+	for(AsteroideExplosion &x:mefec_explosion) x.dibujar(win);
+	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->dibujar(win);
+	m_navesita.dibujar(win);
+}
+OnePlayer::~OnePlayer()
+{
+	if(!m_vfx){
+		delete m_vfx;
+	}
+//	delete mtex_asteroide;
+}
