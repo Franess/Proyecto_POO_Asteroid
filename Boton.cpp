@@ -1,5 +1,4 @@
 #include "Boton.h"
-#include <iostream>
 
 Boton::Boton(string texto_boton, sf::Font *fuente, int tamanio_letras)
 {
