@@ -17,6 +17,7 @@ private:
 	sf::Font m_fuente;
 	sf::Texture m_textura, m_imgFondo;
 	vector<Boton> vec_botones;
+	vector<float> m_escalas;
 };
 
 #endif

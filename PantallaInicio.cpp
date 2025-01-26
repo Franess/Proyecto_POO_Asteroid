@@ -4,13 +4,11 @@
 #include "Settings.h"
 using namespace std;
 
-bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b)
+bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b,float ex, float ey)
 {
-	sf::Vector2f punto_1 = b.obtenerPunto(0);
-	sf::Vector2f punto_2 = b.obtenerPunto(2);
-	sf::Vector2f pos_actualBoton = b.obtenerPosicion();
-	bool zona_x = punto_1.x+pos_actualBoton.x-b.obtenerAnchoBorde()/2<=pos_puntero.x && pos_puntero.x<=punto_2.x+pos_actualBoton.x-b.obtenerAnchoBorde()/2;
-	bool zona_y = punto_1.y+pos_actualBoton.y-b.obtenerAltoBorde()/2<=pos_puntero.y && pos_puntero.y	<=punto_2.y+pos_actualBoton.y-b.obtenerAltoBorde()/2;
+	sf::Vector2f pos_actualBoton = b.obtenerVectorPosRelativo();
+	bool zona_x = (pos_actualBoton.x<=pos_puntero.x)*ex && pos_puntero.x<=(pos_actualBoton.x+b.obtenerAnchoBorde())*ex;
+	bool zona_y = (pos_actualBoton.y)*ey<=pos_puntero.y && pos_puntero.y<=(pos_actualBoton.y+b.obtenerAltoBorde())*ey;
 	if(zona_x && zona_y) return true;
 	else return false;
 }
@@ -62,6 +60,8 @@ PantallaInicio::PantallaInicio()
 	nuevo_boton1.establecerPosicion(320,280);
 	vec_botones.push_back(nuevo_boton1);
 	
+	m_escalas.push_back(0);
+	m_escalas.push_back(0);
 	
 	
 }
@@ -72,6 +72,9 @@ void PantallaInicio::Actualizar (Juego & j)
 }
 void PantallaInicio::Dibujar (sf::RenderWindow & win) {
 	win.clear({0,0,0});
+	sf::Vector2u aux = win.getSize();
+	m_escalas[0]=static_cast<float>(aux.x)/640;
+	m_escalas[1]=static_cast<float>(aux.y)/360;
 	win.draw(m_sprFondo);
 	win.draw(m_comienzoNombre);
 	win.draw(m_finalNombre);
@@ -87,7 +90,7 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 	{
 		sf::Vector2f pos_mouse(e.mouseMove.x,e.mouseMove.y);
 		for(Boton &x:vec_botones){
-			if(calculo_sobreposicion(pos_mouse,x))
+			if(calculo_sobreposicion(pos_mouse,x,m_escalas[0],m_escalas[1]))
 			{ 
 				x.colorFondo({190,255,250,50});
 			}
@@ -97,7 +100,7 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 	if(e.type == sf::Event::MouseButtonReleased)
 	{
 		sf::Vector2f pos_mouse(e.mouseButton.x,e.mouseButton.y);
-		if(calculo_sobreposicion(pos_mouse,vec_botones[0]) && e.mouseButton.button == sf::Mouse::Left)
+		if(calculo_sobreposicion(pos_mouse,vec_botones[0],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
 		{
 			Settings s;
 			j.CambiarEscena(new OnePlayer(s));

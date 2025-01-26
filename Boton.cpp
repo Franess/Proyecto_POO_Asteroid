@@ -1,4 +1,5 @@
 #include "Boton.h"
+#include <iostream>
 
 Boton::Boton(string texto_boton, sf::Font *fuente, int tamanio_letras)
 {
@@ -29,10 +30,16 @@ Boton::~Boton()
 void Boton::actualizar()
 {
 	colorFondo({0,0,0,0});
+	sf::Rect<float> info_BordesTexto = m_texto.getGlobalBounds();
+	float pos_origX = (info_BordesTexto.width)/2;
+	float pos_origY = (info_BordesTexto.height)/2;
+	m_texto.setOrigin(pos_origX,pos_origY);
+	
+	sf::Vector2f tamanio_borde(info_BordesTexto.width+4,info_BordesTexto.height+15);
+	m_tamanioBorde = tamanio_borde;
 }
 void Boton::dibujar(sf::RenderWindow &win)
 {
-	
 	win.draw(m_texto);
 	win.draw(m_borde);
 }
@@ -81,9 +88,18 @@ sf::Vector2f Boton::obtenerPosicion()const
 }
 float Boton::obtenerAnchoBorde()const
 {
-	return m_tamanioBorde.x;
+	sf::Rect<float> info_BordesTexto = m_borde.getGlobalBounds();
+	return info_BordesTexto.width;
 }
 float Boton::obtenerAltoBorde()const
 {
-	return m_tamanioBorde.y;
+	sf::Rect<float> info_BordesTexto = m_borde.getGlobalBounds();
+	return info_BordesTexto.height;
+}
+
+sf::Vector2f Boton::obtenerVectorPosRelativo()
+{
+	sf::Rect<float> info_BordesTexto = m_borde.getGlobalBounds();
+	sf::Vector2f aux(info_BordesTexto.left,info_BordesTexto.top);
+	return aux;
 }

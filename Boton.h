@@ -20,6 +20,7 @@ public:
 	sf::Vector2f obtenerPosicion()const;
 	float obtenerAnchoBorde()const;
 	float obtenerAltoBorde()const;
+	sf::Vector2f obtenerVectorPosRelativo();
 	
 	
 	void actualizar();
