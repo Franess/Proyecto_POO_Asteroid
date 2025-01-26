@@ -1,4 +1,5 @@
 #include "OnePlayer.h"
+#include "PantallaInicio.h"
 
 using namespace std;
 using namespace sf;
@@ -74,6 +75,12 @@ Vector2f correccionPosicionNave(const Nave &n)
 
 OnePlayer::OnePlayer(Settings &s):m_navesita(s) 
 {
+	bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
+	m_msjTeclaMenu.setFont(m_fuente);
+	m_msjTeclaMenu.setCharacterSize(10);
+	m_msjTeclaMenu.setString("<Presione 'esc' para volver al menu, se perderan los puntos>");
+	m_msjTeclaMenu.setOrigin(0,0);
+	m_msjTeclaMenu.setPosition(180,345);
 	mtex_asteroide = new Texture;
 	(*mtex_asteroide).loadFromFile("asteroide.png");
 }
@@ -150,6 +157,7 @@ void OnePlayer::Dibujar (sf::RenderWindow & win)
 	for(Proyectil &x:mproye_pantalla) x.dibujar(win);
 	for(AsteroideExplosion &x:mefec_explosion) x.dibujar(win);
 	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->dibujar(win);
+	win.draw(m_msjTeclaMenu);
 	m_navesita.dibujar(win);
 }
 OnePlayer::~OnePlayer()
@@ -158,4 +166,11 @@ OnePlayer::~OnePlayer()
 		delete m_vfx;
 	}
 //	delete mtex_asteroide;
+}
+void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
+{
+	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
+	{
+		j.CambiarEscena(new PantallaInicio);
+	}
 }
