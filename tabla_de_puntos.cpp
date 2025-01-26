@@ -12,11 +12,15 @@ tabla_de_puntos::tabla_de_puntos(string nombre_archi) {
 
 void tabla_de_puntos::actualizar_archivo_puntaje(){
 	fstream archi(archivo_puntos, ios::binary|ios::in|ios::out);
-	archi.seekp(0, ios::beg);
 	if (!archi.is_open()){
 		cout<<"error al abrir el archivo"<<endl;
 		return;
 	}
+	
+	archi.seekp(sizeof(puntos_jugador)*10,ios::beg);
+	archi.read(reinterpret_cast<char*>(&puntos_jugador.puntos),sizeof(int));
+	
+	archi.seekp(0, ios::beg);
 	vector<puntaje> v(10);
 	puntaje aux;
 	for(int i=0;i<10;i++) {
@@ -44,6 +48,15 @@ void tabla_de_puntos::actualizar_puntos_j(int puntos_a_sumar){
 void tabla_de_puntos::recibir_nombre_j(string nombre_j){
 	strncpy(puntos_jugador.nombre,nombre_j.c_str(),sizeof (nombre_j)-1);	//sizeof se utiliza para evitar la sobreescritura en la memoria
 }
+
 int tabla_de_puntos::get_puntos(){
 	return puntos_jugador.puntos;
 }
+
+void tabla_de_puntos::guardado_temporal(){
+	ofstream archi(archivo_puntos, ios::binary|ios::out|ios::app);
+	archi.seekp(sizeof(puntos_jugador)*10,ios::beg);
+	archi.write(reinterpret_cast<const char*>(&puntos_jugador.puntos),sizeof(int));
+	archi.close();
+};
+
