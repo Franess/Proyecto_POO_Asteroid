@@ -52,6 +52,7 @@ PantallaInicio::PantallaInicio()
 	m_sprFondo.setTexture(m_imgFondo);
 	m_sprFondo.setOrigin(0,0);
 	m_sprFondo.setPosition(0,0);
+	m_sprFondo.setScale(1.0/3,1.0/3);
 	
 	Boton nuevo_boton("Jugar",&m_fuente,30);
 	nuevo_boton.establecerPosicion(320,220);
