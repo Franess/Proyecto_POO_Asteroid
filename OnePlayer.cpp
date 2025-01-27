@@ -1,5 +1,6 @@
 #include "OnePlayer.h"
 #include "PantallaInicio.h"
+
 using namespace std;
 using namespace sf;
 
@@ -86,17 +87,23 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 
 void OnePlayer::Actualizar (Juego &j) 
 {
+	
 	m_prueba++;
-	if (m_prueba>20){
-		spawn(m_ast,mtex_asteroide);
+	if (m_prueba%120==0){
 		respawn(m_ast);
-		m_prueba=0;
+		if(  (m_ast.size()<3) or (m_tabla.get_puntos()>m_puntos_para_siguiente)  ){
+			spawn(m_ast,mtex_asteroide);
+			m_puntos_para_siguiente=m_puntos_para_siguiente*1.6;
+		}
+		m_tabla.actualizar_puntos_j(m_ast.size()*10);
 	} 
-	destruir(m_ast,mproye_pantalla,mefec_explosion);
+	
+	destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla);
 	colision(m_ast);
 	for(int i=0;i<m_ast.size();i++) {  
 		m_ast[i].actualizar();
 	}
+	
 	if(m_navesita.disparar(mproye_pantalla.size())){
 		mproye_pantalla.push_back(m_navesita.generarDisparo());
 	}

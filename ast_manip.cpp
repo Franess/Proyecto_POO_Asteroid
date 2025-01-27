@@ -3,13 +3,15 @@
 #include <vector>
 #include <iostream>
 #include "Proyectil.h"
+#include "tabla_de_puntos.h"
 #include "AsteroideExplosion.h"
 using namespace std;
 
 
 void spawn (vector<asteroide> &a, Texture* tex){
-	if (a.size()<5){
+	if (a.size()<50){
 		int id= a.size();
+		cout<<"spawn "<<id<<endl;
 		a.push_back(asteroide(tex,id));
 		a[a.size()-1].r_size();
 		a[a.size()-1].cambiar_objetivo();
@@ -37,7 +39,7 @@ void respawn(vector<asteroide> &a){
 			for(int j=i+1;j<v.size();j++) { 
 				asteroide a=v[i],b=v[j];
 				Vector2f aux= a.get_posicion()-b.get_posicion();
-				if (sqrt( aux.x*aux.x + aux.y*aux.y )<a.get_rad()+b.get_rad()){
+				if (sqrt(aux.x*aux.x+aux.y*aux.y)<a.get_rad()+b.get_rad()){
 					
 					Vector2f Vx=a.get_velocidad()-b.get_velocidad();
 					Vector2f Px=a.get_posicion()-b.get_posicion();
@@ -65,26 +67,34 @@ void respawn(vector<asteroide> &a){
 			}
 		}
 	}
-	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp){
+
+	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp, tabla_de_puntos &tabla){
 		for(int i=0;i<pro.size();i++) { 
 			for(int j=0;j<ast.size();j++) {
 				asteroide a= ast[j];
 				Proyectil p= pro[i];
 				Vector2f aux= a.get_posicion()-p.obtenerPosicion();
+				
 				if (sqrt( aux.x*aux.x + aux.y*aux.y )<(a.get_rad()+3.5)){
-					AsteroideExplosion aux(a);//Efecto de explosion auxiliar
-					aux.marcarTiempo();
-					exp.push_back(aux);
-					ast[j].r_size();
-					ast[j].cambiar_objetivo();
-					ast[j].reposicionar();
-					ast[j].set_direccion();
+					ast[j].disminuir_hp(100);
 					
+					if (ast[j].get_hp()<0){
+						tabla.actualizar_puntos_j(static_cast<int>(ast[j].get_size()*100));
+						
+						AsteroideExplosion aux(a);//Efecto de explosion auxiliar
+						aux.marcarTiempo();
+						exp.push_back(aux);
+						ast[j].r_size();
+						ast[j].cambiar_objetivo();
+						ast[j].reposicionar();
+						ast[j].set_direccion();
+						ast[j].set_color();
+					}else{
+						ast[j].set_color(255,55,55);
+					}
 					pro.erase(pro.begin()+i);
-					
 				}
 			}
 		}
-		
 	}
 	
