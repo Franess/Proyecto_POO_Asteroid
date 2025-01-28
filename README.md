@@ -31,11 +31,24 @@ cansado de la vida -G.
 (puntaje): creada branch puntaje, los asteroides estan listos, espero a la funcion disparo de la nave y r de la nave. Por ende empiezo a trabajar en el sistema de puntaje.
 -G
 
+<<<<<<< HEAD
+31/12/24
+6b99b8b (puntaje): la clase tabla_de_puntos funciona en base a c_string para facilitar su uso en manejo de archivos; se creo un constructor, funcion para actualizar el .bin y para actualizar los puntos y nombre.
+-G
+
+36e0906 (puntaje): se creo el metodo para recibir el nombre (string) ahora funciona en base a c_strimg. usando la funcion strncopy.
+-G
+
+    
+=======
 02/01/2025 5ed2b29 (archivo_setting)
 
 Se implementa la rama setting con la funcionalidad de obtenerControles lista para usar. Esta funcionando, podes cambiar los controles, le agregue las flechas en el formato "Flecha-(Direccion)" siempre la direccion sin abreviar y con mayuscula al inicio. Parecia al principio mas trabajoso, pero resulto ser bastante practico, una vez que entendes como funciona la carga desde el archivo y la busqueda de los strings, es facil de ampliar
 
 -M. 
+<<<<<<< HEAD
+>>>>>>> main
+=======
 
 16/01/2025 61e2d1 (main)
 
@@ -55,3 +68,4 @@ Es el commit mas significativo, el otro no hice grandes cambios. Este es el pesa
 
 -M
 
+>>>>>>> main

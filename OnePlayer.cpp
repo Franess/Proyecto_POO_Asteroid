@@ -85,24 +85,35 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	(*mtex_asteroide).loadFromFile("asteroide.png");
 	stringstream ss;
 	ss<<"Vidas: "<<m_navesita.obtenerVidas();
-	Boton nuevo_boton(ss.str(),&m_fuente,20);
-	nuevo_boton.establecerPosicion(50,320);
-	vec_botones.push_back(nuevo_boton);
+	Boton boton_vidas(ss.str(),&m_fuente,20);
+	boton_vidas.establecerPosicion(50,320);
+	vec_botones.push_back(boton_vidas);//Corresponde a la pos [0]
+	ss.str("");
+	ss<<"Puntos: "<<m_tabla.get_puntos();
+	Boton boton_ptos(ss.str(),&m_fuente,20);
+	boton_ptos.establecerPosicion(320,20);
+	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
 }
 
 void OnePlayer::Actualizar (Juego &j) 
 {
+	
 	m_prueba++;
-	if (m_prueba>20){
-		spawn(m_ast,mtex_asteroide);
+	if (m_prueba%120==0){
 		respawn(m_ast);
-		m_prueba=0;
+		if(  (m_ast.size()<3) or (m_tabla.get_puntos()>m_puntos_para_siguiente)  ){
+			spawn(m_ast,mtex_asteroide);
+			m_puntos_para_siguiente=m_puntos_para_siguiente*1.6;
+		}
+		m_tabla.actualizar_puntos_j(m_ast.size()*10);
 	} 
-	destruir(m_ast,mproye_pantalla,mefec_explosion);
+	
+	destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla);
 	colision(m_ast);
 	for(int i=0;i<m_ast.size();i++) {  
 		m_ast[i].actualizar();
 	}
+	
 	if(m_navesita.disparar(mproye_pantalla.size())){
 		mproye_pantalla.push_back(m_navesita.generarDisparo());
 	}
@@ -137,9 +148,13 @@ void OnePlayer::Actualizar (Juego &j)
 	{
 		j.CambiarEscena(new PantallaInicio);
 	}
+	if(m_navesita.obtenerVidas()==1) vec_botones[0].establecerColorTexto({255,0,0});
 	stringstream ss;
 	ss<<"Vidas: "<<m_navesita.obtenerVidas();
 	vec_botones[0].establecerTexto(ss.str());
+	ss.str("");
+	ss<<"Puntos: "<<m_tabla.get_puntos();
+	vec_botones[1].establecerTexto(ss.str());
 	
 	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->actualizar();
 	
@@ -149,7 +164,7 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarInmunidad();
 		m_navesita.respawn();
 	}
-	
+	for(Boton &x:vec_botones) x.actualizar();
 	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
 	m_navesita.establecerPosicion(vecPos_correccion);
 	m_navesita.actualizar();

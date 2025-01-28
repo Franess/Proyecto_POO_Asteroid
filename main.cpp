@@ -7,7 +7,6 @@ using namespace std;
 using namespace sf;
 
 
-
 int main(int argc, char *argv[]){
 	Juego j(new PantallaInicio);
 	j.jugar();

@@ -13,8 +13,9 @@ asteroide::asteroide(Texture *tex_asteroide,int id_num) {
 	magnitud=1;
 	size=1;
 	spr.setScale(size,size);
-	radio=size*10;
+	radio=(size*9)+(0.25*size/3);
 	spr.setOrigin(size*10,size*10);
+	ast_color=Color(255,255,255,255);
 }
 
 Vector2f asteroide::get_posicion(){
@@ -32,18 +33,23 @@ float asteroide::get_rad(){
 Vector2f asteroide::get_velocidad(){
 	return velocidad;
 }
+int asteroide::get_hp(){
+	return ast_hp;
+}
 
+void asteroide::disminuir_hp(int danio){
+	ast_hp-=danio;
+}
 
 void asteroide::r_size(){
 	size=static_cast<float>(RNG(300,50))/100.0;
 	spr.setScale(size,size);
-	ast_hp=size*10;
-	radio=size*9;
+	ast_hp=static_cast<int>(size*100);
+	radio=size*9+0.25*size/3;
 	//cout<<"size "<<size<<" hp "<<ast_hp<<endl;
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
 }
-
 void asteroide::reposicionar(){
 	int x=RNG(1), y= RNG(1);
 	if (x>0){
@@ -86,7 +92,7 @@ void asteroide::cambiar_objetivo(){
 	objetivo.y=y;
 }
 void asteroide::set_direccion(){
-	magnitud=static_cast<float>(RNG(300,25)/100.0);
+	magnitud=static_cast<float>(RNG(200,50)/100.0);
 	Vector2f aux=spr.getPosition();
 	direccion=(objetivo-aux);
 	normal_v(direccion);
@@ -100,10 +106,17 @@ void asteroide::set_velocidad(Vector2f new_v){
 }
 
 void asteroide::actualizar(){
+	if((ast_color.g<255)&&(ast_color.g>0)){
+		ast_color=Color(255,ast_color.g+20,ast_color.b+20);
+		spr.setColor(Color(ast_color.r,ast_color.g,ast_color.b));
+	}
 	spr.move(velocidad);
 }
 void asteroide::dibujar(RenderWindow &win){
 	win.draw(spr);
 }
-
+void asteroide::set_color(int r, int g, int b, int a){
+	ast_color=Color(r,g,b,a);
+	spr.setColor(ast_color);
+}
 

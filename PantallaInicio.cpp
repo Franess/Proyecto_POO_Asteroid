@@ -47,7 +47,7 @@ PantallaInicio::PantallaInicio()
 	m_mensajeSalir.setOrigin(0,0);
 	m_comienzoNombre.setOrigin(0,0);
 	m_finalNombre.setOrigin(0,0);
-	m_mensajeSalir.setPosition(243,345);
+	m_mensajeSalir.setPosition(243,260);
 	m_comienzoNombre.setPosition(205,60);
 	m_finalNombre.setPosition(365,60);
 	
@@ -61,12 +61,13 @@ PantallaInicio::PantallaInicio()
 	m_sprFondo.setTexture(m_imgFondo);
 	m_sprFondo.setOrigin(0,0);
 	m_sprFondo.setPosition(0,0);
+	m_sprFondo.setScale(1.0/3,1.0/3);
 	
 	Boton nuevo_boton("Jugar",&m_fuente,30);
-	nuevo_boton.establecerPosicion(320,220);
+	nuevo_boton.establecerPosicion(320,150);
 	vec_botones.push_back(nuevo_boton);
 	Boton nuevo_boton1("Puntaje",&m_fuente,30);
-	nuevo_boton1.establecerPosicion(320,280);
+	nuevo_boton1.establecerPosicion(320,210);
 	vec_botones.push_back(nuevo_boton1);
 	
 	
@@ -75,6 +76,8 @@ PantallaInicio::PantallaInicio()
 void PantallaInicio::Actualizar (Juego & j)
 {
 	m_imagenAsteroide.rotate(3);
+	//No se actualizan botones ya que su contenido no cambia.
+	//Se actualiza el color solamente solo si esta el puntero del mouse por encima.
 }
 void PantallaInicio::Dibujar (sf::RenderWindow & win) {
 	win.clear({0,0,0});
