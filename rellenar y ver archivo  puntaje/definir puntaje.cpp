@@ -9,16 +9,16 @@ struct puntaje{
 };
 int main() {
 	vector<string> s ={
-		"Luigi",
-		"Videla",
-		"Peron",
+		"Dios.asm",
+		"jhon++",
+		"aGente_P.T",
 		"Ñefi",
 		"BAD_Ceju",
 		"Brass_Sniper",
 		"Jalapeño417",
 		"Mayy_23",	
-		"Fran.co",	
-		"Glass"	
+		"Fran.cpp",	
+		"Glass.h"	
 	};
 	vector<int> n={
 		100000,

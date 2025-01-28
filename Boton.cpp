@@ -36,6 +36,8 @@ void Boton::actualizar()
 	
 	sf::Vector2f tamanio_borde(info_BordesTexto.width+4,info_BordesTexto.height+15);
 	m_tamanioBorde = tamanio_borde;
+	m_borde.setSize(tamanio_borde);
+	m_borde.setOrigin(pos_origX,pos_origY);
 }
 void Boton::dibujar(sf::RenderWindow &win)
 {

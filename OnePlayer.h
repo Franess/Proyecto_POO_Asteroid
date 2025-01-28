@@ -11,6 +11,7 @@
 #include <cmath>
 #include <algorithm>
 #include "ast_manip.h"
+#include "Boton.h"
 #include "tabla_de_puntos.h"
 using namespace std;
 
@@ -33,6 +34,7 @@ private:
 	Efecto *m_vfx = nullptr;
 	sf::Font m_fuente;
 	sf::Text m_msjTeclaMenu;
+	vector<Boton> vec_botones;
 };
 
 #endif

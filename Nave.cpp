@@ -163,3 +163,20 @@ void Nave::establecerPosicion(Vector2f pos_nueva)
 {
 	m_nave.setPosition(pos_nueva);
 }
+int Nave::obtenerVidas()const
+{
+	return m_vidas;
+}
+void Nave::sumarVidas(int cantidad)
+{
+	m_vidas+=cantidad;
+}
+bool Nave::restarVidas()
+{
+	if(m_vidas >=1 )
+	{
+		m_vidas-=1;
+		return true;
+	}else 
+	   return false;
+}

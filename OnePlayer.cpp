@@ -1,6 +1,7 @@
 #include "OnePlayer.h"
 #include "PantallaInicio.h"
 #include "Escena_Puntaje.h"
+#include <sstream>
 
 using namespace std;
 using namespace sf;
@@ -23,7 +24,7 @@ bool colision_naveaste(Nave &n, asteroide &a)
 	float limiteNorma_foco2 = n.obtenerRadioFoco2() + a.get_rad();
 	float norma_foco1 = sqrt(vec_foco1.x*vec_foco1.x + vec_foco1.y*vec_foco1.y);
 	float norma_foco2 = sqrt(vec_foco2.x*vec_foco1.x + vec_foco2.y*vec_foco2.y);
-	if(norma_foco1<=limiteNorma_foco1 || norma_foco2<=limiteNorma_foco2 )
+	if((norma_foco1<=limiteNorma_foco1 || norma_foco2<=limiteNorma_foco2) && n.restarVidas())
 		return true;
 	else
 		return false;
@@ -84,6 +85,16 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	m_msjTeclaMenu.setPosition(180,345);
 	mtex_asteroide = new Texture;
 	(*mtex_asteroide).loadFromFile("asteroide.png");
+	stringstream ss;
+	ss<<"Vidas: "<<m_navesita.obtenerVidas();
+	Boton boton_vidas(ss.str(),&m_fuente,20);
+	boton_vidas.establecerPosicion(50,320);
+	vec_botones.push_back(boton_vidas);//Corresponde a la pos [0]
+	ss.str("");
+	ss<<"Puntos: "<<m_tabla.get_puntos();
+	Boton boton_ptos(ss.str(),&m_fuente,20);
+	boton_ptos.establecerPosicion(320,20);
+	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
 }
 
 void OnePlayer::Actualizar (Juego &j) 
@@ -121,7 +132,7 @@ void OnePlayer::Actualizar (Juego &j)
 	
 	Nave nav = this->m_navesita;
 	auto it_colisionAsteNave = find_if(m_ast.begin(),m_ast.end(),[&nav](asteroide &a){return colision_naveaste(nav,a);});
-	if(it_colisionAsteNave!=m_ast.end() && m_navesita.obtenerInmunidad()){
+	if(it_colisionAsteNave!=m_ast.end() && m_navesita.obtenerInmunidad() && m_navesita.restarVidas()){
 		(*it_colisionAsteNave).r_size();
 		(*it_colisionAsteNave).cambiar_objetivo();
 		(*it_colisionAsteNave).reposicionar();
@@ -134,10 +145,18 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarColision();
 		m_navesita.cambiarTransparencia();
 		m_navesita.cambiarInmunidad();
-		j.CambiarEscena(new Escena_Puntaje);
-	} 
-	
-	
+	}
+	if(m_navesita.obtenerVidas()==0)
+	{
+		j.CambiarEscena(new PantallaInicio);
+	}
+	if(m_navesita.obtenerVidas()==1) vec_botones[0].establecerColorTexto({255,0,0});
+	stringstream ss;
+	ss<<"Vidas: "<<m_navesita.obtenerVidas();
+	vec_botones[0].establecerTexto(ss.str());
+	ss.str("");
+	ss<<"Puntos: "<<m_tabla.get_puntos();
+	vec_botones[1].establecerTexto(ss.str());
 	
 	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->actualizar();
 	
@@ -147,7 +166,7 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarInmunidad();
 		m_navesita.respawn();
 	}
-	
+	for(Boton &x:vec_botones) x.actualizar();
 	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
 	m_navesita.establecerPosicion(vecPos_correccion);
 	m_navesita.actualizar();
@@ -158,6 +177,7 @@ void OnePlayer::Dibujar (sf::RenderWindow & win)
 	for(int i=0;i<m_ast.size();i++) m_ast[i].dibujar(win);
 	for(Proyectil &x:mproye_pantalla) x.dibujar(win);
 	for(AsteroideExplosion &x:mefec_explosion) x.dibujar(win);
+	for(Boton &x:vec_botones) x.dibujar(win);
 	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->dibujar(win);
 	win.draw(m_msjTeclaMenu);
 	m_navesita.dibujar(win);

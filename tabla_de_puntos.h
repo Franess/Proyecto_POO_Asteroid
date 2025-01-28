@@ -23,4 +23,3 @@ private:
 	puntaje puntos_jugador;
 };
 #endif
-

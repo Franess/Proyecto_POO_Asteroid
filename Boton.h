@@ -21,6 +21,8 @@ public:
 	float obtenerAnchoBorde()const;
 	float obtenerAltoBorde()const;
 	sf::Vector2f obtenerVectorPosRelativo();
+	bool estaApuntado(sf::Vector2f pos_puntero);
+	void estaApuntado();
 	
 	
 	void actualizar();
@@ -30,6 +32,7 @@ private:
 	sf::Text m_texto;
 	sf::RectangleShape m_borde; //Es para hacer un recuadro que rodee al texto
 	sf::Vector2f m_tamanioBorde;
+	vector<float> m_esclares = {1.f,1.f};
 };
 
 #endif
