@@ -2,6 +2,7 @@
 #include "OnePlayer.h"
 #include "Settings.h"
 #include "PantallaInicio.h"
+#include "Escena_Puntaje.h"
 
 using namespace std;
 using namespace sf;

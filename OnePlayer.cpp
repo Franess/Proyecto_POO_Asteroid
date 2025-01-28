@@ -1,5 +1,6 @@
 #include "OnePlayer.h"
 #include "PantallaInicio.h"
+#include "Escena_Puntaje.h"
 
 using namespace std;
 using namespace sf;
@@ -133,7 +134,8 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarColision();
 		m_navesita.cambiarTransparencia();
 		m_navesita.cambiarInmunidad();
-	}
+		j.CambiarEscena(new Escena_Puntaje);
+	} 
 	
 	
 	

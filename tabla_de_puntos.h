@@ -1,6 +1,8 @@
 #ifndef TABLA_DE_PUNTOS_H
 #define TABLA_DE_PUNTOS_H
 #include <string>
+#include <vector>
+
 using namespace std;
 struct puntaje{
 	int puntos;
@@ -14,6 +16,7 @@ public:
 	void recibir_nombre_j(string nombre_j);
 	int get_puntos();
 	void guardado_temporal();
+	vector<puntaje> cargar_lista();
 
 private: 
 	string archivo_puntos;
