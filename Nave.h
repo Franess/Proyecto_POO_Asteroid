@@ -30,6 +30,9 @@ public:
 	float obtenerRadioNave()const;
 	void cambiarTransparencia();
 	void establecerPosicion(Vector2f pos_nueva);
+	int obtenerVidas()const;
+	void sumarVidas(int cantidad);
+	bool restarVidas();
 private:
 	ConvexShape m_nave;
 	vector<Keyboard::Key> m_teclas;
@@ -42,6 +45,7 @@ private:
 	Clock m_reloj;
 	Time m_tiempo;
 	bool m_colision=false;
+	int m_vidas=5;
 };
 #endif
 

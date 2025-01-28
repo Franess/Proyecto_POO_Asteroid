@@ -11,6 +11,7 @@
 #include <cmath>
 #include <algorithm>
 #include "ast_manip.h"
+#include "Boton.h"
 using namespace std;
 
 class OnePlayer : public Escena {
@@ -30,6 +31,7 @@ private:
 	Efecto *m_vfx = nullptr;
 	sf::Font m_fuente;
 	sf::Text m_msjTeclaMenu;
+	vector<Boton> vec_botones;
 };
 
 #endif

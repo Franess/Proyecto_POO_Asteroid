@@ -13,6 +13,15 @@ bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b,float ex, float ey
 	else return false;
 }
 
+vector<float> actualizarEscalares(sf::RenderWindow &w)
+{
+	vector<float> v_aux;
+	sf::Vector2u aux = w.getSize();
+	v_aux.push_back(static_cast<float>(aux.x)/640);
+	v_aux.push_back(static_cast<float>(aux.y)/360);
+	return v_aux;
+}
+
 PantallaInicio::PantallaInicio() 
 {
 	bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
@@ -60,9 +69,6 @@ PantallaInicio::PantallaInicio()
 	nuevo_boton1.establecerPosicion(320,280);
 	vec_botones.push_back(nuevo_boton1);
 	
-	m_escalas.push_back(0);
-	m_escalas.push_back(0);
-	
 	
 }
 
@@ -72,9 +78,7 @@ void PantallaInicio::Actualizar (Juego & j)
 }
 void PantallaInicio::Dibujar (sf::RenderWindow & win) {
 	win.clear({0,0,0});
-	sf::Vector2u aux = win.getSize();
-	m_escalas[0]=static_cast<float>(aux.x)/640;
-	m_escalas[1]=static_cast<float>(aux.y)/360;
+	m_escalas = actualizarEscalares(win);
 	win.draw(m_sprFondo);
 	win.draw(m_comienzoNombre);
 	win.draw(m_finalNombre);
