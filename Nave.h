@@ -45,7 +45,7 @@ private:
 	Clock m_reloj;
 	Time m_tiempo;
 	bool m_colision=false;
-	int m_vidas=5;
+	int m_vidas=0;
 };
 #endif
 
