@@ -17,9 +17,7 @@ public:
 private:
 	sf::Font m_fuente;
 	InputText m_textoEntrada;
-	sf::Text m_textoAclaracion;
-	sf::Text m_tituloPantalla;
-	sf::Text m_msjTeclaMenu;
+	sf::Text m_textoAclaracion,m_tituloPantalla,m_msjTeclaMenu,m_msjFaltaNombre;
 	tabla_de_puntos m_tabla;
 	std::string m_nombreJugador;
 	int m_puntosFinales=0;

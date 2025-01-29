@@ -71,7 +71,15 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	m_textoEntrada.setMaxChars(16);
 	m_textoEntrada.setSingleWord(true);
 	
-	m_textoEntrada.setPosition(245,190);
+	m_textoEntrada.setPosition(225,190);
+	
+	m_msjFaltaNombre.setFont(m_fuente);
+	m_msjFaltaNombre.setCharacterSize(18);
+	m_msjFaltaNombre.setString("<Ingrese un nombre por favor>");
+	m_msjFaltaNombre.setOrigin(0,0);
+	m_msjFaltaNombre.setPosition(210,230);
+	m_msjFaltaNombre.setFillColor({0,0,0,0});
+	
 }
 
 void JuegoTerminado::Actualizar (Juego & j) 
@@ -95,6 +103,7 @@ void JuegoTerminado::Dibujar (sf::RenderWindow & win)
 	m_btnGuardar.dibujar(win);
 	win.draw(m_textoAclaracion);
 	win.draw(m_textoEntrada);
+	win.draw(m_msjFaltaNombre);
 }
 
 void JuegoTerminado::ProcesarEvento (Juego &j, sf::Event e) 
@@ -112,10 +121,13 @@ void JuegoTerminado::ProcesarEvento (Juego &j, sf::Event e)
 	if(e.type == sf::Event::MouseButtonReleased)
 	{
 		sf::Vector2f pos_mouse(e.mouseButton.x,e.mouseButton.y);
-		if(calculo_sobrepos(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]) && e.mouseButton.button == sf::Mouse::Left)
+		if(calculo_sobrepos(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]) && e.mouseButton.button == sf::Mouse::Left && m_textoEntrada.getValue()!="")
 		{
 			//Acá antes de cambiar de pantalla deberia ir la carga de datos (Leo)
 			j.CambiarEscena(new PantallaInicio);
+		}else
+		{
+			m_msjFaltaNombre.setFillColor({255,0,0});
 		}
 	}
 	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
