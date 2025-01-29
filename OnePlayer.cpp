@@ -1,6 +1,6 @@
 #include "OnePlayer.h"
-#include "PantallaInicio.h"
 #include <sstream>
+
 using namespace std;
 using namespace sf;
 
@@ -97,7 +97,6 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 
 void OnePlayer::Actualizar (Juego &j) 
 {
-	
 	m_prueba++;
 	if (m_prueba%120==0){
 		respawn(m_ast);
@@ -146,7 +145,7 @@ void OnePlayer::Actualizar (Juego &j)
 	}
 	if(m_navesita.obtenerVidas()==0)
 	{
-		j.CambiarEscena(new PantallaInicio);
+		j.CambiarEscena(new JuegoTerminado(m_tabla.get_puntos()));
 	}
 	if(m_navesita.obtenerVidas()==1) vec_botones[0].establecerColorTexto({255,0,0});
 	stringstream ss;

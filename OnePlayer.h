@@ -13,6 +13,8 @@
 #include "ast_manip.h"
 #include "Boton.h"
 #include "tabla_de_puntos.h"
+#include "JuegoTerminado.h"
+#include "PantallaInicio.h"
 using namespace std;
 
 class OnePlayer : public Escena {

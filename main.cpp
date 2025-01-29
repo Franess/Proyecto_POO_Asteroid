@@ -2,6 +2,7 @@
 #include "OnePlayer.h"
 #include "Settings.h"
 #include "PantallaInicio.h"
+#include "JuegoTerminado.h"
 
 using namespace std;
 using namespace sf;
