@@ -180,3 +180,7 @@ bool Nave::restarVidas()
 	}else 
 	   return false;
 }
+void Nave::establecerVidas(int cant)
+{
+	m_vidas=cant;
+}

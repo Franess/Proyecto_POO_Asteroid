@@ -93,6 +93,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	Boton boton_ptos(ss.str(),&m_fuente,20);
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
+	m_navesita.establecerVidas(3);
 }
 
 void OnePlayer::Actualizar (Juego &j) 
