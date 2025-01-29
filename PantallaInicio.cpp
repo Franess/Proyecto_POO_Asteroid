@@ -39,18 +39,39 @@ PantallaInicio::PantallaInicio()
 	m_mensajeSalir.setCharacterSize(10);
 	m_comienzoNombre.setCharacterSize(50);
 	m_finalNombre.setCharacterSize(50);
+	m_finalNombre.setScale(0.5,1);
 	m_mensajeSalir.setFillColor({255,255,255});
 	m_comienzoNombre.setFillColor({255,255,255});
 	m_finalNombre.setFillColor({255,255,255});
 	m_mensajeSalir.setString("<Presione la tecla 'esc' para salir>");
 	m_comienzoNombre.setString("Aster");
 	m_finalNombre.setString("ids");
-	m_mensajeSalir.setOrigin(0,0);
-	m_comienzoNombre.setOrigin(0,0);
-	m_finalNombre.setOrigin(0,0);
-	m_mensajeSalir.setPosition(243,260);
-	m_comienzoNombre.setPosition(205,60);
-	m_finalNombre.setPosition(365,60);
+//	m_mensajeSalir.setOrigin(0,0);
+//	m_comienzoNombre.setOrigin(0,0);
+//	m_finalNombre.setOrigin(0,0);
+	
+	m_mensajeSalir.setScale(0.5,1);
+	m_comienzoNombre.setScale(0.5,1);
+	m_finalNombre.setScale(0.5,1);
+	
+	auto m_text_size=m_mensajeSalir.getLocalBounds();
+	m_mensajeSalir.setOrigin(m_text_size.width/2,m_text_size.height/2);
+	
+	m_text_size=m_comienzoNombre.getLocalBounds();
+	m_comienzoNombre.setOrigin(m_text_size.width/2,m_text_size.height/2);
+	
+	m_text_size=m_finalNombre.getLocalBounds();
+	m_finalNombre.setOrigin(m_text_size.width/2,m_text_size.height/2);
+
+//	m_mensajeSalir.setPosition(320,275);
+//	m_comienzoNombre.setPosition(205,60);
+//	m_finalNombre.setPosition(365,60);
+	
+	m_mensajeSalir.setPosition(320,275);
+	m_comienzoNombre.setPosition(255,80+3);
+	m_finalNombre.setPosition(392,77+3);
+	
+	
 	
 	
 	m_imagenAsteroide.setScale(2.f,2.f);
@@ -65,10 +86,13 @@ PantallaInicio::PantallaInicio()
 	m_sprFondo.setScale(1.0/3,1.0/3);
 	
 	Boton nuevo_boton("Jugar",&m_fuente,30);
-	nuevo_boton.establecerPosicion(320,150);
+	nuevo_boton.escalado(0.45,0.9);
+	nuevo_boton.establecerPosicion(320,150+28);
 	vec_botones.push_back(nuevo_boton);
+	
 	Boton nuevo_boton1("Puntaje",&m_fuente,30);
-	nuevo_boton1.establecerPosicion(320,210);
+	nuevo_boton1.escalado(0.45,0.9);
+	nuevo_boton1.establecerPosicion(320,210+15);
 	vec_botones.push_back(nuevo_boton1);
 	
 	
