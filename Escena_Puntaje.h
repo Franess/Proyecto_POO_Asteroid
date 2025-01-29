@@ -4,6 +4,7 @@
 #include <vector>
 #include "Escena.h"
 #include <SFML/Graphics.hpp>
+#include "asteroide.h"
 using namespace std;
 
 class Escena_Puntaje : public Escena {
@@ -17,6 +18,9 @@ private:
 	vector<puntaje> m_puntos;
 	sf::Font m_fuente;
 	vector<sf::Text> m_text;
+	int m_prueba;
+	vector<asteroide> m_ast;
+	Texture* mtex_asteroide; 
 };
 
 #endif
