@@ -15,7 +15,7 @@ public:
 	void establecerGrosorBordes(float th);
 	void establecerColorBordes(sf::Color c);
 	void colorFondo(sf::Color c);
-	void escalado(float multi);
+	void escalado(float multi_x, float multi_y);
 	sf::Vector2f obtenerPunto(int i)const;
 	sf::Vector2f obtenerPosicion()const;
 	float obtenerAnchoBorde()const;

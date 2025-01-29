@@ -74,10 +74,10 @@ void Boton::colorFondo(sf::Color c)
 {
 	m_borde.setFillColor(c);
 }
-void Boton::escalado(float multi)
+void Boton::escalado(float multi_x, float multi_y)
 {
-	m_texto.setScale(multi,multi);
-	m_borde.setScale(multi,multi);
+	m_texto.setScale(multi_x,multi_y);
+	m_borde.setScale(multi_x,multi_y);
 }
 sf::Vector2f Boton::obtenerPunto(int i)const
 {
