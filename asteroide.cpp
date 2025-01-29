@@ -41,11 +41,11 @@ void asteroide::disminuir_hp(int danio){
 	ast_hp-=danio;
 }
 
-void asteroide::r_size(){
+void asteroide::r_size(float var){
 	size=static_cast<float>(RNG(300,50))/100.0;
-	spr.setScale(size,size);
+	spr.setScale(size*var,size*var);
 	ast_hp=static_cast<int>(size*100);
-	radio=size*9+0.25*size/3;
+	radio=(size*9)*var+(0.25*size/3)*var;
 	//cout<<"size "<<size<<" hp "<<ast_hp<<endl;
 	auto limites=spr.getLocalBounds();
 	spr.setOrigin(limites.width/2,limites.height/2);
@@ -91,8 +91,8 @@ void asteroide::cambiar_objetivo(){
 	objetivo.x=x;
 	objetivo.y=y;
 }
-void asteroide::set_direccion(){
-	magnitud=static_cast<float>(RNG(200,50)/100.0);
+void asteroide::set_direccion(float var){
+	magnitud=static_cast<float>((RNG(250,50)/100.0)*var);
 	Vector2f aux=spr.getPosition();
 	direccion=(objetivo-aux);
 	normal_v(direccion);

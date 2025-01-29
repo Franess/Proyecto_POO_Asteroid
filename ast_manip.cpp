@@ -8,27 +8,27 @@
 using namespace std;
 
 
-void spawn (vector<asteroide> &a, Texture* tex){
+void spawn (vector<asteroide> &a, Texture* tex,float var){
 	if (a.size()<50){
 		int id= a.size();
 		cout<<"spawn "<<id<<endl;
 		a.push_back(asteroide(tex,id));
-		a[a.size()-1].r_size();
+		a[a.size()-1].r_size(var);
 		a[a.size()-1].cambiar_objetivo();
 		a[a.size()-1].reposicionar();
-		a[a.size()-1].set_direccion();
+		a[a.size()-1].set_direccion(var);
 		
 	}
 }
-void respawn(vector<asteroide> &a){
+void respawn(vector<asteroide> &a,float var){
 	
 	for(int i=0;i<a.size();i++) { 
 		float limites = a[i].get_size()*11;
 		if ( (a[i].get_posicion()> Vector2f(640+limites,360+limites))or(Vector2f(0-limites,0-limites)>a[i].get_posicion()) ){
-			a[i].r_size();
+			a[i].r_size(var);
 			a[i].cambiar_objetivo();
 			a[i].reposicionar();
-			a[i].set_direccion();
+			a[i].set_direccion(var);
 			
 		}
 	}

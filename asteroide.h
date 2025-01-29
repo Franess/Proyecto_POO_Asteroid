@@ -30,8 +30,8 @@ public:
 	void disminuir_hp(int danio);
 	void cambiar_objetivo();
 	void reposicionar();
-	void set_direccion();
-	void r_size();
+	void set_direccion(float var=1);
+	void r_size(float=1);
 	void set_velocidad(Vector2f new_v);
 	void set_posicion(Vector2f v);
 	void set_id();
