@@ -148,7 +148,7 @@ void OnePlayer::Actualizar (Juego &j)
 	}
 	if(m_navesita.obtenerVidas()==0)
 	{
-		j.CambiarEscena(new PantallaInicio);
+		j.CambiarEscena(new Escena_Puntaje);
 	}
 	if(m_navesita.obtenerVidas()==1) vec_botones[0].establecerColorTexto({255,0,0});
 	stringstream ss;

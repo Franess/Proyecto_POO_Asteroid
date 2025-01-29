@@ -24,7 +24,8 @@ vector<float> actualizarEscalares(sf::RenderWindow &w)
 
 PantallaInicio::PantallaInicio() 
 {
-	bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
+	//bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
+	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	bool estado_textura = m_textura.loadFromFile("asteroide.png");
 	bool estado_imgFondo = m_imgFondo.loadFromFile("fondoPantallaInicio.jpg");
 	if(!estado_imgFondo) throw runtime_error("No se encuentra el fondo fondoPantallaInicio.jpg");
