@@ -77,22 +77,23 @@ Vector2f correccionPosicionNave(const Nave &n)
 
 OnePlayer::OnePlayer(Settings &s):m_navesita(s) 
 {
-	bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
+	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	m_msjTeclaMenu.setFont(m_fuente);
 	m_msjTeclaMenu.setCharacterSize(10);
 	m_msjTeclaMenu.setString("<Presione 'esc' para volver al menu, se perderan los puntos>");
 	m_msjTeclaMenu.setOrigin(0,0);
+	m_msjTeclaMenu.setScale(0.5,1);
 	m_msjTeclaMenu.setPosition(180,345);
 	mtex_asteroide = new Texture;
 	(*mtex_asteroide).loadFromFile("asteroide.png");
 	stringstream ss;
 	ss<<"Vidas: "<<m_navesita.obtenerVidas();
-	Boton boton_vidas(ss.str(),&m_fuente,20);
+	Boton boton_vidas(ss.str(),&m_fuente,10);
 	boton_vidas.establecerPosicion(50,320);
 	vec_botones.push_back(boton_vidas);//Corresponde a la pos [0]
 	ss.str("");
 	ss<<"Puntos: "<<m_tabla.get_puntos();
-	Boton boton_ptos(ss.str(),&m_fuente,20);
+	Boton boton_ptos(ss.str(),&m_fuente,10);
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
 }

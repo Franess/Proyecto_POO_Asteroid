@@ -2,6 +2,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include "ast_manip.h"
+#include "PantallaInicio.h"
+#include "Juego.h"
 using namespace std;
 Escena_Puntaje::Escena_Puntaje ( ) {
 tabla_de_puntos tabla;
@@ -71,7 +73,10 @@ void Escena_Puntaje::Dibujar (sf::RenderWindow & win) {
 }
 
 void Escena_Puntaje::ProcesarEvento (Juego & j, sf::Event e) {
-	
+	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
+	{
+		j.CambiarEscena(new PantallaInicio);
+	}
 }
 
 Escena_Puntaje::~Escena_Puntaje ( ) {

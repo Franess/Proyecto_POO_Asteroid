@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "OnePlayer.h"
 #include "Settings.h"
+#include "Escena_Puntaje.h"
 using namespace std;
 
 bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b,float ex, float ey)
@@ -87,7 +88,7 @@ PantallaInicio::PantallaInicio()
 	
 	Boton nuevo_boton("Jugar",&m_fuente,30);
 	nuevo_boton.escalado(0.45,0.9);
-	nuevo_boton.establecerPosicion(320,150+28);
+	nuevo_boton.establecerPosicion(320,150+25);
 	vec_botones.push_back(nuevo_boton);
 	
 	Boton nuevo_boton1("Puntaje",&m_fuente,30);
@@ -136,6 +137,11 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 		{
 			Settings s;
 			j.CambiarEscena(new OnePlayer(s));
+		}
+		if(calculo_sobreposicion(pos_mouse,vec_botones[1],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
+		{
+			Settings s;
+			j.CambiarEscena(new Escena_Puntaje);
 		}
 	}
 	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
