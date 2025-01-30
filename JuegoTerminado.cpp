@@ -31,6 +31,7 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	m_fondo.setTexture(m_texturaFondo);
 	m_fondo.setOrigin(0,0);
 	m_fondo.setPosition(0,0);
+	m_fondo.setScale(1.0/3,1.0/3);
 	
 	m_navePixel.setTexture(m_texturaNavePixel);
 	m_navePixel.setOrigin(0,0);
@@ -62,13 +63,13 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	
 	m_textoAclaracion.setFont(m_fuente);
 	m_textoAclaracion.setCharacterSize(15);
-	m_textoAclaracion.setString("<Ingrese su nombre (max caracteres = 16)>");
+	m_textoAclaracion.setString("<Ingrese su nombre (max caracteres = 15)>");
 	aux_medidas = m_textoAclaracion.getGlobalBounds();
 	m_textoAclaracion.setOrigin(aux_medidas.width/2,aux_medidas.height/2);
 	m_textoAclaracion.setPosition(320,165);
 	
 	m_textoEntrada = InputText(m_fuente,25,{255,255,255});
-	m_textoEntrada.setMaxChars(16);
+	m_textoEntrada.setMaxChars(15);
 	m_textoEntrada.setSingleWord(true);
 	
 	m_textoEntrada.setPosition(225,190);

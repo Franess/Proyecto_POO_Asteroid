@@ -24,9 +24,11 @@ Vector2f asteroide::get_posicion(){
 float asteroide::get_size(){
 	return size;
 }
+/*
 int asteroide::get_id(){
 	return ast_id;
 }
+*/
 float asteroide::get_rad(){
 	return radio;
 }

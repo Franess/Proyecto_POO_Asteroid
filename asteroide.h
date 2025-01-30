@@ -34,12 +34,12 @@ public:
 	void r_size(float=1);
 	void set_velocidad(Vector2f new_v);
 	void set_posicion(Vector2f v);
-	void set_id();
+	//void set_id();
 	void set_color(int r=255, int g=255, int b=255, int a=255);
 	
 	float get_rad();
 	float get_size();
-	int get_id();
+	//int get_id();
 	int get_hp();
 	Vector2f get_posicion();
 	Vector2f get_velocidad();
