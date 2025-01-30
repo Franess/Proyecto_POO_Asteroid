@@ -96,11 +96,11 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	Boton boton_ptos(ss.str(),&m_fuente,10);
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
+	m_navesita.establecerVidas(3);
 }
 
 void OnePlayer::Actualizar (Juego &j) 
 {
-	
 	m_prueba++;
 	if (m_prueba%120==0){
 		respawn(m_ast);
@@ -149,7 +149,8 @@ void OnePlayer::Actualizar (Juego &j)
 	}
 	if(m_navesita.obtenerVidas()==0)
 	{
-		j.CambiarEscena(new Escena_Puntaje);
+		//j.CambiarEscena(new Escena_Puntaje);
+		j.CambiarEscena(new JuegoTerminado(m_tabla.get_puntos()));
 	}
 	if(m_navesita.obtenerVidas()==1) vec_botones[0].establecerColorTexto({255,0,0});
 	stringstream ss;

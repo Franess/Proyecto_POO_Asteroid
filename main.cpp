@@ -3,6 +3,7 @@
 #include "Settings.h"
 #include "PantallaInicio.h"
 #include "Escena_Puntaje.h"
+#include "JuegoTerminado.h"
 
 using namespace std;
 using namespace sf;

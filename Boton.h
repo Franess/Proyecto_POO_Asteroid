@@ -7,6 +7,7 @@ using namespace std;
 class Boton 
 {
 public:
+	Boton() = default;
 	Boton(string texto_boton, sf::Font *fuente, int tamanio_letras);
 	void establecerPosicion(float x, float y);
 	void establecerTexto(string nuevo_texto);

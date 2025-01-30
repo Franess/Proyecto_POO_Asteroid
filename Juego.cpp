@@ -23,7 +23,7 @@ void Juego::jugar()
 				m_escenaActual->ProcesarEvento(*this,e);
 			}
 		}
-		m_win.clear(sf::Color(40,40,50,255));
+		m_win.clear(sf::Color(0,0,0,255));
 		m_escenaActual->Actualizar(*this);
 		m_escenaActual->Dibujar(m_win);
 		m_win.display();
