@@ -124,6 +124,9 @@ void JuegoTerminado::ProcesarEvento (Juego &j, sf::Event e)
 		if(calculo_sobrepos(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]) && e.mouseButton.button == sf::Mouse::Left && m_textoEntrada.getValue()!="")
 		{
 			//Acá antes de cambiar de pantalla deberia ir la carga de datos (Leo)
+			m_tabla.recibir_nombre_j(m_textoEntrada.getString());
+			m_tabla.actualizar_puntos_j(m_puntosFinales);
+			m_tabla.actualizar_archivo_puntaje();
 			j.CambiarEscena(new PantallaInicio);
 		}else
 		{
