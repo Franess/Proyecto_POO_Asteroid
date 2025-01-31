@@ -22,37 +22,42 @@ vector<float> actualizarEscalar(sf::RenderWindow &w)
 
 JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 {
-	bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
+	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	if(!estado_fuente) throw runtime_error("No se encuentra la fuente Roboto_Condensed-Bold.ttf");
-	bool estado_imgFondo = m_texturaFondo.loadFromFile("fondoJuegoTerminado.jpg");
+	bool estado_imgFondo = m_texturaFondo.loadFromFile("fondoPantallaInicio.jpg");
 	if(!estado_imgFondo) throw runtime_error("No se encuentra el fondo fondoJuegoTerminado.jpg");
 	bool estado_navepixel = m_texturaNavePixel.loadFromFile("navepixelada.png");
 	if(!estado_navepixel) throw runtime_error("No se encuentra la textura navepixelada.png");
 	m_fondo.setTexture(m_texturaFondo);
 	m_fondo.setOrigin(0,0);
 	m_fondo.setPosition(0,0);
-	m_fondo.setScale(1.0/3,1.0/3);
+	m_fondo.setScale(1.0/2,1.0/2);
 	
 	m_navePixel.setTexture(m_texturaNavePixel);
 	m_navePixel.setOrigin(0,0);
-	m_navePixel.setPosition(443,40);
+	m_navePixel.setPosition(443,28);
 	m_navePixel.setScale(1.5,1.5);
 	m_navePixel.setRotation(15);
 	
 	m_tituloPantalla.setFont(m_fuente);
 	m_tituloPantalla.setCharacterSize(50);
-	m_tituloPantalla.setString("JUEGO TERMIN   DO");
+	m_tituloPantalla.setString("JUEGO TERMIN  DO");
+	m_tituloPantalla.setScale(0.5,1);
+	auto m_aux_size=m_tituloPantalla.getLocalBounds();
+	m_tituloPantalla.setOrigin(m_aux_size.width/2,m_aux_size.height/2);
 	
 	sf::Rect<float> aux_medidas = m_tituloPantalla.getGlobalBounds();
-	m_tituloPantalla.setOrigin(aux_medidas.width/2,aux_medidas.height/2);
-	
+	/*m_tituloPantalla.setOrigin(aux_medidas.width/2,aux_medidas.height/2);
+	*/
 	m_tituloPantalla.setPosition(320,50);
 	
 	m_msjTeclaMenu.setFont(m_fuente);
 	m_msjTeclaMenu.setCharacterSize(10);
 	m_msjTeclaMenu.setString("<Presione 'esc' para volver al menu sin guardar el puntaje>");
-	m_msjTeclaMenu.setOrigin(0,0);
-	m_msjTeclaMenu.setPosition(180,345);
+	m_aux_size=m_msjTeclaMenu.getLocalBounds();
+	m_msjTeclaMenu.setOrigin(m_aux_size.width/2,m_aux_size.height/2);
+	m_msjTeclaMenu.setPosition(320,345);
+	m_msjTeclaMenu.setScale(0.5,1);
 	
 	std::stringstream ss;
 	ss<<"Puntaje Final: "<<puntos_fin;
@@ -60,25 +65,36 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	m_mostrarPuntos.establecerPosicion(320,120);
 	m_btnGuardar = Boton("Guardar",&m_fuente,30);
 	m_btnGuardar.establecerPosicion(320,300);
+	m_btnGuardar.escalado(0.5,1);
 	
 	m_textoAclaracion.setFont(m_fuente);
 	m_textoAclaracion.setCharacterSize(15);
 	m_textoAclaracion.setString("<Ingrese su nombre (max caracteres = 15)>");
-	aux_medidas = m_textoAclaracion.getGlobalBounds();
-	m_textoAclaracion.setOrigin(aux_medidas.width/2,aux_medidas.height/2);
+	m_aux_size=m_textoAclaracion.getLocalBounds();
+	m_textoAclaracion.setOrigin(m_aux_size.width/2,m_aux_size.height/2);
+	m_textoAclaracion.setScale(0.5,1);
 	m_textoAclaracion.setPosition(320,165);
+	
+	
 	
 	m_textoEntrada = InputText(m_fuente,25,{255,255,255});
 	m_textoEntrada.setMaxChars(15);
 	m_textoEntrada.setSingleWord(true);
 	
+	m_aux_size=m_textoEntrada.getLocalBounds();
+	m_textoEntrada.setOrigin(m_aux_size.width/2,m_aux_size.height/2);
+	m_textoEntrada.setScale(0.5,1);
 	m_textoEntrada.setPosition(225,190);
 	
 	m_msjFaltaNombre.setFont(m_fuente);
 	m_msjFaltaNombre.setCharacterSize(18);
 	m_msjFaltaNombre.setString("<Ingrese un nombre por favor>");
-	m_msjFaltaNombre.setOrigin(0,0);
-	m_msjFaltaNombre.setPosition(210,230);
+	
+	m_aux_size=m_msjFaltaNombre.getLocalBounds();
+	m_msjFaltaNombre.setOrigin(m_aux_size.width/2,m_aux_size.height/2);
+	m_msjFaltaNombre.setScale(0.5,1);
+	
+	m_msjFaltaNombre.setPosition(320,230);
 	m_msjFaltaNombre.setFillColor({0,0,0,0});
 	
 }
