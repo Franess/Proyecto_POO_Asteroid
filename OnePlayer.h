@@ -9,6 +9,7 @@
 #include "Juego.h"
 #include "OndaConcentrica.h"
 #include <cmath>
+#include <SFML/Audio.hpp>
 #include <algorithm>
 #include "ast_manip.h"
 #include "Boton.h"
@@ -37,6 +38,9 @@ private:
 	sf::Font m_fuente;
 	sf::Text m_msjTeclaMenu;
 	vector<Boton> vec_botones;
+	sf::SoundBuffer m_buffer;
+	sf::Sound m_shot;
+	sf::Music m_music;
 };
 
 #endif

@@ -97,6 +97,12 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
 	m_navesita.establecerVidas(3);
+	
+	/*m_buffer.loadFromFile("01 - MMX - X Regular Shot.wav");
+	m_shot.setBuffer(m_buffer);
+	m_shot.play();*/
+	//m_music.openFromFile("Mega Man X4 - Military Train.wav");
+	//m_music.play();
 }
 
 void OnePlayer::Actualizar (Juego &j) 
@@ -189,7 +195,7 @@ OnePlayer::~OnePlayer()
 	if(!m_vfx){
 		delete m_vfx;
 	}
-//	delete mtex_asteroide;
+	//delete mtex_asteroide;
 }
 void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {

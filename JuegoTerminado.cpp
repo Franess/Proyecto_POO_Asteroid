@@ -31,7 +31,6 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	m_fondo.setTexture(m_texturaFondo);
 	m_fondo.setOrigin(0,0);
 	m_fondo.setPosition(0,0);
-	m_fondo.setScale(1.0/3,1.0/3);
 	
 	m_navePixel.setTexture(m_texturaNavePixel);
 	m_navePixel.setOrigin(0,0);
