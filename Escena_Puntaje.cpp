@@ -24,7 +24,7 @@ auto text_size=m_text[10].getLocalBounds();
 m_text[10].setOrigin(text_size.width/2,text_size.height/2);
 m_text[10].setPosition(posicion.x,35);
 
-m_text[11].setString("<prescione 'esc' para salir>");
+m_text[11].setString("<presione 'esc' para salir>");
 m_text[11].setFont(m_fuente);
 m_text[11].setScale(0.9,1);
 m_text[11].setFillColor({0,255,0});

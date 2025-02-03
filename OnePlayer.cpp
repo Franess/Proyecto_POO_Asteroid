@@ -2,6 +2,7 @@
 #include "PantallaInicio.h"
 #include "Escena_Puntaje.h"
 #include <sstream>
+#include "musica.h"
 
 using namespace std;
 using namespace sf;
@@ -75,7 +76,7 @@ Vector2f correccionPosicionNave(const Nave &n)
 	return pos_nave;
 }
 
-OnePlayer::OnePlayer(Settings &s):m_navesita(s) 
+OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 {
 	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	m_msjTeclaMenu.setFont(m_fuente);
@@ -96,15 +97,11 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	Boton boton_ptos(ss.str(),&m_fuente,10);
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
-	m_navesita.establecerVidas(3);
-	
-	/*m_buffer.loadFromFile("01 - MMX - X Regular Shot.wav");
-	m_shot.setBuffer(m_buffer);
-	m_shot.play();*/
-	//m_music.openFromFile("Mega Man X4 - Military Train.wav");
-	//m_music.play();
+	m_navesita.establecerVidas(50);
+	m_musica.openFromFile("Mega Man X4 - Military Train.wav");
+	m_musica.setLoop(true);
+	m_musica.play();
 }
-
 void OnePlayer::Actualizar (Juego &j) 
 {
 	m_prueba++;
@@ -156,6 +153,7 @@ void OnePlayer::Actualizar (Juego &j)
 	if(m_navesita.obtenerVidas()==0)
 	{
 		//j.CambiarEscena(new Escena_Puntaje);
+		m_musica.stop();
 		j.CambiarEscena(new JuegoTerminado(m_tabla.get_puntos()));
 	}
 	if(m_navesita.obtenerVidas()==1) vec_botones[0].establecerColorTexto({255,0,0});
@@ -201,6 +199,7 @@ void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {
 	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
 	{
+		m_musica.stop();
 		j.CambiarEscena(new PantallaInicio);
 	}
 }

@@ -16,6 +16,7 @@
 #include "tabla_de_puntos.h"
 #include "JuegoTerminado.h"
 #include "PantallaInicio.h"
+#include "musica.h"
 using namespace std;
 
 class OnePlayer : public Escena {
@@ -38,9 +39,8 @@ private:
 	sf::Font m_fuente;
 	sf::Text m_msjTeclaMenu;
 	vector<Boton> vec_botones;
-	sf::SoundBuffer m_buffer;
-	sf::Sound m_shot;
-	sf::Music m_music;
+	//musica m_musica;
+	sf::Music m_musica;
 };
 
 #endif
