@@ -1,24 +1,8 @@
 #include "JuegoTerminado.h"
 #include <sstream>
 #include "rng.h"
+#include "funcionesBotones.h"
 
-bool calculo_sobrepos(sf::Vector2f pos_puntero, Boton &b,float ex, float ey)
-{
-	sf::Vector2f pos_actualBoton = b.obtenerVectorPosRelativo();
-	bool zona_x = (pos_actualBoton.x)*ex <=pos_puntero.x&& pos_puntero.x<=(pos_actualBoton.x+b.obtenerAnchoBorde())*ex;
-	bool zona_y = (pos_actualBoton.y)*ey<=pos_puntero.y && pos_puntero.y<=(pos_actualBoton.y+b.obtenerAltoBorde())*ey;
-	if(zona_x && zona_y) return true;
-	else return false;
-}
-
-vector<float> actualizarEscalar(sf::RenderWindow &w)
-{
-	vector<float> v_aux;
-	sf::Vector2u aux = w.getSize();
-	v_aux.push_back(static_cast<float>(aux.x)/640);
-	v_aux.push_back(static_cast<float>(aux.y)/360);
-	return v_aux;
-}
 
 JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 {
@@ -111,7 +95,7 @@ void JuegoTerminado::Actualizar (Juego & j)
 void JuegoTerminado::Dibujar (sf::RenderWindow & win) 
 {
 	win.clear({0,0,0});
-	m_escalares = actualizarEscalar(win);
+	m_escalares = actualizarEscalares(win);
 	win.draw(m_fondo);
 	win.draw(m_tituloPantalla);
 	win.draw(m_navePixel);
@@ -129,7 +113,7 @@ void JuegoTerminado::ProcesarEvento (Juego &j, sf::Event e)
 	if(e.type == sf::Event::MouseMoved)
 	{
 		sf::Vector2f pos_mouse(e.mouseMove.x,e.mouseMove.y);
-		if(calculo_sobrepos(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]))
+		if(calculo_sobreposicion(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]))
 		{ 
 			m_btnGuardar.colorFondo({190,255,250,50});
 		}
@@ -138,7 +122,7 @@ void JuegoTerminado::ProcesarEvento (Juego &j, sf::Event e)
 	if(e.type == sf::Event::MouseButtonReleased)
 	{
 		sf::Vector2f pos_mouse(e.mouseButton.x,e.mouseButton.y);
-		if(calculo_sobrepos(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]) && e.mouseButton.button == sf::Mouse::Left && m_textoEntrada.getValue()!="")
+		if(calculo_sobreposicion(pos_mouse,m_btnGuardar,m_escalares[0],m_escalares[1]) && e.mouseButton.button == sf::Mouse::Left && m_textoEntrada.getValue()!="")
 		{
 			//Acá antes de cambiar de pantalla deberia ir la carga de datos (Leo)
 			m_tabla.recibir_nombre_j(m_textoEntrada.getString());
