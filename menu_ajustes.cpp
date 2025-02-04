@@ -76,6 +76,22 @@ menu_ajustes::menu_ajustes() {
 	m_avisoTeclaSalir.setCharacterSize(10);
 	m_avisoTeclaSalir.setScale(0.5,1);
 	m_avisoTeclaSalir.setPosition(370,350);
+	//Mensaje Guardado para los Controles
+	m_avisoGuardadoCtrl.setFont(m_fuente);
+	m_avisoGuardadoCtrl.setString("<Sin Guardar>");
+	m_avisoGuardadoCtrl.setCharacterSize(10);
+	m_avisoGuardadoCtrl.setScale(0.5,1);
+	m_avisoGuardadoCtrl.setFillColor({255,0,0});
+	m_avisoGuardadoCtrl.setPosition(600,350);
+	//Mensaje Guardado para los Juego
+	m_avisoGuardadoJuego.setFont(m_fuente);
+	m_avisoGuardadoJuego.setString("<Sin Guardar>");
+	m_avisoGuardadoJuego.setCharacterSize(10);
+	m_avisoGuardadoJuego.setScale(0.5,1);
+	m_avisoGuardadoJuego.setFillColor({255,0,0});
+	m_avisoGuardadoJuego.setPosition(600,350);
+	
+	
 	//Textos de los ajustes para los controles
 	stringControles = {"Disparar=","Rotar Derecha=", "Rotar Izquierda=", "Avanzar=","Frenar="};
 	
@@ -99,7 +115,7 @@ menu_ajustes::menu_ajustes() {
 	
 	for(int i=0;i<textos_controles.size();i++) 
 	{
-		selec_cambios.push_back(generarBotonSelecc(textos_controles[i],&m_fuente));
+		selec_cambiosCtrl.push_back(generarBotonSelecc(textos_controles[i],&m_fuente));
 	}
 	
 	
@@ -112,6 +128,11 @@ void menu_ajustes::Actualizar (Juego & j)
 	m_titulo.setOrigin(info_texto.width/2,info_texto.height/2);
 	info_texto = m_avisoTeclaSalir.getLocalBounds();
 	m_avisoTeclaSalir.setOrigin(info_texto.width/2,info_texto.height/2);
+	info_texto = m_avisoGuardadoCtrl.getLocalBounds();
+	m_avisoGuardadoCtrl.setOrigin(info_texto.width/2,info_texto.height/2);
+	info_texto = m_avisoGuardadoJuego.getLocalBounds();
+	m_avisoGuardadoJuego.setOrigin(info_texto.width/2,info_texto.height/2);
+	
 	m_textoEntrada.update();
 	
 }
@@ -122,16 +143,17 @@ void menu_ajustes::Dibujar (sf::RenderWindow & win) {
 	win.draw(m_recuadroTitulo);
 	win.draw(m_titulo);
 	win.draw(m_avisoTeclaSalir);
+	win.draw(m_textoEntrada);
 	for(Boton &x:vec_botones)x.dibujar(win);
 	switch (m_selectorContenidos)
 	{
 	case 1:
-		win.draw(m_textoEntrada);
-		for(Boton &x:selec_cambios)x.dibujar(win);
+		win.draw(m_avisoGuardadoCtrl);
+		for(Boton &x:selec_cambiosCtrl)x.dibujar(win);
 		for(sf::Text &x:textos_controles) win.draw(x);
 		break;
 	case 2:
-		
+		win.draw(m_avisoGuardadoJuego);
 		break;
 	}
 		
@@ -149,7 +171,7 @@ void menu_ajustes::ProcesarEvento (Juego & j, sf::Event e) {
 			}
 			else x.colorFondo({0,0,0,0});
 		}
-		for(Boton &x:selec_cambios){
+		for(Boton &x:selec_cambiosCtrl){
 			if(calculo_sobreposicion(pos_mouse,x,m_escalas[0],m_escalas[1]))
 			{ 
 				x.colorFondo({190,255,250,50});
@@ -177,14 +199,18 @@ void menu_ajustes::ProcesarEvento (Juego & j, sf::Event e) {
 			case 1:
 				actualizarTextoControles(stringControles,m_controlesActuales,textos_controles);
 				m_settings.actualizarControles(m_controlesActuales);
+				m_avisoGuardadoCtrl.setFillColor({0,255,0});
+				m_avisoGuardadoCtrl.setString("<Guardado>");
 				break;
 			case 2:
+				m_avisoGuardadoJuego.setFillColor({0,255,0});
+				m_avisoGuardadoJuego.setString("<Guardado>");
 				break;
 			}
 		}
-		for(int i=0;i<selec_cambios.size();i++) 
+		for(int i=0;i<selec_cambiosCtrl.size();i++) 
 		{
-			if(calculo_sobreposicion(pos_mouse,selec_cambios[i],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
+			if(calculo_sobreposicion(pos_mouse,selec_cambiosCtrl[i],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
 			{
 				string x = m_textoEntrada.getValue();
 				m_controlesActuales[i] = x;

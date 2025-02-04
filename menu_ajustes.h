@@ -17,11 +17,11 @@ private:
 	Settings m_settings;
 	sf::Font m_fuente;
 	sf::RectangleShape m_divisor, m_recuadroTitulo;
-	sf::Text m_titulo, m_avisoTeclaSalir;
+	sf::Text m_titulo, m_avisoTeclaSalir, m_avisoGuardadoCtrl, m_avisoGuardadoJuego;
 	vector<float> m_escalas;
 	std::vector<string> m_controlesActuales; 
 	std::vector<Boton> vec_botones;
-	std::vector<Boton> selec_cambios;
+	std::vector<Boton> selec_cambiosCtrl;
 	std::vector<sf::Text> textos_controles;
 	std::vector<std::string> stringControles;
 	InputText m_textoEntrada;

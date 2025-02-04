@@ -75,7 +75,7 @@ path=JuegoTerminado.cpp
 cursor=105:26
 [source]
 path=menu_ajustes.cpp
-cursor=178:56
+cursor=206:24
 open=true
 [source]
 path=funcionesBotones.cpp
@@ -143,7 +143,7 @@ path=JuegoTerminado.h
 cursor=17:1
 [header]
 path=menu_ajustes.h
-cursor=15:28
+cursor=19:58
 open=true
 [header]
 path=InputText.hpp
