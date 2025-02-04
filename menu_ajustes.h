@@ -1,8 +1,10 @@
 #ifndef MENU_AJUSTES_H
 #define MENU_AJUSTES_H
+#include <SFML/Graphics.hpp>
 #include "Escena.h"
 #include "Settings.h"
 #include "Boton.h"
+#include "PantallaInicio.h"
 
 class menu_ajustes : public Escena {
 public:
@@ -11,10 +13,18 @@ public:
 	void Dibujar (sf::RenderWindow & win);
 	void ProcesarEvento (Juego & j, sf::Event e);
 private:
+	int m_selectorContenidos=1;
 	Settings m_settings;
-	std::vector<Boton> vec_botones;
 	sf::Font m_fuente;
+	sf::RectangleShape m_divisor, m_recuadroTitulo;
+	sf::Text m_titulo, m_avisoTeclaSalir;
 	vector<float> m_escalas;
+	std::vector<string> m_controlesActuales; 
+	std::vector<Boton> vec_botones;
+	std::vector<Boton> selec_cambios;
+	std::vector<sf::Text> textos_controles;
+	std::vector<std::string> stringControles;
+	InputText m_textoEntrada;
 };
 
 #endif

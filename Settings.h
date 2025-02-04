@@ -10,8 +10,10 @@ class Settings {
 public:
 	Settings();
 	vector<Keyboard::Key>obtenerControles() ;
+	vector<string> obtenerStringTeclas()const;
+	void actualizarControles(vector<string> v);
 private:
-	vector<string> m_stringsTeclas;
+	vector<string> m_stringsTeclas, m_teclasCrudo;
 };
 
 #endif
