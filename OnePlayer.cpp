@@ -75,7 +75,7 @@ Vector2f correccionPosicionNave(const Nave &n)
 	return pos_nave;
 }
 
-OnePlayer::OnePlayer(Settings &s):m_navesita(s) 
+OnePlayer::OnePlayer(Settings &s):m_navesita(s),m_settings(s) 
 {
 	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	m_msjTeclaMenu.setFont(m_fuente);
@@ -109,7 +109,7 @@ void OnePlayer::Actualizar (Juego &j)
 			m_puntos_para_siguiente=m_puntos_para_siguiente*1.6;
 		}
 		m_tabla.actualizar_puntos_j(m_ast.size()*10);
-	} 
+	}
 	
 	destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla);
 	colision(m_ast);

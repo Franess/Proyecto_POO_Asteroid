@@ -62,7 +62,7 @@ menu_ajustes::menu_ajustes() {
 	
 	Boton boton_guardar("Guardar",&m_fuente,20);
 	boton_guardar.escalado(0.5,1.f);
-	boton_guardar.establecerPosicion(40,320);
+	boton_guardar.establecerPosicion(40,325);
 	vec_botones.push_back(boton_guardar);//vec_botones[2]
 	
 	//Inicializacion Titulo del Ajuste
