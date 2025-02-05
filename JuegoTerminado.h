@@ -1,7 +1,6 @@
 #ifndef JUEGOTERMINADO_H
 #define JUEGOTERMINADO_H
 #include "Escena.h"
-#include "InputText.hpp"
 #include <SFML/Graphics.hpp>
 #include "tabla_de_puntos.h"
 #include "Boton.h"

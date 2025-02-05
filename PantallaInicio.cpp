@@ -1,27 +1,5 @@
 #include "PantallaInicio.h"
-#include <algorithm>
-#include "OnePlayer.h"
-#include "Settings.h"
-#include "Escena_Puntaje.h"
 using namespace std;
-
-bool calculo_sobreposicion(sf::Vector2f pos_puntero, Boton &b,float ex, float ey)
-{
-	sf::Vector2f pos_actualBoton = b.obtenerVectorPosRelativo();
-	bool zona_x = (pos_actualBoton.x)*ex <=pos_puntero.x&& pos_puntero.x<=(pos_actualBoton.x+b.obtenerAnchoBorde())*ex;
-	bool zona_y = (pos_actualBoton.y)*ey<=pos_puntero.y && pos_puntero.y<=(pos_actualBoton.y+b.obtenerAltoBorde())*ey;
-	if(zona_x && zona_y) return true;
-	else return false;
-}
-
-vector<float> actualizarEscalares(sf::RenderWindow &w)
-{
-	vector<float> v_aux;
-	sf::Vector2u aux = w.getSize();
-	v_aux.push_back(static_cast<float>(aux.x)/640);
-	v_aux.push_back(static_cast<float>(aux.y)/360);
-	return v_aux;
-}
 
 PantallaInicio::PantallaInicio() 
 {
@@ -86,17 +64,20 @@ PantallaInicio::PantallaInicio()
 	m_sprFondo.setPosition(0,0);
 	m_sprFondo.setScale(1.0/3,1.0/3);
 	
-	Boton nuevo_boton("Jugar",&m_fuente,30);
-	nuevo_boton.escalado(0.45,0.9);
-	nuevo_boton.establecerPosicion(320,150+25);
-	vec_botones.push_back(nuevo_boton);
+	Boton boton_jugar("Jugar",&m_fuente,30);
+	boton_jugar.escalado(0.45,0.9);
+	boton_jugar.establecerPosicion(320,150+25);
+	vec_botones.push_back(boton_jugar);//vec_botones[0]
 	
-	Boton nuevo_boton1("Puntaje",&m_fuente,30);
-	nuevo_boton1.escalado(0.45,0.9);
-	nuevo_boton1.establecerPosicion(320,210+15);
-	vec_botones.push_back(nuevo_boton1);
+	Boton boton_puntajes("Puntaje",&m_fuente,30);
+	boton_puntajes.escalado(0.45,0.9);
+	boton_puntajes.establecerPosicion(320,210+15);
+	vec_botones.push_back(boton_puntajes);//vec_botones[1]
 	
-	
+	Boton boton_ajustes("Ajustes",&m_fuente,15);
+	boton_ajustes.escalado(0.5,1);
+	boton_ajustes.establecerPosicion(600.f,20.f);
+	vec_botones.push_back(boton_ajustes);//vec_botones[2]
 }
 
 void PantallaInicio::Actualizar (Juego & j)
@@ -140,8 +121,11 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 		}
 		if(calculo_sobreposicion(pos_mouse,vec_botones[1],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
 		{
-			Settings s;
 			j.CambiarEscena(new Escena_Puntaje);
+		}
+		if(calculo_sobreposicion(pos_mouse,vec_botones[2],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
+		{
+			j.CambiarEscena(new menu_ajustes);
 		}
 	}
 	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)

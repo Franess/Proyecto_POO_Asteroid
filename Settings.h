@@ -6,12 +6,22 @@
 using namespace std;
 using namespace sf;
 
+struct Config
+{
+	char nom_config[9];
+	int i_valor;
+	float f_valor;
+};
+
 class Settings {
 public:
-	Settings();
+	Settings(); 
 	vector<Keyboard::Key>obtenerControles() ;
+	vector<string> obtenerStringTeclas()const;
+	void actualizarControles(vector<string> v);
 private:
-	vector<string> m_stringsTeclas;
+	vector<string> m_stringsTeclas, m_teclasCrudo;
+	vector<Config> m_configuraciones;
 };
 
 #endif

@@ -8,12 +8,12 @@ using namespace std;
 Settings::Settings() {
 	
 	//Abre el archivo y guarda las lineas de texto de interes para el programa
-	fstream archi("Set_Controls.txt");
+	fstream archi("Set_Controls.txt",ios::in);
 	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
 	string s;
 	while(getline(archi,s)){
+		m_teclasCrudo.push_back(s);
 		if(s.find_first_of('#',0)){
-			/*cout<<s<<endl;*/
 			m_stringsTeclas.push_back(s);
 		}
 	}
@@ -24,7 +24,6 @@ vector<Keyboard::Key> Settings::obtenerControles() {
 	vector<string> ref_teclas = {
 		"Space",
 		"Enter",
-		"Escape",
 		"Backspace",
 		"Tab",
 		"Flecha-Derecha",
@@ -36,7 +35,6 @@ vector<Keyboard::Key> Settings::obtenerControles() {
 	vector<Keyboard::Key> teclas_sfml = {
 		Keyboard::Space,
 		Keyboard::Return,
-		Keyboard::Escape,
 		Keyboard::BackSpace,
 		Keyboard::Tab,
 		Keyboard::Right,
@@ -69,4 +67,25 @@ vector<Keyboard::Key> Settings::obtenerControles() {
 	}
 	return teclas_nave;
 }
-
+vector<string> Settings::obtenerStringTeclas()const
+{
+	return m_stringsTeclas;
+}
+void Settings::actualizarControles(vector<string> v)
+{
+	int k =0;
+	for(int i=0;i<m_teclasCrudo.size();i++) 
+	{
+		if(m_teclasCrudo[i].find_first_of('#',0)){
+			m_teclasCrudo[i]=v[k];
+			++k;
+		}
+	}
+	ofstream archi("Set_Controls.txt",ios::trunc);
+	if(!archi.is_open()) throw runtime_error("No se pudo abrir el archivo, graba controles");
+	for(string &s:m_teclasCrudo)
+	{
+		archi<<s<<endl;
+	}
+	archi.close();
+}
