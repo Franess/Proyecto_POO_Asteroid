@@ -1,30 +1,44 @@
 #include "Settings.h"
-#include <fstream>
-#include <string>
-#include <cstring>
-#include <algorithm>
+
+bool operator!=(Config c1,Config c2)
+{
+	if(c1.nom_config!=c2.nom_config &&c1.i_valor!=c2.i_valor && c1.f_valor!=c2.f_valor)
+		return true; 
+	else
+		return false;
+}
+
 using namespace std;
 
 Settings::Settings() {
 	
 	//Abre el archivo y guarda las lineas de texto de interes para el programa
-	fstream archi("Set_Controls.txt");
+	fstream archi("Set_Controls.txt",ios::in);
 	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
 	string s;
 	while(getline(archi,s)){
+		m_teclasCrudo.push_back(s);
 		if(s.find_first_of('#',0)){
-			/*cout<<s<<endl;*/
 			m_stringsTeclas.push_back(s);
 		}
 	}
 	archi.close();
+	archi.open("configuracionesJuego.poo",ios::binary|ios::in);
+	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
+	archi.seekg(0);
+	Config c;
+	while(archi.read(reinterpret_cast<char*>(&c),sizeof(c)))
+	{
+		m_configuraciones.push_back(c);
+	}
+	archi.close();
+	
 }
 vector<Keyboard::Key> Settings::obtenerControles() {
 	vector<Keyboard::Key> teclas_nave;
 	vector<string> ref_teclas = {
 		"Space",
 		"Enter",
-		"Escape",
 		"Backspace",
 		"Tab",
 		"Flecha-Derecha",
@@ -36,7 +50,6 @@ vector<Keyboard::Key> Settings::obtenerControles() {
 	vector<Keyboard::Key> teclas_sfml = {
 		Keyboard::Space,
 		Keyboard::Return,
-		Keyboard::Escape,
 		Keyboard::BackSpace,
 		Keyboard::Tab,
 		Keyboard::Right,
@@ -69,4 +82,40 @@ vector<Keyboard::Key> Settings::obtenerControles() {
 	}
 	return teclas_nave;
 }
-
+vector<string> Settings::obtenerStringTeclas()const
+{
+	return m_stringsTeclas;
+}
+void Settings::actualizarControles(vector<string> v)
+{
+	int k =0;
+	for(int i=0;i<m_teclasCrudo.size();i++) 
+	{
+		if(m_teclasCrudo[i].find_first_of('#',0)){
+			m_teclasCrudo[i]=v[k];
+			++k;
+		}
+	}
+	ofstream archi("Set_Controls.txt",ios::trunc);
+	if(!archi.is_open()) throw runtime_error("No se pudo abrir el archivo, graba controles");
+	for(string &s:m_teclasCrudo)
+	{
+		archi<<s<<endl;
+	}
+	archi.close();
+}
+vector<Config> Settings::obtenerConfiguracion()const
+{
+	return m_configuraciones;
+}
+void Settings::actualizarConfiguracion(vector<Config> nuevas_configuraciones)
+{
+	fstream archi("configuracionesJuego.poo",ios::binary|ios::out|ios::trunc);
+	if(!archi.is_open())throw runtime_error("No se pudo arbir el archivo");
+	archi.seekp(0);
+	for(Config &x:nuevas_configuraciones)
+	{
+		archi.write(reinterpret_cast<const char*>(&x),sizeof(x));
+	}
+	archi.close();
+}

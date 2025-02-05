@@ -37,6 +37,7 @@ private:
 	sf::Font m_fuente;
 	sf::Text m_msjTeclaMenu;
 	vector<Boton> vec_botones;
+	vector<Config> m_configuraciones;
 };
 
 #endif

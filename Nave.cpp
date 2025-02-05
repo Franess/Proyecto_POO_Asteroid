@@ -49,8 +49,8 @@ void Nave::actualizar(){
 		m_vecDireccion.y=m_rapidez*sin(radianes_rot-M_PI/2);
 		Vector2f nueva_direccion(m_rapidez*cos(radianes_rot-M_PI/2),m_rapidez*sin(radianes_rot-M_PI/2));
 		m_nave.move(m_vecDireccion);
-		if(time_pressed<=(6.0/2)){//Tiempo que se mantiene presionada la tecla.
-			time_pressed+=1.0/40;
+		if(time_pressed<=(5.0/2)){//Tiempo que se mantiene presionada la tecla.
+			time_pressed+=1.0/20;
 		}
 	}
 	if(Keyboard::isKeyPressed(m_teclas[4])){//Frenar Nave

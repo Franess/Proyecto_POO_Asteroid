@@ -75,9 +75,10 @@ Vector2f correccionPosicionNave(const Nave &n)
 	return pos_nave;
 }
 
-OnePlayer::OnePlayer(Settings &s):m_navesita(s) 
+OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 {
 	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+	m_configuraciones = s.obtenerConfiguracion();
 	m_msjTeclaMenu.setFont(m_fuente);
 	m_msjTeclaMenu.setCharacterSize(10);
 	m_msjTeclaMenu.setString("<Presione 'esc' para volver al menu, se perderan los puntos>");
@@ -96,7 +97,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	Boton boton_ptos(ss.str(),&m_fuente,10);
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
-	m_navesita.establecerVidas(0);
+	m_navesita.establecerVidas(m_configuraciones[0].i_valor);
 }
 
 void OnePlayer::Actualizar (Juego &j) 
@@ -109,7 +110,7 @@ void OnePlayer::Actualizar (Juego &j)
 			m_puntos_para_siguiente=m_puntos_para_siguiente*1.6;
 		}
 		m_tabla.actualizar_puntos_j(m_ast.size()*10);
-	} 
+	}
 	
 	destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla);
 	colision(m_ast);
@@ -189,7 +190,7 @@ OnePlayer::~OnePlayer()
 	if(!m_vfx){
 		delete m_vfx;
 	}
-//	delete mtex_asteroide;
+    delete mtex_asteroide;
 }
 void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {

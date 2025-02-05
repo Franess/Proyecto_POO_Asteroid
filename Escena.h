@@ -1,7 +1,7 @@
 #ifndef ESCENA_H
 #define ESCENA_H
 #include <SFML/Graphics.hpp>
-
+#include "InputText.hpp"
 class Juego;
 
 class Escena

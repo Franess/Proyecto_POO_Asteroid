@@ -3,6 +3,12 @@
 #include "Escena.h"
 #include <SFML/Graphics.hpp>
 #include "Boton.h"
+#include "menu_ajustes.h"
+#include <algorithm>
+#include "OnePlayer.h"
+#include "Settings.h"
+#include "Escena_Puntaje.h"
+#include "funcionesBotones.h"
 
 class PantallaInicio : public Escena {
 public:

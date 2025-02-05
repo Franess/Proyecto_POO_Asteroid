@@ -22,8 +22,6 @@ public:
 	float obtenerAnchoBorde()const;
 	float obtenerAltoBorde()const;
 	sf::Vector2f obtenerVectorPosRelativo();
-	bool estaApuntado(sf::Vector2f pos_puntero);
-	void estaApuntado();
 	
 	
 	void actualizar();
