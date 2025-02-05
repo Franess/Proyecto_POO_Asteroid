@@ -43,7 +43,7 @@ void tabla_de_puntos::actualizar_puntos_j(int puntos_a_sumar){
 	puntos_jugador.puntos+=puntos_a_sumar;
 }
 void tabla_de_puntos::recibir_nombre_j(string nombre_j){
-	strncpy(puntos_jugador.nombre,nombre_j.c_str(),sizeof (nombre_j)-1);	//sizeof se utiliza para evitar la sobreescritura en la memoria
+	strcpy(puntos_jugador.nombre,nombre_j.c_str());	//sizeof se utiliza para evitar la sobreescritura en la memoria
 }
 
 int tabla_de_puntos::get_puntos(){
