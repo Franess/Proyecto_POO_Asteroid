@@ -15,7 +15,7 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=rellenar y ver archivo  puntaje
 inherits_from=
-current_source=menu_ajustes.cpp
+current_source=OnePlayer.cpp
 path_char=/
 [source]
 path=main.cpp
@@ -56,7 +56,7 @@ path=Juego.cpp
 cursor=9:1
 [source]
 path=OnePlayer.cpp
-cursor=77:61
+cursor=188:12
 open=true
 [source]
 path=PantallaInicio.cpp

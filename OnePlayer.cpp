@@ -189,7 +189,7 @@ OnePlayer::~OnePlayer()
 	if(!m_vfx){
 		delete m_vfx;
 	}
-//	delete mtex_asteroide;
+    delete mtex_asteroide;
 }
 void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {
