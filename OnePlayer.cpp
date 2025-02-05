@@ -2,11 +2,29 @@
 #include "PantallaInicio.h"
 #include "Escena_Puntaje.h"
 #include <sstream>
-#include "musica.h"
 
+#include <iostream>
 using namespace std;
 using namespace sf;
 
+void reproducir(sf::SoundBuffer &buffer, vector<sf::Sound*> &s){
+	sf::Sound* sound=new sf::Sound();
+	(*sound).setBuffer(buffer);
+	(*sound).play();
+	s.push_back(sound);
+}
+
+void eliminar_s(vector<sf::Sound*> &s){
+	
+	for (size_t i=0;i<s.size(); ){
+		if((*s[i]).getStatus()==sf::Sound::Stopped){
+			delete s[i];
+			s.erase(s.begin()+i);
+		}else{
+			++i;
+		}
+	}
+}
 
 bool fuera_limites(Proyectil &d)
 {
@@ -100,7 +118,13 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	m_navesita.establecerVidas(50);
 	m_musica.openFromFile("Mega Man X4 - Military Train.wav");
 	m_musica.setLoop(true);
+	m_musica.setVolume(35);
 	m_musica.play();
+	sf::SoundBuffer aux_buffer;
+	aux_buffer.loadFromFile("01 - MMX - X Regular Shot.wav");
+	m_buffer.push_back(aux_buffer);
+	aux_buffer.loadFromFile("57 - MMX - Enemy Die (2).wav");
+	m_buffer.push_back(aux_buffer);
 }
 void OnePlayer::Actualizar (Juego &j) 
 {
@@ -112,9 +136,12 @@ void OnePlayer::Actualizar (Juego &j)
 			m_puntos_para_siguiente=m_puntos_para_siguiente*1.6;
 		}
 		m_tabla.actualizar_puntos_j(m_ast.size()*10);
+		
 	} 
-	
-	destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla);
+
+	if(destruir(m_ast,mproye_pantalla,mefec_explosion,m_tabla)){
+		reproducir(m_buffer[1],m_sound);
+	}
 	colision(m_ast);
 	for(int i=0;i<m_ast.size();i++) {  
 		m_ast[i].actualizar();
@@ -122,6 +149,10 @@ void OnePlayer::Actualizar (Juego &j)
 	
 	if(m_navesita.disparar(mproye_pantalla.size())){
 		mproye_pantalla.push_back(m_navesita.generarDisparo());
+		reproducir(m_buffer[0],m_sound);
+		/*m_s_disparo++;
+		m_sound[m_s_disparo].play();
+		if(m_s_disparo==6){m_s_disparo=0;}*/
 	}
 	for(Proyectil &x:mproye_pantalla) x.actualizar();
 	for(AsteroideExplosion &x:mefec_explosion) x.actualizar();
@@ -176,6 +207,8 @@ void OnePlayer::Actualizar (Juego &j)
 	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
 	m_navesita.establecerPosicion(vecPos_correccion);
 	m_navesita.actualizar();
+	
+	eliminar_s(m_sound);
 }
 
 void OnePlayer::Dibujar (sf::RenderWindow & win) 
@@ -193,7 +226,7 @@ OnePlayer::~OnePlayer()
 	if(!m_vfx){
 		delete m_vfx;
 	}
-	//delete mtex_asteroide;
+	delete mtex_asteroide;
 }
 void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {

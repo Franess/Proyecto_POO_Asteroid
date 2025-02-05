@@ -80,5 +80,6 @@ void Escena_Puntaje::ProcesarEvento (Juego & j, sf::Event e) {
 }
 
 Escena_Puntaje::~Escena_Puntaje ( ) {
+	delete mtex_asteroide;
 }
 

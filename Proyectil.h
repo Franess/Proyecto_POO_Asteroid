@@ -1,6 +1,7 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 using namespace sf;
 

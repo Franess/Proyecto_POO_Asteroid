@@ -6,11 +6,13 @@
 #include "Proyectil.h"
 #include "tabla_de_puntos.h"
 #include "AsteroideExplosion.h"
+#include <SFML/Audio.hpp>
+
 using namespace std;
 void spawn (vector<asteroide> &a, Texture* tex,float var=1);
 void respawn(vector<asteroide> &a,float var=1);
 void indicador_d(vector<asteroide> &ast);
-void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp, tabla_de_puntos &tabla);
+bool destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp, tabla_de_puntos &tabla);
 void colision(vector<asteroide> &v);	
 
 /* 
