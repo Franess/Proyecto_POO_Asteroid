@@ -35,7 +35,7 @@ int main() {
 	vector<puntaje> p;
 	puntaje aux;
 	for(int i=0;i<10;i++) { 
-		strncpy(aux.nombre,s[i].c_str(),sizeof(aux.nombre)-1);
+		strcpy(aux.nombre,s[i].c_str());
 		aux.puntos=n[i];
 		p.push_back(aux);
 	}
