@@ -75,9 +75,10 @@ Vector2f correccionPosicionNave(const Nave &n)
 	return pos_nave;
 }
 
-OnePlayer::OnePlayer(Settings &s):m_navesita(s),m_settings(s) 
+OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 {
 	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+	m_configuraciones = s.obtenerConfiguracion();
 	m_msjTeclaMenu.setFont(m_fuente);
 	m_msjTeclaMenu.setCharacterSize(10);
 	m_msjTeclaMenu.setString("<Presione 'esc' para volver al menu, se perderan los puntos>");
@@ -96,7 +97,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s),m_settings(s)
 	Boton boton_ptos(ss.str(),&m_fuente,10);
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
-	m_navesita.establecerVidas(3);
+	m_navesita.establecerVidas(m_configuraciones[0].i_valor);
 }
 
 void OnePlayer::Actualizar (Juego &j) 

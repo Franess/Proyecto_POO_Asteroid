@@ -25,7 +25,6 @@ public:
 	void ProcesarEvento(Juego &j, sf::Event e)override;
 	~OnePlayer();
 private:
-	Settings m_settings;
 	Nave m_navesita;
 	Texture* mtex_asteroide; 			
 	vector <asteroide> m_ast;
@@ -38,6 +37,7 @@ private:
 	sf::Font m_fuente;
 	sf::Text m_msjTeclaMenu;
 	vector<Boton> vec_botones;
+	vector<Config> m_configuraciones;
 };
 
 #endif

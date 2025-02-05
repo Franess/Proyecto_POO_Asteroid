@@ -3,14 +3,17 @@
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
 #include <string>
+#include <fstream>
+#include <cstring>
+#include <algorithm>
 using namespace std;
 using namespace sf;
 
 struct Config
 {
 	char nom_config[9];
-	int i_valor;
 	float f_valor;
+	int i_valor;
 };
 
 class Settings {
@@ -19,6 +22,8 @@ public:
 	vector<Keyboard::Key>obtenerControles() ;
 	vector<string> obtenerStringTeclas()const;
 	void actualizarControles(vector<string> v);
+	vector<Config> obtenerConfiguracion()const;
+	void actualizarConfiguracion(vector<Config> nuevas_configuraciones);
 private:
 	vector<string> m_stringsTeclas, m_teclasCrudo;
 	vector<Config> m_configuraciones;
