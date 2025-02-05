@@ -35,6 +35,7 @@ void actualizarTextoControles(std::vector<std::string> &sControles,std::vector<s
 menu_ajustes::menu_ajustes() {
 	m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	m_controlesActuales = m_settings.obtenerStringTeclas();
+	m_configuraciones = m_settings.obtenerConfiguracion();
 	//Inicializo las divisiones
 	m_divisor.setSize(sf::Vector2f(100,360));
 	m_divisor.setOutlineColor({255,255,255});
@@ -118,7 +119,25 @@ menu_ajustes::menu_ajustes() {
 		selec_cambiosCtrl.push_back(generarBotonSelecc(textos_controles[i],&m_fuente));
 	}
 	
+	//Texto indicador de la cantidad de vidas
+	m_textoVidas.setFont(m_fuente);
+	m_textoVidas.setScale(0.5,1);
+	m_textoVidas.setCharacterSize(25);
+	m_textoVidas.setOrigin(0,0);
+	m_textoVidas.setPosition(107,50);
+	std::stringstream ss;
+	ss<<"Vidas: "<<m_configuraciones[0].i_valor;
+	m_textoVidas.setString(ss.str());
 	
+	
+	//Botones de suma y resta para las vidas
+	m_btnsumar = Boton("v++",&m_fuente,25);
+	m_btnsumar.escalado(0.5,1.f);
+	m_btnsumar.establecerPosicion(250,60);
+	
+	m_btnrestar= Boton("v--",&m_fuente,25);
+	m_btnrestar.escalado(0.5,1.f);
+	m_btnrestar.establecerPosicion(300,60);
 }
 
 void menu_ajustes::Actualizar (Juego & j) 
@@ -132,7 +151,9 @@ void menu_ajustes::Actualizar (Juego & j)
 	m_avisoGuardadoCtrl.setOrigin(info_texto.width/2,info_texto.height/2);
 	info_texto = m_avisoGuardadoJuego.getLocalBounds();
 	m_avisoGuardadoJuego.setOrigin(info_texto.width/2,info_texto.height/2);
-	
+	std::stringstream ss;
+	ss<<"Vidas: "<<m_configuraciones[0].i_valor;
+	m_textoVidas.setString(ss.str());
 	m_textoEntrada.update();
 	
 }
@@ -143,17 +164,20 @@ void menu_ajustes::Dibujar (sf::RenderWindow & win) {
 	win.draw(m_recuadroTitulo);
 	win.draw(m_titulo);
 	win.draw(m_avisoTeclaSalir);
-	win.draw(m_textoEntrada);
 	for(Boton &x:vec_botones)x.dibujar(win);
 	switch (m_selectorContenidos)
 	{
 	case 1:
+		win.draw(m_textoEntrada);
 		win.draw(m_avisoGuardadoCtrl);
 		for(Boton &x:selec_cambiosCtrl)x.dibujar(win);
 		for(sf::Text &x:textos_controles) win.draw(x);
 		break;
 	case 2:
 		win.draw(m_avisoGuardadoJuego);
+		m_btnrestar.dibujar(win);
+		m_btnsumar.dibujar(win);
+		win.draw(m_textoVidas);
 		break;
 	}
 		
@@ -178,6 +202,17 @@ void menu_ajustes::ProcesarEvento (Juego & j, sf::Event e) {
 			}
 			else x.colorFondo({0,0,0,0});
 		}
+		if(calculo_sobreposicion(pos_mouse,m_btnsumar,m_escalas[0],m_escalas[1]))
+		{ 
+			m_btnsumar.colorFondo({190,255,250,50});
+		}
+		else m_btnsumar.colorFondo({0,0,0,0});
+		if(calculo_sobreposicion(pos_mouse,m_btnrestar,m_escalas[0],m_escalas[1]))
+		{ 
+			m_btnrestar.colorFondo({190,255,250,50});
+		}
+		else m_btnrestar.colorFondo({0,0,0,0});
+		
 	}
 	if(e.type == sf::Event::MouseButtonReleased)
 	{
@@ -192,6 +227,17 @@ void menu_ajustes::ProcesarEvento (Juego & j, sf::Event e) {
 			m_titulo.setString("Juego");
 			m_selectorContenidos=2;
 		}
+		if(calculo_sobreposicion(pos_mouse,m_btnsumar,m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
+		{
+			++(m_configuraciones[0].i_valor);
+		}
+		if(calculo_sobreposicion(pos_mouse,m_btnrestar,m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
+		{
+			if(m_configuraciones[0].i_valor>1)
+			{
+				--(m_configuraciones[0].i_valor);
+			}
+		}
 		if(calculo_sobreposicion(pos_mouse,vec_botones[2],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
 		{
 			switch(m_selectorContenidos)
@@ -203,6 +249,7 @@ void menu_ajustes::ProcesarEvento (Juego & j, sf::Event e) {
 				m_avisoGuardadoCtrl.setString("<Guardado>");
 				break;
 			case 2:
+				m_settings.actualizarConfiguracion(m_configuraciones);
 				m_avisoGuardadoJuego.setFillColor({0,255,0});
 				m_avisoGuardadoJuego.setString("<Guardado>");
 				break;

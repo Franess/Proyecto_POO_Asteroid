@@ -5,6 +5,7 @@
 #include "Settings.h"
 #include "Boton.h"
 #include "PantallaInicio.h"
+#include <sstream>
 
 class menu_ajustes : public Escena {
 public:
@@ -17,14 +18,17 @@ private:
 	Settings m_settings;
 	sf::Font m_fuente;
 	sf::RectangleShape m_divisor, m_recuadroTitulo;
-	sf::Text m_titulo, m_avisoTeclaSalir, m_avisoGuardadoCtrl, m_avisoGuardadoJuego;
+	sf::Text m_titulo, m_avisoTeclaSalir, m_avisoGuardadoCtrl, m_avisoGuardadoJuego, m_textoVidas;
 	vector<float> m_escalas;
 	std::vector<string> m_controlesActuales; 
+	Boton m_btnsumar, m_btnrestar;
 	std::vector<Boton> vec_botones;
 	std::vector<Boton> selec_cambiosCtrl;
 	std::vector<sf::Text> textos_controles;
+	std::vector<sf::Text> txt_configJuego;
 	std::vector<std::string> stringControles;
 	InputText m_textoEntrada;
+	vector<Config> m_configuraciones;
 };
 
 #endif

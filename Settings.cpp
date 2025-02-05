@@ -1,8 +1,13 @@
 #include "Settings.h"
-#include <fstream>
-#include <string>
-#include <cstring>
-#include <algorithm>
+
+bool operator!=(Config c1,Config c2)
+{
+	if(c1.nom_config!=c2.nom_config &&c1.i_valor!=c2.i_valor && c1.f_valor!=c2.f_valor)
+		return true; 
+	else
+		return false;
+}
+
 using namespace std;
 
 Settings::Settings() {
@@ -18,6 +23,16 @@ Settings::Settings() {
 		}
 	}
 	archi.close();
+	archi.open("configuracionesJuego.poo",ios::binary|ios::in);
+	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
+	archi.seekg(0);
+	Config c;
+	while(archi.read(reinterpret_cast<char*>(&c),sizeof(c)))
+	{
+		m_configuraciones.push_back(c);
+	}
+	archi.close();
+	
 }
 vector<Keyboard::Key> Settings::obtenerControles() {
 	vector<Keyboard::Key> teclas_nave;
@@ -86,6 +101,21 @@ void Settings::actualizarControles(vector<string> v)
 	for(string &s:m_teclasCrudo)
 	{
 		archi<<s<<endl;
+	}
+	archi.close();
+}
+vector<Config> Settings::obtenerConfiguracion()const
+{
+	return m_configuraciones;
+}
+void Settings::actualizarConfiguracion(vector<Config> nuevas_configuraciones)
+{
+	fstream archi("configuracionesJuego.poo",ios::binary|ios::out|ios::trunc);
+	if(!archi.is_open())throw runtime_error("No se pudo arbir el archivo");
+	archi.seekp(0);
+	for(Config &x:nuevas_configuraciones)
+	{
+		archi.write(reinterpret_cast<const char*>(&x),sizeof(x));
 	}
 	archi.close();
 }
