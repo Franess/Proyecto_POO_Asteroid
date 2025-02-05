@@ -6,6 +6,7 @@
 #include "Particula.h"
 #include "asteroide.h"
 #include "Efecto.h"
+#include <SFML/Audio.hpp>
 
 class AsteroideExplosion : public Efecto {
 public:
@@ -19,6 +20,8 @@ private:
 	std::vector<Particula> m_vecParticulas;
 	sf::Clock m_reloj;
 	sf::Time m_tiempo;
+	sf::Sound m_sound;
+	sf::SoundBuffer m_buffer;
 };
 
 #endif

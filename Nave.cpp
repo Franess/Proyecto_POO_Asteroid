@@ -27,6 +27,8 @@ Nave::Nave(Settings &s)
 	m_teclas = s.obtenerControles();
 	Vector2f aux = m_nave.getOrigin() - m_nave.getPoint(0);
 	m_radio=sqrt(aux.x*aux.x + aux.y*aux.y);
+	
+	m_buffer.loadFromFile("01 - MMX - X Regular Shot.wav");
 }
 
 void Nave::actualizar(){

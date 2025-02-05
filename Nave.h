@@ -6,6 +6,8 @@
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
 #include "Proyectil.h"
+#include <SFML/Audio.hpp>
+
 using namespace std;
 using namespace sf;
 class Nave{
@@ -47,6 +49,8 @@ private:
 	Time m_tiempo;
 	bool m_colision=false;
 	int m_vidas;
+	
+	sf::SoundBuffer m_buffer;
 };
 #endif
 

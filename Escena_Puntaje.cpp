@@ -18,7 +18,7 @@ mtex_asteroide = new Texture;
 m_text[10].setString("MEJORES PUNTUACIONES");
 m_text[10].setFont(m_fuente);
 m_text[10].setScale(0.9,1);
-m_text[10].setFillColor({0,0,255});
+m_text[10].setFillColor({255,0,255});
 m_text[10].setCharacterSize(25);
 auto text_size=m_text[10].getLocalBounds();
 m_text[10].setOrigin(text_size.width/2,text_size.height/2);
@@ -80,5 +80,6 @@ void Escena_Puntaje::ProcesarEvento (Juego & j, sf::Event e) {
 }
 
 Escena_Puntaje::~Escena_Puntaje ( ) {
+	delete mtex_asteroide;
 }
 

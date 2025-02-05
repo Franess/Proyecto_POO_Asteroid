@@ -11,7 +11,6 @@ using namespace std;
 void spawn (vector<asteroide> &a, Texture* tex,float var){
 	if (a.size()<50){
 		int id= a.size();
-		cout<<"spawn "<<id<<endl;
 		a.push_back(asteroide(tex,id));
 		a[a.size()-1].r_size(var);
 		a[a.size()-1].cambiar_objetivo();
@@ -68,7 +67,7 @@ void respawn(vector<asteroide> &a,float var){
 		}
 	}
 
-	void destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp, tabla_de_puntos &tabla){
+	bool destruir (vector<asteroide> &ast,  vector<Proyectil> &pro, vector<AsteroideExplosion> &exp, tabla_de_puntos &tabla){
 		for(int i=0;i<pro.size();i++) { 
 			for(int j=0;j<ast.size();j++) {
 				asteroide a= ast[j];
@@ -78,21 +77,21 @@ void respawn(vector<asteroide> &a,float var){
 				if (sqrt( aux.x*aux.x + aux.y*aux.y )<(a.get_rad()+3.5)){
 					ast[j].disminuir_hp(100);
 					
+					pro.erase(pro.begin()+i);
 					if (ast[j].get_hp()<0){
 						tabla.actualizar_puntos_j(static_cast<int>(ast[j].get_size()*100));
-						
-						AsteroideExplosion aux(a);//Efecto de explosion auxiliar
-						aux.marcarTiempo();
-						exp.push_back(aux);
+						exp.emplace_back(a);
+						exp.back().marcarTiempo();
 						ast[j].r_size();
 						ast[j].cambiar_objetivo();
 						ast[j].reposicionar();
 						ast[j].set_direccion();
 						ast[j].set_color();
+						return true;
 					}else{
 						ast[j].set_color(255,55,55);
+						return false;
 					}
-					pro.erase(pro.begin()+i);
 				}
 			}
 		}

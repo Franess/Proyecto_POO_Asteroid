@@ -15,6 +15,8 @@
 #include "tabla_de_puntos.h"
 #include "JuegoTerminado.h"
 #include "PantallaInicio.h"
+#include <SFML/Audio.hpp>
+#include <ctime>
 using namespace std;
 
 class OnePlayer : public Escena {
@@ -30,6 +32,7 @@ private:
 	vector <asteroide> m_ast;
 	tabla_de_puntos m_tabla;
 	int m_prueba=0;
+	int m_s_disparo=0;
 	int m_puntos_para_siguiente=75;
 	vector<Proyectil> mproye_pantalla;
 	vector<AsteroideExplosion> mefec_explosion;
@@ -38,6 +41,9 @@ private:
 	sf::Text m_msjTeclaMenu;
 	vector<Boton> vec_botones;
 	vector<Config> m_configuraciones;
+	sf::Music m_musica;
+	vector<sf::SoundBuffer> m_buffer;
+	vector<sf::Sound*> m_sound;
 };
 
 #endif
