@@ -2,12 +2,12 @@
 #Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.
 #Jugador 1
 #Disparar
-S
+Space
 #Rotar derecha
-L
+D
 #Rotar izquierda
-J
+A
 #Avanzar
-I
+W
 #Frenar
-K
+S

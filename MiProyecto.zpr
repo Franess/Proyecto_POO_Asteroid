@@ -15,13 +15,8 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=rellenar y ver archivo  puntaje
 inherits_from=
-<<<<<<< HEAD
-current_source=tabla_de_puntos.cpp
+current_source=OnePlayer.cpp
 path_char=/
-=======
-current_source=OnePlayer.h
-path_char=\
->>>>>>> 44ea77b89c28f16c23f8894fd883c053398cbfbc
 [source]
 path=main.cpp
 cursor=10:0
@@ -61,7 +56,7 @@ path=Juego.cpp
 cursor=9:1
 [source]
 path=OnePlayer.cpp
-cursor=243:14
+cursor=215:55
 open=true
 [source]
 path=PantallaInicio.cpp
@@ -107,12 +102,7 @@ path=PantallaInicio.h
 cursor=25:24
 [header]
 path=Settings.h
-<<<<<<< HEAD
-cursor=11:0
-open=true
-=======
-cursor=10:1
->>>>>>> 44ea77b89c28f16c23f8894fd883c053398cbfbc
+cursor=0:0
 [header]
 path=Proyectil.h
 cursor=18:0

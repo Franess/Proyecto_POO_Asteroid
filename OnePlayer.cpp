@@ -210,9 +210,12 @@ void OnePlayer::Actualizar (Juego &j)
 	if((m_navesita.obtenerTiempo()).asMilliseconds()>=3000 && m_navesita.obtenerColision()){
 		m_navesita.cambiarColision();
 		m_navesita.cambiarTransparencia();
-		m_navesita.cambiarInmunidad();
 		m_navesita.respawn();
 		reproducir(m_buffer[3],m_sound);
+	}
+	if((m_navesita.obtenerTiempo()).asMilliseconds()>=4500)
+	{
+		m_navesita.cambiarInmunidad();
 	}
 	for(Boton &x:vec_botones) x.actualizar();
 	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
