@@ -1,4 +1,9 @@
 #include "Juego.h"
+#include <iostream>
+#include "Escena.h"
+
+#include <typeinfo>
+using namespace std;
 
 Juego::Juego(Escena* e):m_win(sf::VideoMode((640),(360)),"Asteroid") {
 	m_win.setFramerateLimit(60);
