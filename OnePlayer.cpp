@@ -2,13 +2,16 @@
 #include "PantallaInicio.h"
 #include "Escena_Puntaje.h"
 #include <sstream>
+#include "rng.h"
 
 using namespace std;
 using namespace sf;
 
-void reproducir(sf::SoundBuffer &buffer, vector<sf::Sound*> &s){
+void reproducir(sf::SoundBuffer &buffer, vector<sf::Sound*> &s, float volume=90, bool random_pitch=1){
 	sf::Sound* sound=new sf::Sound();
 	(*sound).setBuffer(buffer);
+	(*sound).setVolume(volume);
+	(*sound).setPitch((1*!random_pitch)+(0.95 + static_cast<float>(RNG(10))/100)*random_pitch);
 	(*sound).play();
 	s.push_back(sound);
 }
@@ -119,7 +122,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	
 	m_musica.openFromFile("Mega Man X4 - Military Train.wav");
 	m_musica.setLoop(true);
-	m_musica.setVolume(35);
+	m_musica.setVolume(40);
 	m_musica.play();
 	
 	sf::SoundBuffer aux_buffer;
@@ -128,7 +131,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	aux_buffer.loadFromFile("125 - MMX - Wing Flap (5).wav");
 	m_buffer.push_back(aux_buffer);
 	
-	aux_buffer.loadFromFile("79 - MMX - Heavy Machine (3).wav");
+	aux_buffer.loadFromFile("11 - MMX - X Die.wav");
 	m_buffer.push_back(aux_buffer);
 
 	aux_buffer.loadFromFile("115 - MMX - Underwater Bubble.wav");
@@ -157,7 +160,7 @@ void OnePlayer::Actualizar (Juego &j)
 	
 	if(m_navesita.disparar(mproye_pantalla.size())){
 		mproye_pantalla.push_back(m_navesita.generarDisparo());
-		reproducir(m_buffer[0],m_sound);
+		reproducir(m_buffer[0],m_sound,75,0);
 		/*m_s_disparo++;
 		m_sound[m_s_disparo].play();
 		if(m_s_disparo==6){m_s_disparo=0;}*/
@@ -189,7 +192,7 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarTransparencia();
 		m_navesita.cambiarInmunidad();
 		
-		reproducir(m_buffer[2],m_sound);
+		reproducir(m_buffer[2],m_sound,25,0);
 	}
 	if(m_navesita.obtenerVidas()==0)
 	{
@@ -205,14 +208,14 @@ void OnePlayer::Actualizar (Juego &j)
 	ss<<"Puntos: "<<m_tabla.get_puntos();
 	vec_botones[1].establecerTexto(ss.str());
 	
-	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision()) m_vfx->actualizar();
+	if((m_navesita.obtenerTiempo()).asMilliseconds()<3000 && m_navesita.obtenerColision())m_vfx->actualizar();
 	
 	if((m_navesita.obtenerTiempo()).asMilliseconds()>=3000 && m_navesita.obtenerColision()){
 		m_navesita.cambiarColision();
 		m_navesita.cambiarTransparencia();
 		m_navesita.cambiarInmunidad();
 		m_navesita.respawn();
-		reproducir(m_buffer[3],m_sound);
+		reproducir(m_buffer[3],m_sound,80,0);
 	}
 	for(Boton &x:vec_botones) x.actualizar();
 	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
