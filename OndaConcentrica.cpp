@@ -35,11 +35,11 @@ void OndaConcentrica::actualizar(){
 	m_circInter.setRadius(m_acumulador*(1.0/3));
 	m_circMed.setRadius(m_acumulador*(2.0/3));
 	m_circExtern.setRadius(m_acumulador);
-	if(m_acumulador<2*m_maxRadio){
-		m_acumulador+=(1.0/6);
+	if(m_acumulador<3*m_maxRadio){
+		m_acumulador+=(1.0/5);
 	}
-	if(m_transparencia<=255){
-		m_transparencia-=(17.0/12);
+	if(m_transparencia>0.1){
+		m_transparencia-=(1.7);
 	}
 }
 void OndaConcentrica::dibujar(RenderWindow &win){
