@@ -3,8 +3,6 @@
 #include "Escena_Puntaje.h"
 #include <sstream>
 
-#include <iostream>
-#include <vector>
 using namespace std;
 using namespace sf;
 
@@ -183,7 +181,6 @@ void OnePlayer::Actualizar (Juego &j)
 		(*it_colisionAsteNave).reposicionar();
 		(*it_colisionAsteNave).set_direccion();
 		if(m_vfx){
-			cout<< "delete efecto aaaaa"<<endl;
 			delete m_vfx;
 		}
 		m_vfx = new OndaConcentrica(m_navesita.obtenerPosicion(),m_navesita.obtenerRadioNave());
@@ -240,7 +237,6 @@ OnePlayer::~OnePlayer()
 	
 	if(m_vfx){
 		delete m_vfx;
-		cout<< "delete efecto uuuuu"<<endl;
 	}
 	delete mtex_asteroide;
 	
@@ -256,7 +252,6 @@ void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {
 	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
 	{
-		m_musica.stop();
 		j.CambiarEscena(new PantallaInicio);
 	}
 }
