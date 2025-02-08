@@ -26,11 +26,17 @@ void Juego::jugar()
 			}else
 			{
 				m_escenaActual->ProcesarEvento(*this,e);
+				
 				if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::F11)
 				{
 					pantalla_completa = !pantalla_completa;
 					if(pantalla_completa==0){
 						
+						vista.setSize(640,360);
+						m_win.create(sf::VideoMode(640, 360),"Asteroid",sf::Style::Default);
+						vista.zoom(1);
+						m_win.setView(vista);
+						m_win.setFramerateLimit(60);
 						
 					}else{
 						sf::VideoMode aux = sf::VideoMode::getDesktopMode();
@@ -40,6 +46,7 @@ void Juego::jugar()
 						cout<<aux.height;
 						vista.zoom(1.f/(aux.height/360));
 						m_win.setView(vista);
+						m_win.setFramerateLimit(60);
 						
 					}
 				}
