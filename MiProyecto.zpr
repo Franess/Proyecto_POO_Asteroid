@@ -15,7 +15,7 @@ tab_width=4
 tab_use_spaces=0
 explorer_path=rellenar y ver archivo  puntaje
 inherits_from=
-current_source=OndaConcentrica.cpp
+current_source=OnePlayer.cpp
 path_char=\
 [source]
 path=main.cpp
@@ -60,7 +60,7 @@ cursor=3:0
 open=true
 [source]
 path=OnePlayer.cpp
-cursor=217:38
+cursor=194:35
 open=true
 [source]
 path=PantallaInicio.cpp
