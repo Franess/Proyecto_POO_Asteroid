@@ -122,7 +122,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	
 	m_musica.openFromFile("Mega Man X4 - Military Train.wav");
 	m_musica.setLoop(true);
-	m_musica.setVolume(40);
+	m_musica.setVolume(45);
 	m_musica.play();
 	
 	sf::SoundBuffer aux_buffer;
