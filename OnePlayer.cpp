@@ -3,7 +3,6 @@
 #include "Escena_Puntaje.h"
 #include <sstream>
 
-#include <iostream>
 using namespace std;
 using namespace sf;
 
@@ -117,16 +116,25 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	boton_ptos.establecerPosicion(320,20);
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
 	m_navesita.establecerVidas(m_configuraciones[0].i_valor);
+	
 	m_musica.openFromFile("Mega Man X4 - Military Train.wav");
 	m_musica.setLoop(true);
 	m_musica.setVolume(35);
 	m_musica.play();
+	
 	sf::SoundBuffer aux_buffer;
 	aux_buffer.loadFromFile("01 - MMX - X Regular Shot.wav");
 	m_buffer.push_back(aux_buffer);
-	aux_buffer.loadFromFile("57 - MMX - Enemy Die (2).wav");
+	aux_buffer.loadFromFile("125 - MMX - Wing Flap (5).wav");
+	m_buffer.push_back(aux_buffer);
+	
+	aux_buffer.loadFromFile("79 - MMX - Heavy Machine (3).wav");
+	m_buffer.push_back(aux_buffer);
+
+	aux_buffer.loadFromFile("115 - MMX - Underwater Bubble.wav");
 	m_buffer.push_back(aux_buffer);
 }
+
 void OnePlayer::Actualizar (Juego &j) 
 {
 	m_prueba++;
@@ -172,7 +180,7 @@ void OnePlayer::Actualizar (Juego &j)
 		(*it_colisionAsteNave).cambiar_objetivo();
 		(*it_colisionAsteNave).reposicionar();
 		(*it_colisionAsteNave).set_direccion();
-		if(!m_vfx){
+		if(m_vfx){
 			delete m_vfx;
 		}
 		m_vfx = new OndaConcentrica(m_navesita.obtenerPosicion(),m_navesita.obtenerRadioNave());
@@ -180,6 +188,8 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarColision();
 		m_navesita.cambiarTransparencia();
 		m_navesita.cambiarInmunidad();
+		
+		reproducir(m_buffer[2],m_sound);
 	}
 	if(m_navesita.obtenerVidas()==0)
 	{
@@ -202,6 +212,7 @@ void OnePlayer::Actualizar (Juego &j)
 		m_navesita.cambiarTransparencia();
 		m_navesita.cambiarInmunidad();
 		m_navesita.respawn();
+		reproducir(m_buffer[3],m_sound);
 	}
 	for(Boton &x:vec_botones) x.actualizar();
 	Vector2f vecPos_correccion = correccionPosicionNave(m_navesita);
@@ -223,16 +234,24 @@ void OnePlayer::Dibujar (sf::RenderWindow & win)
 }
 OnePlayer::~OnePlayer()
 {
-	if(!m_vfx){
+	
+	if(m_vfx){
 		delete m_vfx;
 	}
 	delete mtex_asteroide;
+	
+	for(sf::Sound* aux:m_sound){
+		(*aux).stop();
+		delete aux;
+	}
+	m_sound.clear();
+	m_buffer.clear();
+	m_musica.stop();
 }
 void OnePlayer::ProcesarEvento(Juego &j, sf::Event e)
 {
 	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
 	{
-		m_musica.stop();
 		j.CambiarEscena(new PantallaInicio);
 	}
 }
