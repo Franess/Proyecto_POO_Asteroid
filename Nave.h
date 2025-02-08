@@ -29,7 +29,7 @@ public:
 	Time obtenerTiempo();
 	Vector2f obtenerPosicion()const;
 	float obtenerRadioNave()const;
-	void cambiarTransparencia();
+	void cambiarTransparencia(bool inmune=0);
 	void establecerPosicion(Vector2f pos_nueva);
 	int obtenerVidas()const;
 	void sumarVidas(int cantidad);

@@ -150,13 +150,13 @@ void Nave::cambiarColision(){
 bool Nave::obtenerColision(){
 	return m_colision;
 }
-void Nave::cambiarTransparencia(){
+void Nave::cambiarTransparencia(bool inmune){
 	if(m_colision){
 		m_nave.setOutlineColor({255,255,255,0});
 		m_nave.setFillColor({239,254,0,0});
 	}else{
-		m_nave.setOutlineColor({255,255,255,255});
-		m_nave.setFillColor({239,254,0,128});
+		m_nave.setOutlineColor({255,255,255,static_cast<unsigned char>(255-155*inmune)});
+		m_nave.setFillColor({239,254,0,static_cast<unsigned char>(128-64*inmune)});
 	}
 }
 void Nave::establecerPosicion(Vector2f pos_nueva)
