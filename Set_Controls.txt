@@ -2,12 +2,12 @@
 #Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.
 #Jugador 1
 #Disparar
-P
-#Rotar derecha
-D
-#Rotar izquierda
-A
-#Avanzar
-W
-#Frenar
 S
+#Rotar derecha
+L
+#Rotar izquierda
+J
+#Avanzar
+I
+#Frenar
+K
