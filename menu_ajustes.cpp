@@ -142,7 +142,7 @@ menu_ajustes::menu_ajustes() {
 
 void menu_ajustes::Actualizar (Juego & j) 
 {
-	
+	m_escalas.resize(2,0);
 	sf::Rect<float> info_texto = m_titulo.getLocalBounds();
 	m_titulo.setOrigin(info_texto.width/2,info_texto.height/2);
 	info_texto = m_avisoTeclaSalir.getLocalBounds();
