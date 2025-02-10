@@ -13,6 +13,8 @@ public:
 private:
 	sf::RenderWindow m_win;
 	Escena *m_escenaActual, *m_escenaSiguiente=nullptr;
+	bool pantalla_completa;
+	sf::View vista;
 };
 
 #endif
