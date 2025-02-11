@@ -14,7 +14,7 @@ PantallaInicio::PantallaInicio()
 	m_comienzoNombre.setFont(m_fuente);
 	m_finalNombre.setFont(m_fuente);
 	m_mensajeSalir.setFont(m_fuente);
-	
+	m_escalas.resize(2,0);
 	m_mensajeSalir.setCharacterSize(10);
 	m_comienzoNombre.setCharacterSize(50);
 	m_finalNombre.setCharacterSize(50);
