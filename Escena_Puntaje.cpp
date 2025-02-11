@@ -47,6 +47,10 @@ m_text[11].setPosition(posicion.x,320);
 		m_text[i].setOrigin(text_size.width/2,text_size.height/2);
 		m_text[i].setPosition(posicion.x,posicion.y+i*20);
 	}
+	m_musica.openFromFile("Megaman X4 - Frost Walrus Stage.wav");
+	m_musica.setLoop(true);
+	m_musica.setVolume(45);
+	m_musica.play();
 }
 
 void Escena_Puntaje::Actualizar (Juego & j) {

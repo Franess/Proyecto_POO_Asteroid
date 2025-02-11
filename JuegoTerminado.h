@@ -6,6 +6,7 @@
 #include "Boton.h"
 #include "PantallaInicio.h"
 #include "Juego.h"
+#include <SFML/Audio.hpp>
 
 class JuegoTerminado : public Escena {
 public:
@@ -28,7 +29,7 @@ private:
 	Boton m_mostrarPuntos;
 	Boton m_btnGuardar;
 	std::vector<float> m_escalares;
-	
+	sf::Music m_musica;
 };
 
 #endif

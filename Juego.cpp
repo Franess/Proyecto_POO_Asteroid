@@ -43,7 +43,6 @@ void Juego::jugar()
 						
 						vista.setSize(aux.width,aux.height);
 						m_win.create(aux,"Asteroid",sf::Style::Fullscreen);
-						cout<<aux.height;
 						vista.zoom(1.f/(aux.height/360));
 						m_win.setView(vista);
 						m_win.setFramerateLimit(60);

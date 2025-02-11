@@ -9,6 +9,7 @@
 #include "Settings.h"
 #include "Escena_Puntaje.h"
 #include "funcionesBotones.h"
+#include <SFML/Audio.hpp>
 
 class PantallaInicio : public Escena {
 public:
@@ -24,6 +25,7 @@ private:
 	sf::Texture m_textura, m_imgFondo;
 	vector<Boton> vec_botones;
 	vector<float> m_escalas;
+	sf::Music m_musica;
 };
 
 #endif

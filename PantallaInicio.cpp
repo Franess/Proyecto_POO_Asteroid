@@ -78,6 +78,11 @@ PantallaInicio::PantallaInicio()
 	boton_ajustes.escalado(0.5,1);
 	boton_ajustes.establecerPosicion(600.f,20.f);
 	vec_botones.push_back(boton_ajustes);//vec_botones[2]
+	
+	m_musica.openFromFile("Megaman X5 - Duff McWhalen Stage.wav");
+	m_musica.setLoop(true);
+	m_musica.setVolume(20);
+	m_musica.play();
 }
 
 void PantallaInicio::Actualizar (Juego & j)

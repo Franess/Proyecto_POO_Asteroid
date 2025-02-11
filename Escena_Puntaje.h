@@ -5,6 +5,8 @@
 #include "Escena.h"
 #include <SFML/Graphics.hpp>
 #include "asteroide.h"
+#include <SFML/Audio.hpp>
+
 using namespace std;
 
 class Escena_Puntaje : public Escena {
@@ -21,6 +23,7 @@ private:
 	int m_prueba;
 	vector<asteroide> m_ast;
 	Texture* mtex_asteroide; 
+	sf::Music m_musica;
 };
 
 #endif

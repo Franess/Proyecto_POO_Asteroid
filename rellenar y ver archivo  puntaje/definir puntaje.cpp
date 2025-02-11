@@ -12,7 +12,7 @@ int main() {
 		"Dios.asm",
 		"jhon++",
 		"aGente_P.T",
-		"Ñefi",
+		"cefi",
 		"BAD_Ceju",
 		"Brass_Sniper",
 		"Jalapeño417",
