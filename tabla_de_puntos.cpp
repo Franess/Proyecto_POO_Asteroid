@@ -6,7 +6,7 @@
 using namespace std;
 
 tabla_de_puntos::tabla_de_puntos() {
-	archivo_puntos="puntaje.poo";
+	archivo_puntos="assets\\dat\\puntaje.poo";
 	puntos_jugador.puntos=0;
 }
 void tabla_de_puntos::actualizar_archivo_puntaje(){
