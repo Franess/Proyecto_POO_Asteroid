@@ -12,7 +12,7 @@ m_fuente.loadFromFile("assets\\dat\\SixtyfourConvergence-Regular-VariableFont_BL
 sf::Vector2i posicion(640/2,90);
 m_text.resize(12);
 mtex_asteroide = new Texture;
-(*mtex_asteroide).loadFromFile("asteroide.png");
+(*mtex_asteroide).loadFromFile("assets\\texture\\asteroide.png");
 
 
 m_text[10].setString("MEJORES PUNTUACIONES");
