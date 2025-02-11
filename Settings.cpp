@@ -13,7 +13,7 @@ using namespace std;
 Settings::Settings() {
 	
 	//Abre el archivo y guarda las lineas de texto de interes para el programa
-	fstream archi("Set_Controls.txt",ios::in);
+	fstream archi("config\\Set_Controls.txt",ios::in);
 	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
 	string s;
 	while(getline(archi,s)){
@@ -23,7 +23,7 @@ Settings::Settings() {
 		}
 	}
 	archi.close();
-	archi.open("configuracionesJuego.poo",ios::binary|ios::in);
+	archi.open("assets\\dat\\configuracionesJuego.poo",ios::binary|ios::in);
 	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
 	archi.seekg(0);
 	Config c;
@@ -96,7 +96,7 @@ void Settings::actualizarControles(vector<string> v)
 			++k;
 		}
 	}
-	ofstream archi("Set_Controls.txt",ios::trunc);
+	ofstream archi("config\\Set_Controls.txt",ios::trunc);
 	if(!archi.is_open()) throw runtime_error("No se pudo abrir el archivo, graba controles");
 	for(string &s:m_teclasCrudo)
 	{

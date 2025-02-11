@@ -4,9 +4,9 @@ using namespace std;
 PantallaInicio::PantallaInicio() 
 {
 	//bool estado_fuente = m_fuente.loadFromFile("Roboto_Condensed-Bold.ttf");
-	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
-	bool estado_textura = m_textura.loadFromFile("asteroide.png");
-	bool estado_imgFondo = m_imgFondo.loadFromFile("fondoPantallaInicio.jpg");
+	bool estado_fuente = m_fuente.loadFromFile("assets\\dat\\SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+	bool estado_textura = m_textura.loadFromFile("assets\\texture\\asteroide.png");
+	bool estado_imgFondo = m_imgFondo.loadFromFile("assets\\texture\\fondoPantallaInicio.jpg");
 	if(!estado_imgFondo) throw runtime_error("No se encuentra el fondo fondoPantallaInicio.jpg");
 	if(!estado_fuente) throw runtime_error("No se encuentra la fuente Roboto_Condensed-Bold.ttf");
 	if(!estado_textura) throw runtime_error("No se encuentra la textura asteroide.png");
@@ -29,6 +29,7 @@ PantallaInicio::PantallaInicio()
 //	m_mensajeSalir.setOrigin(0,0);
 //	m_comienzoNombre.setOrigin(0,0);
 //	m_finalNombre.setOrigin(0,0);
+	
 	
 	m_mensajeSalir.setScale(0.5,1);
 	m_comienzoNombre.setScale(0.5,1);
@@ -80,7 +81,7 @@ PantallaInicio::PantallaInicio()
 	boton_ajustes.establecerPosicion(600.f,20.f);
 	vec_botones.push_back(boton_ajustes);//vec_botones[2]
 	
-	m_musica.openFromFile("Megaman X5 - Duff McWhalen Stage.wav");
+	m_musica.openFromFile("assets\\sound\\Megaman X5 - Duff McWhalen Stage.wav");
 	m_musica.setLoop(true);
 	m_musica.setVolume(20);
 	m_musica.play();

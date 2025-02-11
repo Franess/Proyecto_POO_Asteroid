@@ -33,7 +33,7 @@ void actualizarTextoControles(std::vector<std::string> &sControles,std::vector<s
 }
 
 menu_ajustes::menu_ajustes() {
-	m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+	m_fuente.loadFromFile("assets\\dat\\SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	m_controlesActuales = m_settings.obtenerStringTeclas();
 	m_configuraciones = m_settings.obtenerConfiguracion();
 	//Inicializo las divisiones

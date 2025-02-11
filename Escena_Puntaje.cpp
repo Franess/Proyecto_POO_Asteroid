@@ -8,7 +8,7 @@ using namespace std;
 Escena_Puntaje::Escena_Puntaje ( ) {
 tabla_de_puntos tabla;
 m_puntos=tabla.cargar_lista();
-m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+m_fuente.loadFromFile("assets\\dat\\SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 sf::Vector2i posicion(640/2,90);
 m_text.resize(12);
 mtex_asteroide = new Texture;
@@ -47,7 +47,7 @@ m_text[11].setPosition(posicion.x,320);
 		m_text[i].setOrigin(text_size.width/2,text_size.height/2);
 		m_text[i].setPosition(posicion.x,posicion.y+i*20);
 	}
-	m_musica.openFromFile("Megaman X4 - Frost Walrus Stage.wav");
+	m_musica.openFromFile("assets\\sound\\Megaman X4 - Frost Walrus Stage.wav");
 	m_musica.setLoop(true);
 	m_musica.setVolume(45);
 	m_musica.play();

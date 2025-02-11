@@ -98,7 +98,7 @@ Vector2f correccionPosicionNave(const Nave &n)
 
 OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 {
-	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+	bool estado_fuente = m_fuente.loadFromFile("assets\\dat\\SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	m_configuraciones = s.obtenerConfiguracion();
 	m_msjTeclaMenu.setFont(m_fuente);
 	m_msjTeclaMenu.setCharacterSize(10);
@@ -107,7 +107,7 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	m_msjTeclaMenu.setScale(0.5,1);
 	m_msjTeclaMenu.setPosition(180,345);
 	mtex_asteroide = new Texture;
-	(*mtex_asteroide).loadFromFile("asteroide.png");
+	(*mtex_asteroide).loadFromFile("assets\\texture\\asteroide.png");
 	stringstream ss;
 	ss<<"Vidas: "<<m_navesita.obtenerVidas();
 	Boton boton_vidas(ss.str(),&m_fuente,10);
@@ -120,21 +120,21 @@ OnePlayer::OnePlayer(Settings &s):m_navesita(s)
 	vec_botones.push_back(boton_ptos);//Corresponde a la pos [1]
 	m_navesita.establecerVidas(m_configuraciones[0].i_valor);
 	
-	m_musica.openFromFile("Mega Man X4 - Military Train.wav");
+	m_musica.openFromFile("assets\\sound\\Mega Man X4 - Military Train.wav");
 	m_musica.setLoop(true);
 	m_musica.setVolume(45);
 	m_musica.play();
 	
 	sf::SoundBuffer aux_buffer;
-	aux_buffer.loadFromFile("01 - MMX - X Regular Shot.wav");
+	aux_buffer.loadFromFile("assets\\sound\\01 - MMX - X Regular Shot.wav");
 	m_buffer.push_back(aux_buffer);
-	aux_buffer.loadFromFile("125 - MMX - Wing Flap (5).wav");
+	aux_buffer.loadFromFile("assets\\sound\\125 - MMX - Wing Flap (5).wav");
 	m_buffer.push_back(aux_buffer);
 	
-	aux_buffer.loadFromFile("11 - MMX - X Die.wav");
+	aux_buffer.loadFromFile("assets\\sound\\11 - MMX - X Die.wav");
 	m_buffer.push_back(aux_buffer);
 
-	aux_buffer.loadFromFile("115 - MMX - Underwater Bubble.wav");
+	aux_buffer.loadFromFile("assets\\sound\\115 - MMX - Underwater Bubble.wav");
 	m_buffer.push_back(aux_buffer);
 }
 

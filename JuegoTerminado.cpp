@@ -6,11 +6,11 @@
 
 JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 {
-	bool estado_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
+	bool estado_fuente = m_fuente.loadFromFile("assets\\dat\\SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
 	if(!estado_fuente) throw runtime_error("No se encuentra la fuente Roboto_Condensed-Bold.ttf");
-	bool estado_imgFondo = m_texturaFondo.loadFromFile("fondoPantallaInicio.jpg");
+	bool estado_imgFondo = m_texturaFondo.loadFromFile("assets\\texture\\fondoPantallaInicio.jpg");
 	if(!estado_imgFondo) throw runtime_error("No se encuentra el fondo fondoJuegoTerminado.jpg");
-	bool estado_navepixel = m_texturaNavePixel.loadFromFile("navepixelada.png");
+	bool estado_navepixel = m_texturaNavePixel.loadFromFile("assets\\texture\\navepixelada.png");
 	if(!estado_navepixel) throw runtime_error("No se encuentra la textura navepixelada.png");
 	m_fondo.setTexture(m_texturaFondo);
 	m_fondo.setOrigin(0,0);
@@ -81,7 +81,7 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	m_msjFaltaNombre.setPosition(320,230);
 	m_msjFaltaNombre.setFillColor({0,0,0,0});
 	
-	m_musica.openFromFile("Shop - The Legend of Zelda_ Ocarina of Time OST  Remastered.wav");
+	m_musica.openFromFile("assets\\sound\\Shop - The Legend of Zelda_ Ocarina of Time OST  Remastered.wav");
 	m_musica.setLoop(true);
 	m_musica.setVolume(32);
 	m_musica.play();
