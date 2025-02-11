@@ -81,6 +81,10 @@ JuegoTerminado::JuegoTerminado(int puntos_fin):m_puntosFinales(puntos_fin)
 	m_msjFaltaNombre.setPosition(320,230);
 	m_msjFaltaNombre.setFillColor({0,0,0,0});
 	
+	m_musica.openFromFile("Shop - The Legend of Zelda_ Ocarina of Time OST  Remastered.wav");
+	m_musica.setLoop(true);
+	m_musica.setVolume(32);
+	m_musica.play();
 }
 
 void JuegoTerminado::Actualizar (Juego & j) 
