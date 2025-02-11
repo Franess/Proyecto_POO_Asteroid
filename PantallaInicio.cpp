@@ -25,6 +25,7 @@ PantallaInicio::PantallaInicio()
 	m_mensajeSalir.setString("<Presione la tecla 'esc' para salir>");
 	m_comienzoNombre.setString("Aster");
 	m_finalNombre.setString("ids");
+	boton_presionado=1;
 //	m_mensajeSalir.setOrigin(0,0);
 //	m_comienzoNombre.setOrigin(0,0);
 //	m_finalNombre.setOrigin(0,0);
@@ -116,8 +117,9 @@ void PantallaInicio::ProcesarEvento(Juego &j, sf::Event e)
 			else x.colorFondo({0,0,0,0});
 		}
 	}
-	if(e.type == sf::Event::MouseButtonReleased)
+	if((e.type == sf::Event::MouseButtonReleased) && (boton_presionado))
 	{
+		boton_presionado=0;
 		sf::Vector2f pos_mouse(e.mouseButton.x,e.mouseButton.y);
 		if(calculo_sobreposicion(pos_mouse,vec_botones[0],m_escalas[0],m_escalas[1]) && e.mouseButton.button == sf::Mouse::Left)
 		{

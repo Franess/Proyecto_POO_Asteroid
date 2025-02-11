@@ -26,6 +26,7 @@ private:
 	vector<Boton> vec_botones;
 	vector<float> m_escalas;
 	sf::Music m_musica;
+	bool boton_presionado;
 };
 
 #endif
