@@ -110,7 +110,7 @@ vector<Config> Settings::obtenerConfiguracion()const
 }
 void Settings::actualizarConfiguracion(vector<Config> nuevas_configuraciones)
 {
-	fstream archi("configuracionesJuego.poo",ios::binary|ios::out|ios::trunc);
+	fstream archi("assets\\dat\\configuracionesJuego.poo",ios::binary|ios::out|ios::trunc);
 	if(!archi.is_open())throw runtime_error("No se pudo arbir el archivo");
 	archi.seekp(0);
 	for(Config &x:nuevas_configuraciones)

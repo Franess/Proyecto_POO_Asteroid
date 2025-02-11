@@ -49,7 +49,7 @@ m_text[11].setPosition(posicion.x,320);
 	}
 	m_musica.openFromFile("assets\\sound\\Megaman X4 - Frost Walrus Stage.wav");
 	m_musica.setLoop(true);
-	m_musica.setVolume(45);
+	m_musica.setVolume(25);
 	m_musica.play();
 }
 
