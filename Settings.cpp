@@ -119,3 +119,15 @@ void Settings::actualizarConfiguracion(vector<Config> nuevas_configuraciones)
 	}
 	archi.close();
 }
+void Settings::regenerarControles()
+{
+	
+}
+void Settings::regenerarConfiguracion()
+{
+	
+}
+void Settings::regenerarPuntaje()
+{
+	
+}

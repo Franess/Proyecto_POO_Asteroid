@@ -24,6 +24,9 @@ public:
 	void actualizarControles(vector<string> v);
 	vector<Config> obtenerConfiguracion()const;
 	void actualizarConfiguracion(vector<Config> nuevas_configuraciones);
+	void regenerarControles();
+	void regenerarConfiguracion();
+	void regenerarPuntaje();
 private:
 	vector<string> m_stringsTeclas, m_teclasCrudo;
 	vector<Config> m_configuraciones;
