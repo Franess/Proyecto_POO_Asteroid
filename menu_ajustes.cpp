@@ -270,4 +270,7 @@ void menu_ajustes::ProcesarEvento (Juego & j, sf::Event e) {
 		j.CambiarEscena(new PantallaInicio);
 	}
 }
-
+menu_ajustes::~menu_ajustes()
+{
+	
+}

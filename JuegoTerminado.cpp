@@ -144,3 +144,7 @@ void JuegoTerminado::ProcesarEvento (Juego &j, sf::Event e)
 	}
 }
 
+JuegoTerminado::~JuegoTerminado()
+{
+	
+}

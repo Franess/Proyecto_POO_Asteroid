@@ -196,7 +196,6 @@ void OnePlayer::Actualizar (Juego &j)
 	}
 	if(m_navesita.obtenerVidas()==0)
 	{
-		//j.CambiarEscena(new Escena_Puntaje);
 		m_musica.stop();
 		j.CambiarEscena(new JuegoTerminado(m_tabla.get_puntos()));
 	}

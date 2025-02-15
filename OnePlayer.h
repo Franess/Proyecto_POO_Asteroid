@@ -25,7 +25,7 @@ public:
 	void Actualizar (Juego &j)override;
 	void Dibujar (sf::RenderWindow & win)override;
 	void ProcesarEvento(Juego &j, sf::Event e)override;
-	~OnePlayer();
+	~OnePlayer()override;
 private:
 	Nave m_navesita;
 	Texture* mtex_asteroide; 			

@@ -10,9 +10,10 @@
 class menu_ajustes : public Escena {
 public:
 	menu_ajustes();
-	void Actualizar (Juego & j);
-	void Dibujar (sf::RenderWindow & win);
-	void ProcesarEvento (Juego & j, sf::Event e);
+	void Actualizar (Juego & j)override;
+	void Dibujar (sf::RenderWindow & win)override;
+	void ProcesarEvento (Juego & j, sf::Event e)override;
+	~menu_ajustes()override;
 private:
 	int m_selectorContenidos=1;
 	Settings m_settings;

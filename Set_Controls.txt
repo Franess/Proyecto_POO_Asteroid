@@ -2,7 +2,7 @@
 #Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.
 #Jugador 1
 #Disparar
-Space
+P
 #Rotar derecha
 D
 #Rotar izquierda
