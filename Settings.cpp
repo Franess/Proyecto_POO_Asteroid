@@ -14,22 +14,31 @@ Settings::Settings() {
 	//Se comentan los controles de los archivos. Se deben generar antes de ser abiertos, de eso se encarga la escena.
 	//Abre el archivo y guarda las lineas de texto de interes para el programa
 	fstream archi("Set_Controls.txt",ios::in);
-//	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
-	string s;
-	while(getline(archi,s)){
-		m_teclasCrudo.push_back(s);
-		if(s.find_first_of('#',0)){
-			m_stringsTeclas.push_back(s);
+	if(!archi.is_open())
+	{
+		throw runtime_error("No se pudo abrir el archivo");
+	}else
+	{
+		string s;
+		while(getline(archi,s)){
+			m_teclasCrudo.push_back(s);
+			if(s.find_first_of('#',0)){
+				m_stringsTeclas.push_back(s);
+			}
 		}
 	}
 	archi.close();
 	archi.open("configuracionesJuego.poo",ios::binary|ios::in);
-//	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
-	archi.seekg(0);
-	Config c;
-	while(archi.read(reinterpret_cast<char*>(&c),sizeof(c)))
+	if(!archi.is_open())
 	{
-		m_configuraciones.push_back(c);
+		throw runtime_error("No se pudo abrir el archivo");
+	}else{
+		archi.seekg(0);
+		Config c;
+		while(archi.read(reinterpret_cast<char*>(&c),sizeof(c)))
+		{
+			m_configuraciones.push_back(c);
+		}
 	}
 	archi.close();
 	
