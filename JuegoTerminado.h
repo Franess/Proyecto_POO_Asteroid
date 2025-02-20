@@ -11,9 +11,10 @@
 class JuegoTerminado : public Escena {
 public:
 	JuegoTerminado(int puntos_fin);
-	void Actualizar (Juego & j);
-	void Dibujar (sf::RenderWindow & win);
-	void ProcesarEvento (Juego & j, sf::Event e);
+	void Actualizar (Juego & j)override;
+	void Dibujar (sf::RenderWindow & win)override;
+	void ProcesarEvento (Juego & j, sf::Event e)override;
+	~JuegoTerminado()override;
 private:
 	sf::Font m_fuente;
 	InputText m_textoEntrada;

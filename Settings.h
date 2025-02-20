@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstring>
 #include <algorithm>
+#include "tabla_de_puntos.h"
 using namespace std;
 using namespace sf;
 
@@ -16,6 +17,7 @@ struct Config
 	int i_valor;
 };
 
+
 class Settings {
 public:
 	Settings(); 
@@ -24,6 +26,9 @@ public:
 	void actualizarControles(vector<string> v);
 	vector<Config> obtenerConfiguracion()const;
 	void actualizarConfiguracion(vector<Config> nuevas_configuraciones);
+	void regenerarControles();
+	void regenerarConfiguracion();
+	void regenerarPuntaje();
 private:
 	vector<string> m_stringsTeclas, m_teclasCrudo;
 	vector<Config> m_configuraciones;

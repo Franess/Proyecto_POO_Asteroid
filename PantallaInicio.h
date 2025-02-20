@@ -14,10 +14,10 @@
 class PantallaInicio : public Escena {
 public:
 	PantallaInicio();
-	void Actualizar (Juego & j);
-	void Dibujar (sf::RenderWindow & win);
+	void Actualizar (Juego & j)override;
+	void Dibujar (sf::RenderWindow & win)override;
 	void ProcesarEvento(Juego &j, sf::Event e)override;
-	~PantallaInicio();
+	~PantallaInicio()override;
 private:
 	sf::Text m_comienzoNombre, m_finalNombre, m_mensajeSalir;
 	sf::Sprite m_imagenAsteroide, m_sprFondo;

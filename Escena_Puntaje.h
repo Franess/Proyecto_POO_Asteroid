@@ -15,7 +15,7 @@ public:
 	void Actualizar (Juego &j)override;
 	void Dibujar (sf::RenderWindow & win)override;
 	void ProcesarEvento(Juego &j, sf::Event e)override;
-	~Escena_Puntaje();
+	~Escena_Puntaje()override;
 private:
 	vector<puntaje> m_puntos;
 	sf::Font m_fuente;
