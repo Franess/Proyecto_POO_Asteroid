@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstring>
 #include <algorithm>
+#include "tabla_de_puntos.h"
 using namespace std;
 using namespace sf;
 
@@ -15,6 +16,7 @@ struct Config
 	float f_valor;
 	int i_valor;
 };
+
 
 class Settings {
 public:

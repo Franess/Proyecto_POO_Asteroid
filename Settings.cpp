@@ -11,10 +11,10 @@ bool operator!=(Config c1,Config c2)
 using namespace std;
 
 Settings::Settings() {
-	
+	//Se comentan los controles de los archivos. Se deben generar antes de ser abiertos, de eso se encarga la escena.
 	//Abre el archivo y guarda las lineas de texto de interes para el programa
 	fstream archi("Set_Controls.txt",ios::in);
-	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
+//	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
 	string s;
 	while(getline(archi,s)){
 		m_teclasCrudo.push_back(s);
@@ -24,7 +24,7 @@ Settings::Settings() {
 	}
 	archi.close();
 	archi.open("configuracionesJuego.poo",ios::binary|ios::in);
-	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
+//	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
 	archi.seekg(0);
 	Config c;
 	while(archi.read(reinterpret_cast<char*>(&c),sizeof(c)))
@@ -121,13 +121,79 @@ void Settings::actualizarConfiguracion(vector<Config> nuevas_configuraciones)
 }
 void Settings::regenerarControles()
 {
-	
+	ofstream archi("Set_Controls.txt",ios::trunc);
+	if(!archi.is_open()){throw runtime_error("No se pudo abir el archivo");}
+	std::vector<std::string> vec_archivoOrig =
+	{
+		"#Las lineas que comienzan con ' # ' seran ignoradas",
+		"#Lineas cuyo comienzo no tiene ' # ' representan un valor de configuracion vigente.",
+		"#Jugador 1",
+		"#Disparar",
+		"Space",
+		"#Rotar derecha",
+		"D",
+		"#Rotar izquierda",
+		"A",
+		"#Avanzar",
+		"W",
+		"#Frenar",
+		"S"
+	};
+	for(std::string &x:vec_archivoOrig)
+	{
+		archi<<x<<std::endl;
+	}
+	archi.close();
 }
 void Settings::regenerarConfiguracion()
 {
-	
+	ofstream archi("configuracionesJuego.poo",ios::binary|ios::trunc);
+	if(!archi.is_open()) throw runtime_error("No se pudo abrir el archivo");
+	string s = "vidas"; 
+	Config aux; strcpy(aux.nom_config,s.c_str());
+	aux.i_valor=3; aux.f_valor=0;
+	archi.seekp(0);
+	archi.write(reinterpret_cast<const char*>(&aux),sizeof(aux));
+	archi.close();
 }
 void Settings::regenerarPuntaje()
 {
-	
+	std::vector<std::string> s ={
+		"Dios.asm",
+			"jhon++",
+			"aGente_P.T",
+			"cefi",
+			"BAD_Ceju",
+			"Brass_Sniper",
+			"Jalapeño417",
+			"Mayy_23",	
+			"Fran.cpp",	
+			"Glass.h"	
+	};
+	vector<int> n={
+		100000,
+			50000,	
+			35000,
+			25000,
+			20000,
+			10000,
+			4000,
+			2000,
+			1500,
+			500
+	};
+	std::vector<puntaje> p;
+	puntaje aux;
+	for(int i=0;i<10;i++) { 
+		strcpy(aux.nombre,s[i].c_str());
+		aux.puntos=n[i];
+		p.push_back(aux);
+	}
+	fstream archi("puntaje.poo", ios::binary|ios::trunc|ios::out);
+	if(!archi.is_open()){throw runtime_error("No se pudo abrir el archivo");}
+	for(int i=0;i<10;i++) { 
+		aux=p[i];
+		archi.write(reinterpret_cast<const char*>(&aux), sizeof(puntaje));
+	}
+	archi.close();
 }

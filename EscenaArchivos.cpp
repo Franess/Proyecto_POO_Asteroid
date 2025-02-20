@@ -37,7 +37,7 @@ EscenaArchivos::EscenaArchivos(int selector_escenaSig)
 	m_indicadorEstado.setOrigin(info_texto.width/2,info_texto.height/2);
 	m_indicadorEstado.setPosition(480,45);
 	
-	std::vector<std::string> nombres_botones = {"Configuracion","Controles","Puntaje"};
+	std::vector<std::string> nombres_botones = {"Puntaje","Configuraciones","Controles"};
 	Boton boton_archivos(nombres_botones[0],&m_fuente,25);
 	boton_archivos.escalado(0.5,1.f);
 	boton_archivos.establecerPosicion(160,90);
@@ -96,10 +96,35 @@ EscenaArchivos::EscenaArchivos(int selector_escenaSig)
 }
 void EscenaArchivos::Actualizar(Juego & j) 
 {
+	std::vector<std::string> nombres_archivos = {"puntaje.poo","configuracionesJuego.poo","Set_Controls.txt"};
+	int cantidad_archivos=2;
+	for(int i=0;i<nombres_archivos.size();i++) 
+	{
+		fstream archi;
+		if(i<cantidad_archivos-1)
+		{
+			archi.open(nombres_archivos[i],ios::in|ios::app);
+			m_estadosArchivos[i] = archi.is_open();
+		}else
+		{
+			archi.open(nombres_archivos[i],ios::binary|ios::in);
+			m_estadosArchivos[i]=archi.is_open();
+		}
+		archi.close();
+	}
 	contador_estados = 0;
 	for(int i = 0;i<m_estadosArchivos.size();++i)
 	{
-		if(m_estadosArchivos[i]) ++contador_estados;
+		if(m_estadosArchivos[i]) 
+		{
+			++contador_estados;
+			m_textosEstados[i].setString("Disponible");
+			m_textosEstados[i].setFillColor({0,255,0});
+		}else
+		{
+			m_textosEstados[i].setString("No Disponible");
+			m_textosEstados[i].setFillColor({255,0,0});
+		}
 	}
 	if(contador_estados==3)
 	{
@@ -138,13 +163,20 @@ void EscenaArchivos::ProcesarEvento(Juego & j, sf::Event e)
 	{
 		if(calculo_sobreposicion(pos_mouse,m_vecbotones[0],m_escalas[0],m_escalas[1])&&e.mouseButton.button == sf::Mouse::Left )
 		{ 
+			m_settings.regenerarPuntaje();
 		}
 		if(calculo_sobreposicion(pos_mouse,m_vecbotones[1],m_escalas[0],m_escalas[1])&&e.mouseButton.button == sf::Mouse::Left )
 		{ 
+			m_settings.regenerarConfiguracion();
 		}
 		if(calculo_sobreposicion(pos_mouse,m_vecbotones[2],m_escalas[0],m_escalas[1])&&e.mouseButton.button == sf::Mouse::Left )
 		{ 
+			m_settings.regenerarControles();
 		}
+	}
+	if(e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Escape)
+	{
+		j.terminar();
 	}
 }
 EscenaArchivos::~EscenaArchivos()

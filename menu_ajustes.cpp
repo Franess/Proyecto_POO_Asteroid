@@ -34,8 +34,8 @@ void actualizarTextoControles(std::vector<std::string> &sControles,std::vector<s
 
 menu_ajustes::menu_ajustes() {
 	bool control_fuente = m_fuente.loadFromFile("SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf");
-	if(control_fuente)
-		throw runtime_error("No se pudo abrir la fuente");
+//	if(control_fuente)
+//		throw runtime_error("No se pudo abrir la fuente");
 	m_controlesActuales = m_settings.obtenerStringTeclas();
 	m_configuraciones = m_settings.obtenerConfiguracion();
 	//Inicializo las divisiones
