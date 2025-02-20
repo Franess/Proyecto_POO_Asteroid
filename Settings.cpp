@@ -16,7 +16,7 @@ Settings::Settings() {
 	fstream archi("Set_Controls.txt",ios::in);
 	if(!archi.is_open())
 	{
-		throw runtime_error("No se pudo abrir el archivo");
+//		throw runtime_error("No se pudo abrir el archivo");
 	}else
 	{
 		string s;
@@ -31,7 +31,7 @@ Settings::Settings() {
 	archi.open("configuracionesJuego.poo",ios::binary|ios::in);
 	if(!archi.is_open())
 	{
-		throw runtime_error("No se pudo abrir el archivo");
+//		throw runtime_error("No se pudo abrir el archivo");
 	}else{
 		archi.seekg(0);
 		Config c;

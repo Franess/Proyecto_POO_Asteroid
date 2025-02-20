@@ -13,13 +13,13 @@ version_saved=20191006
 version_required=20160225
 tab_width=4
 tab_use_spaces=0
-explorer_path=../../Programas/zinjai/
+explorer_path=../../Programas/zinjai
 inherits_from=
-current_source=Settings.cpp
+current_source=EscenaArchivos.cpp
 path_char=/
 [source]
 path=main.cpp
-cursor=3:27
+cursor=13:30
 open=true
 [source]
 path=Nave.cpp
@@ -32,7 +32,7 @@ path=complemento_v.cpp
 cursor=34:1
 [source]
 path=Settings.cpp
-cursor=41:2
+cursor=18:19
 open=true
 [source]
 path=ast_manip.cpp
@@ -81,7 +81,7 @@ path=menu_ajustes.cpp
 cursor=31:3
 [source]
 path=EscenaArchivos.cpp
-cursor=174:3
+cursor=55:54
 open=true
 [header]
 path=Nave.h
@@ -100,7 +100,7 @@ path=ast_manip.h
 cursor=18:23
 [header]
 path=PantallaInicio.h
-cursor=10:29
+cursor=11:25
 [header]
 path=Settings.h
 cursor=8:27
@@ -152,7 +152,7 @@ path=menu_ajustes.h
 cursor=30:3
 [header]
 path=EscenaArchivos.h
-cursor=11:0
+cursor=8:17
 open=true
 [other]
 path=Leeme.txt

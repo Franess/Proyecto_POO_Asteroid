@@ -59,15 +59,8 @@ EscenaArchivos::EscenaArchivos(int selector_escenaSig)
 	for(int i=0;i<nombres_archivos.size();i++) 
 	{
 		fstream archi;
-		if(i<cantidad_archivos-1)
-		{
-			archi.open(nombres_archivos[i],ios::in|ios::app);
-			m_estadosArchivos.push_back(archi.is_open());
-		}else
-		{
-			archi.open(nombres_archivos[i],ios::binary|ios::in);
-			m_estadosArchivos.push_back(archi.is_open());
-		}
+		archi.open(nombres_archivos[i],ios::in|ios::binary);
+		m_estadosArchivos.push_back(archi.is_open());
 		archi.close();
 	}
 	//Generacion de los textos que indican si esta o no el archivo
@@ -101,15 +94,8 @@ void EscenaArchivos::Actualizar(Juego & j)
 	for(int i=0;i<nombres_archivos.size();i++) 
 	{
 		fstream archi;
-		if(i<cantidad_archivos-1)
-		{
-			archi.open(nombres_archivos[i],ios::in|ios::app);
-			m_estadosArchivos[i] = archi.is_open();
-		}else
-		{
-			archi.open(nombres_archivos[i],ios::binary|ios::in);
-			m_estadosArchivos[i]=archi.is_open();
-		}
+		archi.open(nombres_archivos[i],ios::binary|ios::in);
+		m_estadosArchivos[i]=archi.is_open();
 		archi.close();
 	}
 	contador_estados = 0;
